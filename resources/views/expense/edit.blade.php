@@ -5,9 +5,10 @@
         <div class="col-lg-6 col-12">
             <div class="card-header bg-white py-15">Edit Expense</div>
 
-            <form class="card text-center form-horizontal card-body" method="post" action="{{ route('expense.store') }}">
+            <form class="card text-center form-horizontal card-body" method="post" action="{{ route('expense.update', $expense->id) }}">
                 {{ csrf_field() }}
-                @method('PUT')
+                {{ method_field('PUT') }}
+                
                    <!-- Status -->
                    <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-input-small">Category</label>
@@ -15,7 +16,7 @@
                             <select class="form-select" name="cat_id">
                                 <option value="">Select category</option>
                                 @foreach($expensecategories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                <option value="{{$category->id}}" {{ $expense->cat_id == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -24,21 +25,21 @@
                     <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-date-input">Date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="date" id="example-date-input" class="form-control">
+                            <input type="date" name="date" value="{{ $expense->date }}" id="example-date-input" class="form-control">
                         </div>
                     </div>
 
                     <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-input-small">Expense Details</label>
                         <div class="col-sm-10">
-                            <input type="textarea" name="details" id="title" class="form-control">
+                            <input type="textarea" name="details" value="{{ $expense->details }}" id="title" class="form-control">
                         </div>
                     </div>
                     
                     <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-input-small">Amount</label>
                         <div class="col-sm-10">
-                            <input type="text" name="amount" id="title" class="form-control">
+                            <input type="text" name="amount" value="{{ $expense->amount }}" id="title" class="form-control">
                         </div>
                     </div>
 
@@ -48,7 +49,7 @@
                             <select class="form-select" name="account">
                                 <option value="">Select Account</option>
                                 @foreach($accounts as $account)
-                                <option value="{{$account->id}}">{{$account->name}}</option>
+                                <option value="{{$account->id}}" {{ $expense->account == $account->id ? 'selected' : '' }}>{{ $account->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,13 +58,13 @@
                     <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-input-small">Remarks</label>
                         <div class="col-sm-10">
-                            <input type="textarea" name="remarks" id="title" class="form-control">
+                            <input type="textarea" name="remarks" value="{{ $expense->remarks }}" id="title" class="form-control">
                         </div>
                     </div> 
                                         
                     <div class="mb-15 mb-0 justify-content-start row">
                         <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary">Add Expense</button>
+                            <button type="submit" class="btn btn-primary">Update Expense</button>
                         </div>
                     </div>                
             </form>

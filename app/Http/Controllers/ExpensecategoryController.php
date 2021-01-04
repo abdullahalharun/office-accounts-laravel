@@ -65,9 +65,12 @@ class ExpensecategoryController extends Controller
      * @param  \App\Models\Expensecategory  $expensecategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expensecategory $expensecategory)
+    public function edit(Expensecategory $expensecategory, $id)
     {
-        //
+        $categories = Expensecategory::all();
+        $category = Expensecategory::find($id);
+
+        return view('expense.category.edit', compact('categories', 'category'));
     }
 
     /**
@@ -77,9 +80,17 @@ class ExpensecategoryController extends Controller
      * @param  \App\Models\Expensecategory  $expensecategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expensecategory $expensecategory)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'cat_name' => 'required'
+        ]);
+
+        $post = Expensecategory::find($id);
+        $post->name = $request->get('cat_name');
+        $post->save();
+
+        return redirect()->back()->with('success', 'Category Updated Successfully');
     }
 
     /**
@@ -88,8 +99,11 @@ class ExpensecategoryController extends Controller
      * @param  \App\Models\Expensecategory  $expensecategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expensecategory $expensecategory)
+    public function destroy($id)
     {
-        //
+        $category = Expensecategory::find($id);
+        $category->delete();
+
+        return redirect()->back()->with('success', 'Category Deleted Successfully');
     }
 }

@@ -16,7 +16,11 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return view('expense.index');
+        $expenses = Expense::all();
+        $expensecategories = Expensecategory::all();
+        $accounts = Account::all();
+
+        return view('expense.index', compact('expenses', 'expensecategories', 'accounts'));
     }
 
     /**
@@ -77,13 +81,12 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expense $expense)
+    public function edit($id)
     {
         $expensecategories = Expensecategory::all();
         $accounts = Account::all();
         $expenses = Expense::all();
-        var_dump($expense);
-        $expense = Expense::find($expense);
+        $expense = Expense::find($id);
         
         return view('expense.edit', compact('expensecategories', 'expenses', 'accounts', 'expense'));
     }
@@ -95,7 +98,7 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'cat_id' => 'required',
@@ -113,7 +116,7 @@ class ExpenseController extends Controller
         $expense->remarks = $request->get('remarks');
         $expense->save();
 
-        return redirect()->back()->with('success', 'Expense Inserted Successfully');
+        return redirect()->back()->with('success', 'Expense Updated Successfully');
     }
 
     /**
@@ -122,8 +125,11 @@ class ExpenseController extends Controller
      * @param  \App\Models\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Expense $expense)
+    public function destroy($id)
     {
-        //
+        $expense = Expense::find($id);
+        $expense->delete();
+
+        return redirect()->back()->with('success', 'Expense Deleted Successfully');
     }
 }

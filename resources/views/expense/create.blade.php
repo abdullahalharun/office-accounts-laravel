@@ -24,7 +24,7 @@
                     <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-date-input">Date</label>
                         <div class="col-sm-10">
-                            <input type="date" name="date" value="{{$expense->date}}" id="example-date-input" class="form-control">
+                            <input type="date" name="date" id="example-date-input" class="form-control">
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                     <div class="mb-15 row">
                         <label class="col-sm-2 col-form-label" for="example-input-small">Amount</label>
                         <div class="col-sm-10">
-                            <input type="text" name="amount" value="{{$expense->amount}}" id="title" class="form-control">
+                            <input type="text" name="amount" value="" id="title" class="form-control">
                         </div>
                     </div>
 
