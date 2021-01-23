@@ -60,6 +60,19 @@
                             <input type="textarea" name="remarks" id="title" class="form-control">
                         </div>
                     </div> 
+                    
+                    <div class="mb-15 row">
+                        <label class="col-sm-2 col-form-label" for="example-input-small">Add Invoice</label>
+                        <div class="col-sm-10">
+                            <div class="form-file">
+                            <input type="file" name="invoice" class="form-file-input" id="customFile">
+                            <label class="form-file-label" for="customFile">
+                                <span class="form-file-text">Upload invoice...</span>
+                                <span class="form-file-button">Browse</span>
+                            </label>
+                            </div>
+                        </div>
+                    </div> 
                                         
                     <div class="mb-15 mb-0 justify-content-start row">
                         <div class="col-sm-6">

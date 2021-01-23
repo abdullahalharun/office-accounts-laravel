@@ -52,6 +52,22 @@ class ExpenseController extends Controller
             'account' => 'required',
         ]);
 
+        //Handle file upload
+        if ($request->hasFile('invoice')) {
+            //get filename with the extension
+            $fileNameWithExtension = $request->file('invoice')->getClientOriginalName();
+            //Get file name
+            $fileName = pathinfo($fileNameWithExtension , PATHINFO_FILENAME);
+            //get extension
+            $extension = $request->file('invoice')->getClientOriginalExtension();
+            //filename to store
+            $fileNametoStore = $fileName.'_'.time().'.'.$extension;
+            //upload image
+            $path = $request->file('invoice')->storeAs('public/invoices', $fileNametoStore);
+        } else {
+            $fileNametoStore = 'noimage.jpg';
+        }
+
         $expense = new Expense;
         $expense->cat_id = $request->get('cat_id');
         $expense->details = $request->get('details');
