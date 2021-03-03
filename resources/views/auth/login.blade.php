@@ -42,7 +42,14 @@
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}
                 </x-jet-button>
+                
+                
             </div>
         </form>
+        <a class="text-sm text-gray-600 hover:text-gray-900" href="/login/google">
+            <x-jet-button class="ml-4 justify-end mt-4">
+               <i class="fab fa-google"></i> Login with Google 
+            </x-jet-button>                
+        </a>
     </x-jet-authentication-card>
 </x-guest-layout>
