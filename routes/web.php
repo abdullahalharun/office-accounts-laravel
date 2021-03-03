@@ -26,3 +26,7 @@ Route::resource('expense-category', 'ExpensecategoryController');
 Route::resource('expense', 'ExpenseController');
 Route::get('test', 'TestController@index');
 // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

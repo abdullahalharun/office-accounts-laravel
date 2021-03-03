@@ -29,7 +29,7 @@
     <meta property="og:image:width" content="1280">
     <meta property="og:image:height" content="720">
 
-    <title>Morioh Responsive Template with Bootstrap 4, HTML5 and Vue.js</title>
+    <title>Taibah Accounts</title>
     <meta itemprop="description" content="Morioh Theme is Bootstrap responsive template free download">
     <meta itemprop="image" content="https://i.imgur.com/gWYKl5F.png">
 
@@ -88,8 +88,7 @@
                                 
                                     <button class="btn btn-outline-primary" type="button">
                                         <i class="fas fa-search"></i>
-                                    </button>
-                              
+                                    </button>                              
                             </div>
                         </form>
                     </li>
@@ -99,76 +98,12 @@
 
                 <ul class="navbar-nav my-2 my-lg-0">
 
-
                     <li class="nav-item mr-10">
                         <a href="#" class="nav-icon font-2xl">
                             <!-- <i class="fas fa-chart-pie"></i> -->
                             <i class="mdi mdi-view-dashboard-outline"></i>
                         </a>
                     </li>
-
-                    <!-- <li class="nav-item mr-10 dropdown">
-                        <span class="badge bg-danger">5</span>
-                        <a class="nav-icon font-2xl" href="#" id="QBDX05" role="button" data-toggle="dropdown"
-                            aria-expanded="false" data-flip="false">
-                            <i class="mdi mdi-bell-ring-outline"></i>
-                            
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right p-0 border-0 w-400" 
-                            aria-labelledby="QBDX05">
-
-                            <div class="card mb-15">
-                                <div class="card-header">
-                                    <a href="javascript://" class="float-right text-body">
-                                        Mask as read
-                                    </a>
-                                    Notifications
-                                </div>
-
-
-                                <div class="perfect-scrollbar position-relative" style="max-height: 400px;">
-
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item list-group-item-action">
-                                            <div class="d-flex">
-                                                <a href="javascript://" class="avatar mr-10">
-                                                    <img src="https://i.imgur.com/ROPF2fQ.png" alt="...">
-                                                </a>
-                                                <div class="flex-fill">
-                                                    <div><strong>Nandu Singh</strong> like your post</div>
-                                                    <span class="text-muted">at few seconds</span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li class="list-group-item list-group-item-action">
-                                            <div class="d-flex">
-                                                <a href="javascript://" class="avatar mr-10">
-                                                    <img src="https://i.imgur.com/ROPF2fQ.png" alt="...">
-                                                </a>
-                                                <div class="flex-fill">
-                                                    <div><strong>Nandu Singh</strong> like your post</div>
-                                                    <span class="text-muted">at few seconds</span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </div>
-
-                                <div class="card-footer text-center border-0">
-                                    <a href="javascript://" class="text-body">
-                                        View all
-                                    </a>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-                    </li> -->
 
                     <li class="nav-item mr-10">
                         <a href="#" class="nav-icon font-2xl rounded-circle">
@@ -218,7 +153,7 @@
         <div class="menubar menubar-dark" id="main-menu">
 
             <div class="menubar-header text-center bg-primary">
-                <a class="menubar-brand" href="/admin">
+                <a class="menubar-brand" href="/expense">
                     <img src="/images/logo_icon.png" title="Dashboard" class="menubar-logo"
                         style="height: 50px;">
                 </a>

@@ -20,6 +20,7 @@ class CreateExpensesTable extends Migration
             $table->string('details')->nullable();
             $table->double('amount');            
             $table->string('account');
+            $table->text('invoice')->nullable();
             $table->string('remarks')->nullable();
             $table->timestamps();
         });
