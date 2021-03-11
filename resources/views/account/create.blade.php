@@ -50,7 +50,7 @@
                                             {{csrf_field()}}
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" id="MId" value="{{$account->id}}">
-                                            <button style="" class="btn text-danger" type="submit"  data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                            <button class="btn text-danger" type="submit"  data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                         </form>
                                     
                                     <!-- <div class="dropdown">

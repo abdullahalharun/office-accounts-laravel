@@ -148,4 +148,21 @@ class ExpenseController extends Controller
 
         return redirect()->back()->with('success', 'Expense Deleted Successfully');
     }
+
+    public function filter_expense()
+    {
+        if(request()->fromdate || request()->category || request()->account){
+            $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
+                                ->orWhere('cat_id', request()->category)
+                                ->orWhere('account', request()->account)
+                                ->get();
+            // dd($expenses);
+        } else {
+            $expenses = Expense::all();
+        }
+        $accounts = Account::all();
+        $categories = Expensecategory::all();
+
+        return view('test.index', compact('expenses', 'categories', 'accounts'));
+    }
 }

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use TCG\Voyager\Facades\Voyager;
 
 Route::get('/login/google', function () {
     return Socialite::driver('google')->redirect();
@@ -11,6 +14,8 @@ Route::get('/login/google/callback', 'SocialiteController@handleGoogleCallback')
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', [TestController::class, 'index'])->name('test');
+Route::get('/expense/filter', [ExpenseController::class, 'filter_expense'])->name('expense.filter');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

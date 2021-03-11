@@ -15,6 +15,9 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('expense.filter') }}" :active="request()->routeIs('expense.filter')">
+                        Expense
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -48,9 +51,14 @@
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
                         </x-jet-dropdown-link>
+                            <div class="border-t border-gray-100"></div>
 
                         <x-jet-dropdown-link href="/expense">
                             {{ __('Accounts') }}
+                        </x-jet-dropdown-link>
+                        
+                        <x-jet-dropdown-link href="/admin">
+                            {{ __('Admin Dashboard') }}
                         </x-jet-dropdown-link>
 
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
