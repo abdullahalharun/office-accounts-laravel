@@ -25,12 +25,12 @@
                         <div class="grid grid-cols-6 gap-6">
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="first_name" class="block text-sm font-medium text-gray-700">From</label>
-                                <input type="date" name="fromdate" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                <input type="date" name="fromdate" value="{{ old('fromdate') }}" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                             </div>
 
                             <div class="col-span-6 sm:col-span-3">
                                 <label for="last_name" class="block text-sm font-medium text-gray-700">To</label>
-                                <input type="date" name="todate" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                <input type="date" name="todate" value="{{ old('todate') }}" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                             </div>
 
                             <!-- <div class="col-span-6 sm:col-span-4">
@@ -84,7 +84,7 @@
                             <th class="py-3 px-6 text-left">Category</th>
                             <th class="py-3 px-6 text-left">Date</th>
                             <th class="py-3 px-6 text-center">Details</th>
-                            <th class="py-3 px-6 text-center">From Account</th>
+                            <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Amount</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>

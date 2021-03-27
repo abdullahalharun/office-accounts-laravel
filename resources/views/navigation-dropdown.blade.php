@@ -53,9 +53,9 @@
                         </x-jet-dropdown-link>
                             <div class="border-t border-gray-100"></div>
 
-                        <x-jet-dropdown-link href="/expense">
+                        <!-- <x-jet-dropdown-link href="/expense">
                             {{ __('Accounts') }}
-                        </x-jet-dropdown-link>
+                        </x-jet-dropdown-link> -->
                         
                         <x-jet-dropdown-link href="/admin">
                             {{ __('Admin Dashboard') }}
