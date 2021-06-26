@@ -6,6 +6,7 @@ use App\Models\Expense;
 use App\Models\Account;
 use App\Models\Expensecategory;
 use Illuminate\Http\Request;
+use PDF;
 
 class ExpenseController extends Controller
 {
@@ -16,11 +17,21 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::all();
-        $expensecategories = Expensecategory::all();
+        if(request()->fromdate || request()->category || request()->account){
+            $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
+                                ->orWhere('cat_id', request()->category)
+                                ->orWhere('account', request()->account)
+                                ->get();
+            // dd($expenses);
+        } else {
+            $expenses = Expense::all();
+        }
         $accounts = Account::all();
+        $categories = Expensecategory::all();
 
-        return view('expense.index', compact('expenses', 'expensecategories', 'accounts'));
+        return view('expense.index', compact('expenses', 'categories', 'accounts'));
+
+        // return view('expense.index', compact('expenses', 'expensecategories', 'accounts'));
     }
 
     /**
@@ -163,6 +174,16 @@ class ExpenseController extends Controller
         $accounts = Account::all();
         $categories = Expensecategory::all();
 
-        return view('test.index', compact('expenses', 'categories', 'accounts'));
+        return view('expense.index', compact('expenses', 'categories', 'accounts'));
+    }
+
+    public function create_invoice($id)
+    {
+        $expense = Expense::find($id);
+        // dd($expense);
+
+        $pdf = PDF::loadview('expense.invoice', ['expense' => $expense]);
+
+        return $pdf->stream('invoice.pdf');
     }
 }
