@@ -15,8 +15,20 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
+                    <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense*')">
                         Expense
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+                        Salary
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">
+                        Earnings
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit*')">
+                        Deposit
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement*')">
+                        Statement
                     </x-jet-nav-link>
                 </div>
             </div>

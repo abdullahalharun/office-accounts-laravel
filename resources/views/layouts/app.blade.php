@@ -29,6 +29,8 @@
                 </div>
             </header>
 
+            @include('inc.messages')
+
             <!-- Page Content -->
             <main>
                 {{ $slot }}

@@ -1,19 +1,52 @@
 @if(count($errors) > 0)
     @foreach($errors->all() as $error)
-       <div class="alert alert-danger" role="alert">
+       <!-- <div class="alert alert-danger" role="alert">
            {{$error}}
-       </div>
+       </div> -->
+        <div class="py-3">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-green overflow-hidden shadow-xl sm:rounded-lg">
+                    <div class="px-4 py-4 sm:px-6 bg-red-200">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900">
+                            {{$error}}
+                        </h3>
+                    </div>
+                </div>                
+            </div>
+        </div>
     @endforeach
 @endif
 
 @if(session('success'))
-       <div class="alert alert-success">
+       <!-- <div class="alert alert-success">
            {{session('success')}}
-       </div>
+       </div> -->
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-green overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="px-4 py-4 sm:px-6 bg-green-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {{session('success')}}
+                    </h3>
+                </div>
+            </div>                
+        </div>
+    </div>
 @endif
 
 @if(session('error'))
-       <div class="alert alert-danger">
+       <!-- <div class="alert alert-danger">
            {{session('error')}}
-       </div>
+       </div> -->
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-green overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="px-4 py-4 sm:px-6 bg-red-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        {{session('error')}}
+                    </h3>
+                </div>
+            </div>                
+        </div>
+    </div>
 @endif

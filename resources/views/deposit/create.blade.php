@@ -1,50 +1,33 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
-            All Expense
+        <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit.index')">
+            All Deposit
         </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+        <x-jet-nav-link href="{{ route('deposit.create') }}" :active="request()->routeIs('deposit.create')">
             {{ __('Add New') }}
         </x-jet-nav-link>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-              
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">              
                 <!-- Filter form -->            
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        New Expense
+                        New Deposit
                     </h3>
                     <!-- <p class="mt-1 max-w-2xl text-sm text-gray-500">
                     Personal details and application.
                     </p> -->
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form action="{{ route('expense.store') }}" method="POST">
+                    <form action="{{ route('deposit.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-3 gap-4">
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                                    <input type="date" name="date" value="{{ old('date') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                    <select id="category" name="cat_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option value="">Select Category</option>
-                                        @foreach($expensecategories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="account" class="block text-sm font-medium text-gray-700">From Account</label>
+                                    <label for="account" class="block text-sm font-medium text-gray-700">Account</label>
                                     <select id="account" name="account" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">Select Account</option>
                                         @foreach($accounts as $account)
@@ -52,21 +35,29 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="from" class="block text-sm font-medium text-gray-700">From</label>
+                                    <input type="text" name="from" value="{{ old('from') }}" id="from" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="from" class="block text-sm font-medium text-gray-700">Details</label>
                                     <textarea name="details" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea> 
+                                    <!-- <input type="text" name="from" value="{{ old('from') }}" id="from" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"> -->
                                 </div>
+
+                                <!-- <div class="col-span-6 sm:col-span-4">
+                                    <label for="email_address" class="block text-sm font-medium text-gray-700">Email address</label>
+                                    <input type="text" name="email_address" id="email_address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div> -->
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
                                     <input type="text" name="amount" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div>
                             
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="invoice" class="block text-sm font-medium text-gray-700">Invoice</label>
-                                    <input type="file" name="invoice" value="{{ old('invoice') }}" id="invoice" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md leading-8">
-                                </div>
+                                
                                 
                             </div>
                         </div>

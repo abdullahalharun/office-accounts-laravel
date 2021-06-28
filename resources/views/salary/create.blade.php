@@ -1,47 +1,46 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
-            All Expense
+        <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+            All Salary
         </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+        <x-jet-nav-link href="{{ route('salary.create') }}" :active="request()->routeIs('salary.create')">
             {{ __('Add New') }}
         </x-jet-nav-link>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
               
                 <!-- Filter form -->            
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        New Expense
+                        New Salary
                     </h3>
                     <!-- <p class="mt-1 max-w-2xl text-sm text-gray-500">
                     Personal details and application.
                     </p> -->
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form action="{{ route('expense.store') }}" method="POST">
+                    <form action="{{ route('salary.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-3 gap-4">
-                                <div class="col-span-6 sm:col-span-3">
+                                <!-- <div class="col-span-6 sm:col-span-3">
                                     <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
                                     <input type="date" name="date" value="{{ old('date') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
+                                </div> -->
 
                                 <div class="col-span-6 sm:col-span-3">
-                                    <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                    <select id="category" name="cat_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option value="">Select Category</option>
-                                        @foreach($expensecategories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <label for="account" class="block text-sm font-medium text-gray-700">Employee</label>
+                                    <select id="account" name="account" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="">Select Employee</option>
+                                        @foreach($employees as $employee)
+                                            <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="account" class="block text-sm font-medium text-gray-700">From Account</label>
@@ -81,5 +80,4 @@
             </div>
         </div>
     </div>
-
 </x-app-layout>

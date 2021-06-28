@@ -76,7 +76,7 @@ class ExpenseController extends Controller
             //upload image
             $path = $request->file('invoice')->storeAs('public/invoices', $fileNametoStore);
         } else {
-            $fileNametoStore = 'noimage.jpg';
+            $fileNametoStore = null;
         }
 
         $expense = new Expense;
@@ -85,6 +85,7 @@ class ExpenseController extends Controller
         $expense->date = $request->get('date');
         $expense->amount = $request->get('amount');
         $expense->account = $request->get('account');
+        $expense->remarks = $fileNametoStore;
         $expense->remarks = $request->get('remarks');
         $expense->save();
 

@@ -22,8 +22,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('account', 'AccountController');
-Route::resource('expense-category', 'ExpensecategoryController');
 Route::resource('expense', 'ExpenseController');
+Route::resource('salary', 'SalaryController');
+Route::resource('earning', 'EarningController');
+Route::resource('deposit', 'DepositController');
+Route::resource('statement', 'StatementController');
+Route::resource('expense-category', 'ExpensecategoryController');
 Route::get('expense/{id}/create-invoice', [ExpenseController::class, 'create_invoice'])->name('expense.invoice');
 Route::get('test', 'TestController@index');
 // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);
