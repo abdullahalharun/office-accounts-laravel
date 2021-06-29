@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Deposit;
 use App\Models\Statement;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use TCG\Voyager\Models\Category;
 
 class DepositController extends Controller
 {
@@ -29,8 +31,10 @@ class DepositController extends Controller
     public function create()
     {
         $accounts = Account::all();
+        $parent_category = Category::where('slug', 'deposit')->first();
+        $categories = Category::where('parent_id', $parent_category->id)->get();
 
-        return view('deposit.create', compact('accounts'));
+        return view('deposit.create', compact('accounts', 'categories'));
     }
 
     /**
@@ -46,17 +50,21 @@ class DepositController extends Controller
         ]);
 
         $deposit = new Deposit;
-        $deposit->account = $request->get('account');
+        $deposit->account_id = $request->get('account');
         $deposit->from = $request->get('from');
         $deposit->details = $request->get('details');
         $deposit->amount = $request->get('amount');
         $deposit->save();
 
-        $transaction = new Statement;
-        $transaction->account = $request->get('account');
-        $transaction->details = $request->get('details');
-        $transaction->debit = 0;
-        $transaction->credit = $request->get('amount');
+        $parent_category = Category::where('slug', 'deposit')->first();
+        
+        $transaction = new Transaction;
+        $transaction->parent_id     = $parent_category->id;
+        $transaction->category_id   = $request->get('category_id');
+        $transaction->account_id    = $request->get('account');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = 0;
+        $transaction->credit        = $request->get('amount');
         $transaction->save();
 
         return redirect()->back()->withSuccess('Your amount has been deposited successfully.');

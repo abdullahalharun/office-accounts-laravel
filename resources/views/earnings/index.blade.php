@@ -1,9 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit.index')">
-            All Deposit
+        <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">
+            All Earning
         </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('deposit.create') }}" :active="request()->routeIs('deposit.create')">
+        <x-jet-nav-link href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
             {{ __('Add New') }}
         </x-jet-nav-link>
     </x-slot>
@@ -18,38 +18,38 @@
                             <th class="py-3 px-6 text-left">Date</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
-                            <th class="py-3 px-6 text-center">Amount (৳{{ $deposits->sum('amount') }})</th>
+                            <th class="py-3 px-6 text-center">Amount (৳{{ $earnings->sum('amount') }})</th>
                             <th class="py-3 px-6 text-center">Invoice</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                      @foreach($deposits as $deposit)
+                      @foreach($earnings as $earning)
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
                             
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
-                                    <span>{{ $deposit->created_at }}</span>
+                                    <span>{{ $earning->created_at }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->account_name->name }}</span>
+                                  <span>{{ $earning->account_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->details }}</span>
+                                  <span>{{ $earning->details }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->amount }}</span>
+                                  <span>{{ $earning->amount }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <a href="/deposit/{{$deposit->id}}/create-invoice" target="_blank"><span>Create Invoice</span></a>
+                                  <a href="/earning/{{$earning->id}}/create-voucher" target="_blank"><span>Create Invoice</span></a>
                                 </div>
                             </td>
                             <!-- <td class="py-3 px-6 text-center">
@@ -82,7 +82,7 @@
                                 <th class="py-3 px-6 text-left"></th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
-                                <th class="py-3 px-6 text-center">৳ {{ $deposits->sum('amount') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('amount') }}</th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>

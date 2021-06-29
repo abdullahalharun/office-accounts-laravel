@@ -18,10 +18,10 @@
                     <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense*')">
                         Expense
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+                    <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary*')">
                         Salary
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">
+                    <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning*')">
                         Earnings
                     </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit*')">

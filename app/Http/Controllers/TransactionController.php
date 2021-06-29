@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
-use App\Models\Salary;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
-class SalaryController extends Controller
+class TransactionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::all();
-
-        return view('salary.index', compact('salaries'));
+        //
     }
 
     /**
@@ -28,11 +24,7 @@ class SalaryController extends Controller
      */
     public function create()
     {
-        $accounts = Account::all();
-        $get_employees =  Http::get('https://taibahacademy.com/api/employees');
-        $employees = json_decode($get_employees);
-
-        return view('salary.create', compact('accounts', 'employees'));
+        //
     }
 
     /**
@@ -49,10 +41,10 @@ class SalaryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Salary  $salary
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Salary $salary)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -60,10 +52,10 @@ class SalaryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Salary  $salary
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salary $salary)
+    public function edit(Transaction $transaction)
     {
         //
     }
@@ -72,10 +64,10 @@ class SalaryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Salary  $salary
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salary $salary)
+    public function update(Request $request, Transaction $transaction)
     {
         //
     }
@@ -83,10 +75,10 @@ class SalaryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Salary  $salary
+     * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Salary $salary)
+    public function destroy(Transaction $transaction)
     {
         //
     }

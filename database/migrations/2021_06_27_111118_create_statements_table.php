@@ -15,7 +15,7 @@ class CreateStatementsTable extends Migration
     {
         Schema::create('statements', function (Blueprint $table) {
             $table->id();
-            $table->integer('account');
+            $table->integer('account_id');
             $table->string('details')->nullable();
             $table->double('debit');
             $table->double('credit');

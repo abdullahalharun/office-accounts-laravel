@@ -21,7 +21,7 @@
        <!-- <div class="alert alert-success">
            {{session('success')}}
        </div> -->
-    <div class="py-6">
+    <div class="pt-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-green overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-4 sm:px-6 bg-green-200">
@@ -38,7 +38,7 @@
        <!-- <div class="alert alert-danger">
            {{session('error')}}
        </div> -->
-    <div class="py-6">
+    <div class="pt-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-green overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-4 sm:px-6 bg-red-200">

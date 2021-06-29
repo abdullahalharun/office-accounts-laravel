@@ -10,6 +10,6 @@ class Statement extends Model
     use HasFactory;
 
     public function account_name(){
-        return $this->belongsTo('App\Models\Account', 'account');
+        return $this->belongsTo('App\Models\Account', 'account_id');
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\Account;
 use App\Models\Expensecategory;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use PDF;
+use TCG\Voyager\Models\Category;
 
 class ExpenseController extends Controller
 {
@@ -89,7 +91,18 @@ class ExpenseController extends Controller
         $expense->remarks = $request->get('remarks');
         $expense->save();
 
-        return redirect()->back()->with('success', 'Expense Inserted Successfully');
+        $parent_category = Category::where('slug', 'expense')->first();
+
+        $transaction = new Transaction;
+        $transaction->parent_id     = $parent_category->id;
+        $transaction->category_id   = $request->get('cat_id');
+        $transaction->account_id    = $request->get('account');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = $request->get('amount');
+        $transaction->credit        = 0;
+        $transaction->save();
+
+        return redirect()->back()->with('success', 'New Expense Inserted Successfully');
     }
 
     /**

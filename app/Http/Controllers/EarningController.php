@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use App\Models\Earning;
+use App\Models\Statement;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use TCG\Voyager\Models\Category;
 
 class EarningController extends Controller
 {
@@ -14,7 +18,9 @@ class EarningController extends Controller
      */
     public function index()
     {
-        //
+        $earnings = Earning::all();
+
+        return view('earnings.index', compact('earnings'));
     }
 
     /**
@@ -24,7 +30,12 @@ class EarningController extends Controller
      */
     public function create()
     {
-        //
+        $accounts = Account::all();
+        $cat_id = Category::where('slug', 'earnings')->first();
+        // dd($cat_id->id);
+        $categories = Category::where('parent_id', $cat_id->id)->get();
+
+        return view('earnings.create', compact('accounts', 'categories'));
     }
 
     /**
@@ -35,7 +46,30 @@ class EarningController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'account_id' => 'required',
+            'amount'     => 'required'
+        ]);
+
+        $earning = new Earning;
+        $earning->category_id = $request->get('category_id');
+        $earning->account_id = $request->get('account_id');
+        $earning->details = $request->get('details');
+        $earning->amount = $request->get('amount');
+        $earning->save();
+
+        $parent_category = Category::where('slug', 'earnings')->first();
+        
+        $transaction = new Transaction;
+        $transaction->parent_id     = $parent_category->id;
+        $transaction->category_id   = $request->get('category_id');
+        $transaction->account_id    = $request->get('account_id');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = 0;
+        $transaction->credit        = $request->get('amount');
+        $transaction->save();
+
+        return redirect()->back()->withSuccess('New Earning Deposited Successfully.');
     }
 
     /**

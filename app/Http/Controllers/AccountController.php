@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Statement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -14,7 +16,16 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        $accounts = Account::all();
+        $statements = Statement::all();        
+        // $debits = Statement::groupBy('account')
+        //             ->selectRaw('sum(debit) as debit, account')
+        //             ->pluck('debit', 'account');
+        // $credits = Statement::groupBy('account')
+        //             ->selectRaw('sum(credit) as credit, account')
+        //             ->pluck('credit', 'account');
+
+        return view('statements.account', compact('accounts', 'statements'));
     }
 
     /**
