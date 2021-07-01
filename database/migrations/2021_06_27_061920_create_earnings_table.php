@@ -15,6 +15,7 @@ class CreateEarningsTable extends Migration
     {
         Schema::create('earnings', function (Blueprint $table) {
             $table->id();
+            $table->integer('transaction_id');
             $table->integer('category_id');
             $table->integer('account_id');
             $table->string('details');

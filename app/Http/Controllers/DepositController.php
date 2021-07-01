@@ -49,13 +49,6 @@ class DepositController extends Controller
             'amount' => 'required',
         ]);
 
-        $deposit = new Deposit;
-        $deposit->account_id = $request->get('account');
-        $deposit->from = $request->get('from');
-        $deposit->details = $request->get('details');
-        $deposit->amount = $request->get('amount');
-        $deposit->save();
-
         $parent_category = Category::where('slug', 'deposit')->first();
         
         $transaction = new Transaction;
@@ -66,6 +59,18 @@ class DepositController extends Controller
         $transaction->debit         = 0;
         $transaction->credit        = $request->get('amount');
         $transaction->save();
+
+        $deposit = new Deposit;
+        $deposit->transaction_id = $transaction->id;
+        $deposit->account_id = $request->get('account');
+        $deposit->from = $request->get('from');
+        $deposit->details = $request->get('details');
+        $deposit->amount = $request->get('amount');
+        $deposit->save();
+
+        
+
+        
 
         return redirect()->back()->withSuccess('Your amount has been deposited successfully.');
     }

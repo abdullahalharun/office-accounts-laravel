@@ -15,6 +15,7 @@ class CreateDepositsTable extends Migration
     {
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
+            $table->integer('transaction_id');
             $table->integer('account_id');
             $table->string('from')->nullable();
             $table->string('details')->nullable();

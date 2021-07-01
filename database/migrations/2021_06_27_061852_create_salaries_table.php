@@ -15,6 +15,7 @@ class CreateSalariesTable extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
+            $table->integer('transaction_id');
             $table->integer('employee_id');
             $table->integer('account_id');
             $table->string('remarks')->nullable();
