@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Statement;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,7 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = Account::all();
-        $statements = Statement::all();        
+        $statements = Transaction::all();        
         // $debits = Statement::groupBy('account')
         //             ->selectRaw('sum(debit) as debit, account')
         //             ->pluck('debit', 'account');

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Statement;
-use App\Models\Transaction;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
-class StatementController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,7 @@ class StatementController extends Controller
      */
     public function index()
     {
-        $statements = Transaction::all();
-
-        return view('statements.index', compact('statements'));
+        //
     }
 
     /**
@@ -27,7 +24,7 @@ class StatementController extends Controller
      */
     public function create()
     {
-        //
+        return view('employee.create');
     }
 
     /**
@@ -38,16 +35,28 @@ class StatementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'email' => 'required|unique:employees',
+        ]);
+        
+        $employee = new Employee;
+        $employee->name         = $request->get('name');
+        $employee->email        = $request->get('email');
+        $employee->phone        = $request->get('phone');
+        $employee->designation  = $request->get('designation');
+        $employee->note         = $request->get('note');
+        $employee->save();
+
+        return redirect()->back()->withSuccess('Employee added Successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Statement  $statement
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function show(Statement $statement)
+    public function show(Employee $employee)
     {
         //
     }
@@ -55,10 +64,10 @@ class StatementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Statement  $statement
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Statement $statement)
+    public function edit(Employee $employee)
     {
         //
     }
@@ -67,10 +76,10 @@ class StatementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Statement  $statement
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Statement $statement)
+    public function update(Request $request, Employee $employee)
     {
         //
     }
@@ -78,10 +87,10 @@ class StatementController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Statement  $statement
+     * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Statement $statement)
+    public function destroy(Employee $employee)
     {
         //
     }

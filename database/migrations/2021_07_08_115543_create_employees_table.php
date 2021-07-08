@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatementsTable extends Migration
+class CreateEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateStatementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('statements', function (Blueprint $table) {
+        Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->integer('transaction_id');
-            $table->integer('account_id');
-            $table->string('details')->nullable();
-            $table->double('debit');
-            $table->double('credit');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('phone')->nullable();
+            $table->string('designation')->nullable();
+            $table->longText('note')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateStatementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statements');
+        Schema::dropIfExists('employees');
     }
 }

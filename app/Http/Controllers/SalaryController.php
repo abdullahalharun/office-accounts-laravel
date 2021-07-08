@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Salary;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -29,8 +33,9 @@ class SalaryController extends Controller
     public function create()
     {
         $accounts = Account::all();
-        $get_employees =  Http::get('https://taibahacademy.com/api/employees');
-        $employees = json_decode($get_employees);
+        // $get_employees =  Http::get('https://taibahacademy.com/api/employees');
+        // $employees = json_decode($get_employees);
+        $employees = Employee::all();
 
         return view('salary.create', compact('accounts', 'employees'));
     }
@@ -43,7 +48,32 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'amount' => 'required',
+        ]);
+
+        $parent_category = Category::where('slug', 'expense')->first();
+        $category = Category::where('slug', 'salary')->first();
+        
+        $transaction = new Transaction;
+        $transaction->parent_id     = $parent_category->id;
+        $transaction->category_id   = $category->id;
+        $transaction->account_id    = $request->get('account_id');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = $request->get('amount');
+        $transaction->credit        = 0;
+        $transaction->save();
+
+        $salary = new Salary;
+        $salary->month          = Carbon::createFromFormat('Y-m', $request->get('month'));
+        $salary->transaction_id = $transaction->id;
+        $salary->employee_id    = $request->get('employee_id');
+        $salary->account_id     = $request->get('account_id');
+        $salary->details        = $request->get('details');
+        $salary->amount         = $request->get('amount');
+        $salary->save();
+
+        return redirect()->back()->withSuccess('Salary has been inserted successfully.');
     }
 
     /**

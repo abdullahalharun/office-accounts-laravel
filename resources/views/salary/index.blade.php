@@ -4,7 +4,10 @@
             All Salary
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('salary.create') }}" :active="request()->routeIs('salary.create')">
-            {{ __('Add New') }}
+            {{ __('New Salary') }}
+        </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('employee.create') }}" :active="request()->routeIs('employee.create')">
+            {{ __('Add New Employee') }}
         </x-jet-nav-link>
     </x-slot>
 
@@ -34,6 +37,11 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
+                                  <span>{{ $salary->employee_name->name }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
                                   <span>{{ $salary->account_name->name }}</span>
                                 </div>
                             </td>
@@ -44,12 +52,7 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->debit }}</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
-                                <div class="flex items-center justify-center">
-                                  <span>{{ $salary->credit }}</span>
+                                  <span>{{ $salary->amount }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">

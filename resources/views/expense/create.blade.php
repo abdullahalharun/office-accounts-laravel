@@ -34,9 +34,9 @@
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                    <select id="category" name="cat_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <select id="category" name="category_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">Select Category</option>
-                                        @foreach($expensecategories as $category)
+                                        @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
@@ -45,7 +45,7 @@
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="account" class="block text-sm font-medium text-gray-700">From Account</label>
-                                    <select id="account" name="account" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <select id="account" name="account_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">Select Account</option>
                                         @foreach($accounts as $account)
                                             <option value="{{ $account->id }}">{{ $account->name }}</option>

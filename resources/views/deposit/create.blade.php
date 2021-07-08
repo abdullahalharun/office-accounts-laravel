@@ -39,35 +39,24 @@
                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="account" class="block text-sm font-medium text-gray-700">Account</label>
-                                    <select id="account" name="account" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                    <select id="account" name="account_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">Select Account</option>
                                         @foreach($accounts as $account)
                                             <option value="{{ $account->id }}">{{ $account->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="from" class="block text-sm font-medium text-gray-700">From</label>
-                                    <input type="text" name="from" value="{{ old('from') }}" id="from" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="from" class="block text-sm font-medium text-gray-700">Details</label>
                                     <textarea name="details" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea> 
-                                    <!-- <input type="text" name="from" value="{{ old('from') }}" id="from" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"> -->
                                 </div>
 
-                                <!-- <div class="col-span-6 sm:col-span-4">
-                                    <label for="email_address" class="block text-sm font-medium text-gray-700">Email address</label>
-                                    <input type="text" name="email_address" id="email_address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div> -->
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
                                     <input type="text" name="amount" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
-                            
+                                </div>                           
                                 
                                 
                             </div>

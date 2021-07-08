@@ -12,9 +12,9 @@ class Account extends Model
 
     protected $fillable = ['name'];
 
-    public function statements()
+    public function transactions()
     {
-        return $this->hasMany('App\Models\Statement', 'account_id');
+        return $this->hasMany('App\Models\Transaction', 'account_id');
     }
     
     // public function credit_balance()

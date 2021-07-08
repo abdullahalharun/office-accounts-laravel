@@ -51,15 +51,8 @@ class EarningController extends Controller
             'amount'     => 'required'
         ]);
 
-        $earning = new Earning;
-        $earning->category_id = $request->get('category_id');
-        $earning->account_id = $request->get('account_id');
-        $earning->details = $request->get('details');
-        $earning->amount = $request->get('amount');
-        $earning->save();
-
         $parent_category = Category::where('slug', 'earnings')->first();
-        
+
         $transaction = new Transaction;
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $request->get('category_id');
@@ -68,6 +61,15 @@ class EarningController extends Controller
         $transaction->debit         = 0;
         $transaction->credit        = $request->get('amount');
         $transaction->save();
+
+        $earning = new Earning;
+        $earning->parent_id         = $parent_category->id;
+        $earning->category_id       = $request->get('category_id');
+        $earning->transaction_id    = $transaction->id;
+        $earning->account_id        = $request->get('account_id');
+        $earning->details           = $request->get('details');
+        $earning->amount            = $request->get('amount');
+        $earning->save(); 
 
         return redirect()->back()->withSuccess('New Earning Deposited Successfully.');
     }

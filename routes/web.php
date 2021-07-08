@@ -24,6 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::resource('account', 'AccountController');
 Route::resource('expense', 'ExpenseController');
 Route::resource('salary', 'SalaryController');
+Route::resource('employee', 'EmployeeController');
 Route::resource('earning', 'EarningController');
 Route::resource('deposit', 'DepositController');
 Route::resource('statement', 'StatementController');

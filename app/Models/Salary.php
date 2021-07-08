@@ -9,7 +9,11 @@ class Salary extends Model
 {
     use HasFactory;
 
+    public function employee_name(){
+        return $this->belongsTo('App\Models\Employee', 'id');
+    }
+    
     public function account_name(){
-        return $this->belongsTo('App\Models\Account', 'account');
+        return $this->belongsTo('App\Models\Account', 'account_id');
     }
 }

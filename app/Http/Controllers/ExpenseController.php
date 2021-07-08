@@ -29,7 +29,7 @@ class ExpenseController extends Controller
             $expenses = Expense::all();
         }
         $accounts = Account::all();
-        $categories = Expensecategory::all();
+        $categories = Category::all();
 
         return view('expense.index', compact('expenses', 'categories', 'accounts'));
 
@@ -43,11 +43,12 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        $expensecategories = Expensecategory::all();
+        $parent_category = Category::where('slug', 'expense')->first();
+        $categories = Category::where('parent_id', $parent_category->id)->get();
         $accounts = Account::all();
         $expenses = Expense::all();
 
-        return view('expense.create', compact('expensecategories', 'expenses', 'accounts'));
+        return view('expense.create', compact('categories', 'expenses', 'accounts'));
     }
 
     /**
@@ -59,10 +60,10 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'cat_id' => 'required',
-            'date'  =>  'required',
-            'amount' => 'required',
-            'account' => 'required',
+            'category_id'   => 'required',
+            'date'          =>  'required',
+            'amount'        => 'required',
+            'account_id'    => 'required',
         ]);
 
         //Handle file upload
@@ -81,26 +82,27 @@ class ExpenseController extends Controller
             $fileNametoStore = null;
         }
 
-        $expense = new Expense;
-        $expense->cat_id = $request->get('cat_id');
-        $expense->details = $request->get('details');
-        $expense->date = $request->get('date');
-        $expense->amount = $request->get('amount');
-        $expense->account = $request->get('account');
-        $expense->remarks = $fileNametoStore;
-        $expense->remarks = $request->get('remarks');
-        $expense->save();
-
-        $parent_category = Category::where('slug', 'expense')->first();
-
+        $parent_category = Category::where('slug', 'deposit')->first();
+        
         $transaction = new Transaction;
         $transaction->parent_id     = $parent_category->id;
-        $transaction->category_id   = $request->get('cat_id');
-        $transaction->account_id    = $request->get('account');
+        $transaction->category_id   = $request->get('category_id');
+        $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
         $transaction->debit         = $request->get('amount');
         $transaction->credit        = 0;
         $transaction->save();
+
+        $expense = new Expense;
+        $expense->parent_id         = $parent_category->id;
+        $expense->category_id       = $request->get('category_id');
+        $expense->transaction_id    = $transaction->id;
+        $expense->date              = $request->get('date');
+        $expense->account_id        = $request->get('account_id');
+        $expense->details           = $request->get('details');
+        $expense->amount            = $request->get('amount');
+        $expense->invoice           = $fileNametoStore;
+        $expense->save();        
 
         return redirect()->back()->with('success', 'New Expense Inserted Successfully');
     }

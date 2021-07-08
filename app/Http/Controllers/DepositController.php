@@ -54,23 +54,20 @@ class DepositController extends Controller
         $transaction = new Transaction;
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $request->get('category_id');
-        $transaction->account_id    = $request->get('account');
+        $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
         $transaction->debit         = 0;
         $transaction->credit        = $request->get('amount');
         $transaction->save();
 
         $deposit = new Deposit;
+        $deposit->parent_id     = $parent_category->id;
+        $deposit->category_id   = $request->get('category_id');
         $deposit->transaction_id = $transaction->id;
-        $deposit->account_id = $request->get('account');
-        $deposit->from = $request->get('from');
+        $deposit->account_id = $request->get('account_id');
         $deposit->details = $request->get('details');
         $deposit->amount = $request->get('amount');
         $deposit->save();
-
-        
-
-        
 
         return redirect()->back()->withSuccess('Your amount has been deposited successfully.');
     }

@@ -21,6 +21,7 @@ class CreateTransactionsTable extends Migration
             $table->string('details')->nullable();
             $table->double('debit');
             $table->double('credit');
+            $table->string('fiscal_year')->default(2122);
             $table->timestamps();
         });
     }

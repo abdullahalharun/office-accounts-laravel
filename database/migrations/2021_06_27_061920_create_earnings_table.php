@@ -15,11 +15,13 @@ class CreateEarningsTable extends Migration
     {
         Schema::create('earnings', function (Blueprint $table) {
             $table->id();
-            $table->integer('transaction_id');
+            $table->integer('parent_id');
             $table->integer('category_id');
+            $table->integer('transaction_id');
             $table->integer('account_id');
-            $table->string('details');
+            $table->string('details')->nullable();
             $table->double('amount');
+            $table->string('fiscal_year')->default(2122);
             $table->timestamps();
         });
     }
