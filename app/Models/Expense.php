@@ -12,7 +12,7 @@ class Expense extends Model
     protected $fillable = ['category_id', 'date', 'details', 'amount'];
 
     public function category_name(){
-        return $this->belongsTo('App\Models\Category', 'id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
     
     public function account_name(){

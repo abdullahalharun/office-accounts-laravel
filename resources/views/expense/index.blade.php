@@ -87,8 +87,8 @@
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Category</th>
                             <th class="py-3 px-6 text-left">Date</th>
+                            <th class="py-3 px-6 text-left">Category</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Amount</th>
@@ -99,14 +99,14 @@
                     <tbody class="text-gray-600 text-sm font-light">
                       @foreach($expenses as $expense)
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
-                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <div class="flex items-center">                                    
-                                    <span class="font-medium">{{ $expense->category_name->name }}</span>
-                                </div>
-                            </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
                                     <span>{{ $expense->date }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <div class="flex items-center">                                    
+                                    <span class="font-medium">{{ $expense->category_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">

@@ -19,6 +19,7 @@
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">Date</th>
+                            <th class="py-3 px-6 text-center">Category</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Debit (৳{{ $statements->sum('debit') }})</th>
@@ -32,6 +33,11 @@
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
                                     <span>{{ $statement->created_at }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $statement->category_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -60,6 +66,7 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
+                                <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $statements->sum('debit') }}</th>

@@ -19,6 +19,7 @@
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">Date</th>
+                            <th class="py-3 px-6 text-center">Employee</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Amount (৳{{ $salaries->sum('amount') }})</th>
@@ -88,6 +89,7 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
+                                <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $salaries->sum('amount') }}</th>
