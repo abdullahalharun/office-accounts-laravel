@@ -180,8 +180,8 @@ class ExpenseController extends Controller
     {
         if(request()->fromdate || request()->category || request()->account){
             $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
-                                ->orWhere('cat_id', request()->category)
-                                ->orWhere('account', request()->account)
+                                ->orWhere('category_id', request()->category)
+                                ->orWhere('account_id', request()->account)
                                 ->get();
             // dd($expenses);
         } else {

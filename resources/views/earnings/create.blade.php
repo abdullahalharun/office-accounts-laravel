@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">
-            All Deposit
+            All Earning
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
             {{ __('Add New') }}

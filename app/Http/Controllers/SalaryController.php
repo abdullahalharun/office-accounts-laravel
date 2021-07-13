@@ -9,7 +9,7 @@ use App\Models\Salary;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use PDF;
 
 class SalaryController extends Controller
 {
@@ -119,5 +119,15 @@ class SalaryController extends Controller
     public function destroy(Salary $salary)
     {
         //
+    }
+
+    public function create_voucher($id)
+    {
+        $voucher = Salary::find($id);
+        // dd($expense);
+
+        $pdf = PDF::loadview('salary.voucher', compact('voucher'));
+
+        return $pdf->stream('voucher.pdf');
     }
 }

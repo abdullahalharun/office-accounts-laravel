@@ -23,7 +23,7 @@
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Amount (৳{{ $salaries->sum('amount') }})</th>
-                            <th class="py-3 px-6 text-center">Invoice</th>
+                            <th class="py-3 px-6 text-center">Voucher</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -58,7 +58,7 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <a href="/salary/{{$salary->id}}/create-pdf" target="_blank"><span>Create Invoice</span></a>
+                                  <a href="/salary/{{$salary->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
                                 </div>
                             </td>
                             <!-- <td class="py-3 px-6 text-center">

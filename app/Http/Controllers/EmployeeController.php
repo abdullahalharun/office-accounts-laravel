@@ -24,7 +24,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employee.create');
+        $employees = Employee::all();
+        
+        return view('employee.create', compact('employees'));
     }
 
     /**

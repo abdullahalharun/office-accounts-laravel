@@ -8,6 +8,7 @@ use App\Models\Statement;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Category;
+use PDF;
 
 class DepositController extends Controller
 {
@@ -115,5 +116,15 @@ class DepositController extends Controller
     public function destroy(Deposit $deposit)
     {
         //
+    }
+
+    public function create_voucher($id)
+    {
+        $deposit = Deposit::find($id);
+        // dd($expense);
+
+        $pdf = PDF::loadview('deposit.voucher', compact('deposit'));
+
+        return $pdf->stream('voucher.pdf');
     }
 }
