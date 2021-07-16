@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
+use App\Models\Category;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,11 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $accounts = Account::all();
+        $parent_category = Category::where('slug', 'transfer')->first();
+        $categories = Category::where('parent_id', $parent_category->id)->get();
+        
+        return view('transfer.create', compact('accounts', 'parent_category', 'categories'));
     }
 
     /**
@@ -35,7 +41,33 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'from_account_id'   => 'required',
+            'to_account_id'     => 'required',
+            'amount'            => 'required', 
+        ]);
+
+        $parent_category = Category::where('slug', 'transfer')->first();
+
+        $debit = new Transaction;
+        $debit->parent_id     = $parent_category->id;
+        $debit->category_id   = $request->get('category_id');
+        $debit->account_id    = $request->get('from_account_id');
+        $debit->details       = $request->get('details');
+        $debit->debit         = $request->get('amount');
+        $debit->credit        = 0;
+        $debit->save();
+        
+        $credit = new Transaction;
+        $credit->parent_id     = $parent_category->id;
+        $credit->category_id   = $request->get('category_id');
+        $credit->account_id    = $request->get('to_account_id');
+        $credit->details       = $request->get('details');
+        $credit->debit         = 0;
+        $credit->credit        = $request->get('amount');
+        $credit->save();
+
+        return redirect()->route('account.index')->withSuccess('Fund transfered Successfully.');
     }
 
     /**

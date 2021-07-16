@@ -6,7 +6,7 @@
         <x-jet-nav-link href="{{ route('account.index') }}" :active="request()->routeIs('account.index')">
             {{ __('Accounts') }}
         </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('statement.create') }}" :active="request()->routeIs('statement.create')">
+        <x-jet-nav-link href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
             {{ __('Transfer Money') }}
         </x-jet-nav-link>
     </x-slot>
