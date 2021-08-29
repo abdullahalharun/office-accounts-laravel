@@ -21,6 +21,7 @@ class CreateSalariesTable extends Migration
             $table->integer('account_id');
             $table->string('details')->nullable();
             $table->double('amount');
+            $table->double('charge');
             $table->string('fiscal_year')->default(2122);
             $table->timestamps();
         });

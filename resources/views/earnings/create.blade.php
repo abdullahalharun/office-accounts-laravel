@@ -28,6 +28,11 @@
                             <div class="grid grid-cols-3 gap-4">
 
                                 <div class="col-span-6 sm:col-span-3">
+                                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                                    <input type="date" name="date" value="{{ old('date') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
+
+                                <div class="col-span-6 sm:col-span-3">
                                     <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
                                     <select id="category" name="category_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">Select category</option>
@@ -48,14 +53,19 @@
                                 </div>
                                 
                                 <div class="col-span-6 sm:col-span-3">
+                                    <label for="amount" class="block text-sm font-medium text-gray-700">Amount</label>
+                                    <input type="text" name="amount" required placeholder="Earnings amount..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>  
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="charge" class="block text-sm font-medium text-gray-700">Charge</label>
+                                    <input type="text" name="charge" required placeholder="Transaction charge..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>  
+                                
+                                <div class="col-span-6 sm:col-span-3">
                                     <label for="from" class="block text-sm font-medium text-gray-700">Details</label>
                                     <textarea name="details" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea> 
                                 </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
-                                    <input type="text" name="amount" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>  
                                 
                             </div>
                         </div>

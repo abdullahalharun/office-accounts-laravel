@@ -20,8 +20,8 @@
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             
                             <th class="py-3 px-6 text-center">Account</th>
-                            <th class="py-3 px-6 text-center">Credit (৳{{ $statements->sum('credit') }})</th>
                             <th class="py-3 px-6 text-center">Debit (৳{{ $statements->sum('debit') }})</th>
+                            <th class="py-3 px-6 text-center">Credit (৳{{ $statements->sum('credit') }})</th>
                             <th class="py-3 px-6 text-center">Balance (৳{{ $statements->sum('credit') - $statements->sum('debit') }})</th>
                         </tr>
                     </thead>
@@ -36,12 +36,12 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $account->transactions->sum('credit') }}</span>
+                                    <span>{{ $account->transactions->sum('debit') }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $account->transactions->sum('debit') }}</span>
+                                  <span>{{ $account->transactions->sum('credit') }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -55,8 +55,8 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-center">Total Amount</th>
-                                <th class="py-3 px-6 text-center">৳ {{ $statements->sum('credit') }}</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $statements->sum('debit') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $statements->sum('credit') }}</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $statements->sum('credit') - $statements->sum('debit') }}</th>
                             </tr>
                         </thead>

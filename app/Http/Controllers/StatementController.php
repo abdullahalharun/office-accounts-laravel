@@ -15,7 +15,7 @@ class StatementController extends Controller
      */
     public function index()
     {
-        $statements = Transaction::all();
+        $statements = Transaction::orderBy('id', 'DESC')->get();
 
         return view('statements.index', compact('statements'));
     }

@@ -16,9 +16,12 @@
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">Date</th>
+                            <th class="py-3 px-6 text-center">Category</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Amount (৳{{ $earnings->sum('amount') }})</th>
+                            <th class="py-3 px-6 text-center">Charge (৳{{ $earnings->sum('charge') }})</th>
+                            <th class="py-3 px-6 text-center">Net Earnings (৳{{ $earnings->sum('amount') - $earnings->sum('charge') }})</th>
                             <th class="py-3 px-6 text-center">Invoice</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
@@ -29,7 +32,12 @@
                             
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
-                                    <span>{{ $earning->created_at }}</span>
+                                    <span>{{ $earning->date }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $earning->category_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -45,6 +53,16 @@
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
                                   <span>{{ $earning->amount }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $earning->charge }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $earning->amount - $earning->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -81,8 +99,11 @@
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
                                 <th class="py-3 px-6 text-center"></th>
+                                <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('amount') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('charge') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('amount') - $earnings->sum('charge') }}</th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>

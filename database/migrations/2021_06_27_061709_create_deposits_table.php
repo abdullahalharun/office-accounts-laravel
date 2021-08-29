@@ -15,12 +15,14 @@ class CreateDepositsTable extends Migration
     {
         Schema::create('deposits', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
             $table->integer('parent_id');
             $table->integer('category_id');
             $table->integer('transaction_id');
             $table->integer('account_id');
             $table->string('details')->nullable();
             $table->double('amount');
+            $table->double('charge');
             $table->string('fiscal_year')->default(2122);
             $table->timestamps();
         });

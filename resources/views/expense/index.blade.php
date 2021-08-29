@@ -91,7 +91,9 @@
                             <th class="py-3 px-6 text-left">Category</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Account</th>
-                            <th class="py-3 px-6 text-center">Amount</th>
+                            <th class="py-3 px-6 text-center">Amount (৳ {{ $expenses->sum('amount') }})</th>
+                            <th class="py-3 px-6 text-center">Charge (৳ {{ $expenses->sum('charge') }})</th>
+                            <th class="py-3 px-6 text-center">Net Expense (৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }})</th>
                             <th class="py-3 px-6 text-center">Invoice</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
@@ -122,6 +124,16 @@
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
                                   <span>{{ $expense->amount }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $expense->charge }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $expense->amount + $expense->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -161,6 +173,8 @@
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $expenses->sum('amount') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $expenses->sum('charge') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }}</th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>

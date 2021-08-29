@@ -53,22 +53,25 @@ class EarningController extends Controller
 
         $parent_category = Category::where('slug', 'earnings')->first();
 
-        $transaction = new Transaction;
+        $transaction                = new Transaction;
+        $transaction->date          = $request->get('date');
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $request->get('category_id');
         $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
         $transaction->debit         = 0;
-        $transaction->credit        = $request->get('amount');
+        $transaction->credit        = $request->get('amount') - $request->get('charge');
         $transaction->save();
 
         $earning = new Earning;
+        $earning->date              = $request->get('date');
         $earning->parent_id         = $parent_category->id;
         $earning->category_id       = $request->get('category_id');
         $earning->transaction_id    = $transaction->id;
         $earning->account_id        = $request->get('account_id');
         $earning->details           = $request->get('details');
         $earning->amount            = $request->get('amount');
+        $earning->charge            = $request->get('charge');
         $earning->save(); 
 
         return redirect()->back()->withSuccess('New Earning Deposited Successfully.');

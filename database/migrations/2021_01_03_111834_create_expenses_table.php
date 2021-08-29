@@ -15,13 +15,14 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
             $table->integer('parent_id');
             $table->integer('category_id');
             $table->integer('transaction_id');
-            $table->date('date');
             $table->string('account_id');
             $table->string('details')->nullable();
             $table->double('amount');            
+            $table->double('charge');            
             $table->text('invoice')->nullable();
             $table->string('fiscal_year')->default(2122);
             $table->timestamps();

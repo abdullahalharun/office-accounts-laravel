@@ -18,11 +18,13 @@
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Date</th>
+                            <th class="py-3 px-6 text-left">Month</th>
                             <th class="py-3 px-6 text-center">Employee</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Amount (৳{{ $salaries->sum('amount') }})</th>
+                            <th class="py-3 px-6 text-center">Charge (৳{{ $salaries->sum('charge') }})</th>
+                            <th class="py-3 px-6 text-center">Net Amount (৳{{ $salaries->sum('amount') + $salaries->sum('charge') }})</th>
                             <th class="py-3 px-6 text-center">Voucher</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
@@ -33,7 +35,7 @@
                             
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
-                                    <span>{{ $salary->created_at }}</span>
+                                    <span>{{ \Carbon\Carbon::parse($salary->month)->format('M Y') }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -54,6 +56,16 @@
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
                                   <span>{{ $salary->amount }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $salary->charge }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                  <span>{{ $salary->amount + $salary->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
@@ -93,6 +105,8 @@
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $salaries->sum('amount') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $salaries->sum('charge') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $salaries->sum('amount') + $salaries->sum('charge') }}</th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>

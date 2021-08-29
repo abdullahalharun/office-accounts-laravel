@@ -34,6 +34,11 @@
                                     <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
                                     <input type="date" name="date" value="{{ old('date') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div> -->
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                                    <input type="date" name="date" value="{{ old('date') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="account" class="block text-sm font-medium text-gray-700">Employee</label>
@@ -43,11 +48,6 @@
                                             <option value="{{ $employee->id }}">{{ $employee->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="month" class="block text-sm font-medium text-gray-700">Date</label>
-                                    <input type="month" name="month" value="{{ old('month') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">
@@ -62,7 +62,12 @@
                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
-                                    <input type="text" name="amount" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    <input type="text" name="amount" required placeholder="Enter amount..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Charge</label>
+                                    <input type="text" name="charge" required placeholder="Transaction charge..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div>
 
                                 <div class="col-span-6 sm:col-span-3">

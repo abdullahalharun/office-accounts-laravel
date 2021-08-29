@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Category;
 use App\Models\Employee;
+use App\Models\Expense;
 use App\Models\Salary;
 use App\Models\Transaction;
 use Carbon\Carbon;
@@ -56,22 +57,37 @@ class SalaryController extends Controller
         $category = Category::where('slug', 'salary')->first();
         
         $transaction = new Transaction;
+        $transaction->date          = $request->get('date');
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $category->id;
         $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
-        $transaction->debit         = $request->get('amount');
+        $transaction->debit         = $request->get('amount') + $request->get('charge');
         $transaction->credit        = 0;
         $transaction->save();
 
         $salary = new Salary;
-        $salary->month          = Carbon::createFromFormat('Y-m', $request->get('month'));
+        $salary->month          = Carbon::createFromFormat('Y-m-d', $request->get('date'));
         $salary->transaction_id = $transaction->id;
         $salary->employee_id    = $request->get('employee_id');
         $salary->account_id     = $request->get('account_id');
         $salary->details        = $request->get('details');
         $salary->amount         = $request->get('amount');
+        $salary->charge         = $request->get('charge');
         $salary->save();
+
+        // if($request->get('charge') > 0) {
+        //     $expense = new Expense;
+        //     $expense->date              = $request->get('date');
+        //     $expense->parent_id         = $parent_category->id;
+        //     $expense->category_id       = $category->id;
+        //     $expense->transaction_id    = $transaction->id;
+        //     $expense->account_id        = $request->get('account_id');
+        //     $expense->details           = 'Salary transaction charge';
+        //     $expense->amount            = $request->get('charge');
+        //     $expense->charge            = 0;
+        //     $expense->save(); 
+        // }
 
         return redirect()->back()->withSuccess('Salary has been inserted successfully.');
     }

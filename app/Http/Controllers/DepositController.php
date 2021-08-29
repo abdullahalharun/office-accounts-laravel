@@ -53,24 +53,27 @@ class DepositController extends Controller
         $parent_category = Category::where('slug', 'deposit')->first();
         
         $transaction = new Transaction;
+        $transaction->date          = $request->get('date');
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $request->get('category_id');
         $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
         $transaction->debit         = 0;
-        $transaction->credit        = $request->get('amount');
+        $transaction->credit        = $request->get('amount') - $request->get('charge');
         $transaction->save();
 
         $deposit = new Deposit;
-        $deposit->parent_id     = $parent_category->id;
-        $deposit->category_id   = $request->get('category_id');
-        $deposit->transaction_id = $transaction->id;
-        $deposit->account_id = $request->get('account_id');
-        $deposit->details = $request->get('details');
-        $deposit->amount = $request->get('amount');
+        $deposit->date              = $request->get('date');
+        $deposit->parent_id         = $parent_category->id;
+        $deposit->category_id       = $request->get('category_id');
+        $deposit->transaction_id    = $transaction->id;
+        $deposit->account_id        = $request->get('account_id');
+        $deposit->details           = $request->get('details');
+        $deposit->amount            = $request->get('amount');
+        $deposit->charge            = $request->get('charge');
         $deposit->save();
 
-        return redirect()->back()->withSuccess('Your amount has been deposited successfully.');
+        return redirect()->route('deposit.index')->withSuccess('Your amount has been deposited successfully.');
     }
 
     /**

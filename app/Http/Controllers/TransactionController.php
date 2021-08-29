@@ -50,6 +50,7 @@ class TransactionController extends Controller
         $parent_category = Category::where('slug', 'transfer')->first();
 
         $debit = new Transaction;
+        $debit->date          = $request->get('date');
         $debit->parent_id     = $parent_category->id;
         $debit->category_id   = $request->get('category_id');
         $debit->account_id    = $request->get('from_account_id');
@@ -59,6 +60,7 @@ class TransactionController extends Controller
         $debit->save();
         
         $credit = new Transaction;
+        $credit->date          = $request->get('date');
         $credit->parent_id     = $parent_category->id;
         $credit->category_id   = $request->get('category_id');
         $credit->account_id    = $request->get('to_account_id');

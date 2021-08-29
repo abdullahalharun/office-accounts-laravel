@@ -29,6 +29,11 @@
                         <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <div class="grid grid-cols-3 gap-4">
+
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                                    <input type="date" name="date" value="{{ old('date') }}" id="date" required autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
                                                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="account" class="block text-sm font-medium text-gray-700">From Account</label>

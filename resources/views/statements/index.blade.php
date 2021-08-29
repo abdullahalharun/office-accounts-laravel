@@ -32,7 +32,7 @@
                             
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
-                                    <span>{{ $statement->created_at }}</span>
+                                    <span>{{ $statement->date }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">

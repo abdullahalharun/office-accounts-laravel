@@ -82,29 +82,31 @@ class ExpenseController extends Controller
             $fileNametoStore = null;
         }
 
-        $parent_category = Category::where('slug', 'deposit')->first();
+        $parent_category = Category::where('slug', 'expense')->first();
         
         $transaction = new Transaction;
+        $transaction->date          = $request->get('date');
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $request->get('category_id');
         $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
-        $transaction->debit         = $request->get('amount');
+        $transaction->debit         = $request->get('amount') + $request->get('charge');
         $transaction->credit        = 0;
         $transaction->save();
 
         $expense = new Expense;
+        $expense->date              = $request->get('date');
         $expense->parent_id         = $parent_category->id;
         $expense->category_id       = $request->get('category_id');
         $expense->transaction_id    = $transaction->id;
-        $expense->date              = $request->get('date');
         $expense->account_id        = $request->get('account_id');
         $expense->details           = $request->get('details');
         $expense->amount            = $request->get('amount');
+        $expense->charge            = $request->get('charge');
         $expense->invoice           = $fileNametoStore;
         $expense->save();        
 
-        return redirect()->back()->with('success', 'New Expense Inserted Successfully');
+        return redirect()->route('expense.index')->with('success', 'New Expense Inserted Successfully');
     }
 
     /**

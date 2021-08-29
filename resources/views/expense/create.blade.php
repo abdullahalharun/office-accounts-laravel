@@ -54,13 +54,18 @@
                                 </div>
                                 
                                 <div class="col-span-6 sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
+                                    <input type="text" name="amount" required placeholder="Expense amount..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Charge</label>
+                                    <input type="text" name="charge" required placeholder="Transaction charge..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
+                                
+                                <div class="col-span-6 sm:col-span-3">
                                     <label for="from" class="block text-sm font-medium text-gray-700">Details</label>
                                     <textarea name="details" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea> 
-                                </div>
-
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
-                                    <input type="text" name="amount" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div>
                             
                                 <div class="col-span-6 sm:col-span-3">
