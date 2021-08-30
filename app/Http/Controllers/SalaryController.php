@@ -10,6 +10,7 @@ use App\Models\Salary;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class SalaryController extends Controller
@@ -22,8 +23,9 @@ class SalaryController extends Controller
     public function index()
     {
         $salaries = Salary::all();
+        $canViewSalary = Auth::user()->can('browse', $salaries);
 
-        return view('salary.index', compact('salaries'));
+        return view('salary.index', compact('salaries', 'canViewSalary'));
     }
 
     /**

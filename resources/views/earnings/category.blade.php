@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
-            All Expense
+        <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">
+            All Earning
         </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+        <x-jet-nav-link href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
             {{ __('Add New') }}
         </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
-            {{ __('Add New Category') }}
+        <x-jet-nav-link href="{{ route('earning-category.create') }}" :active="request()->routeIs('earning-category.create')">
+            {{ __('Add Earning Category') }}
         </x-jet-nav-link>
     </x-slot>
 
@@ -18,14 +18,14 @@
                 <!-- Filter form -->            
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Add Expense Category
+                        Add Earning Category
                     </h3>
                     <!-- <p class="mt-1 max-w-2xl text-sm text-gray-500">
                     Personal details and application.
                     </p> -->
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form action="{{ route('expense-category.store') }}" method="POST">
+                    <form action="{{ route('earning-category.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="shadow overflow-hidden sm:rounded-md">
                         <div class="px-4 py-5 bg-white sm:p-6">
@@ -43,7 +43,7 @@
                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <!-- <label for="parent_category" class="block text-sm font-medium text-gray-700">Parent Category</label> -->
-                                    <input type="hidden" name="parent_id" value="{{ $expensecategory->id }}" id="parent_category" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    <input type="hidden" name="parent_id" value="{{ $earningcategory->id }}" id="parent_category" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div>
                                                                 
                                 <div class="col-span-6 sm:col-span-3">

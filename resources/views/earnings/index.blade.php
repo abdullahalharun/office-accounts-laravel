@@ -6,6 +6,9 @@
         <x-jet-nav-link href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
             {{ __('Add New') }}
         </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('earning-category.create') }}" :active="request()->routeIs('earning-category.create')">
+            {{ __('Add New Category') }}
+        </x-jet-nav-link>
     </x-slot>
 
     <div class="py-8">

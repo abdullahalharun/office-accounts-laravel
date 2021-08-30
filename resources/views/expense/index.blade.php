@@ -10,6 +10,9 @@
         <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('create')">
             {{ __('Add New') }}
         </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
+            {{ __('Add New Category') }}
+        </x-jet-nav-link>
     </x-slot>
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

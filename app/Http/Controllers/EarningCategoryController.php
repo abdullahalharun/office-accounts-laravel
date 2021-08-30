@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use App\Models\Expensecategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-class ExpensecategoryController extends Controller
+class EarningCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class ExpensecategoryController extends Controller
      */
     public function index()
     {
-        return view('expense.index');
+        //
     }
 
     /**
@@ -26,11 +25,11 @@ class ExpensecategoryController extends Controller
      */
     public function create()
     {
-        $expensecategory = Category::where('slug', 'expense')->first();
+        $earningcategory = Category::where('slug', 'earnings')->first();
 
-        $categories = Category::where('parent_id', $expensecategory->id)->get();
+        $categories = Category::where('parent_id', $earningcategory->id)->get();
 
-        return view('expense/category/create', compact('categories', 'expensecategory'));
+        return view('earnings.category', compact('categories', 'earningcategory'));
     }
 
     /**
@@ -58,10 +57,10 @@ class ExpensecategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Expensecategory  $expensecategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Expensecategory $expensecategory)
+    public function show($id)
     {
         //
     }
@@ -69,56 +68,34 @@ class ExpensecategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Expensecategory  $expensecategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Expensecategory $expensecategory, $id)
+    public function edit($id)
     {
-        $categories = Expensecategory::all();
-        $category = Expensecategory::find($id);
-
-        return view('expense.category.edit', compact('categories', 'category'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Expensecategory  $expensecategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'cat_name' => 'required'
-        ]);
-
-        $post = Expensecategory::find($id);
-        $post->name = $request->get('cat_name');
-        $post->save();
-
-        return redirect()->back()->with('success', 'Category Updated Successfully');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Expensecategory  $expensecategory
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $category = Expensecategory::find($id);
-        $category->delete();
-
-        return redirect()->back()->with('success', 'Category Deleted Successfully');
+        //
     }
-
-    public function slug(Request $request)
-{
-    // $slug = str_slug($request->title);
-    $slug = Str::slug($request->cat_name, '-');
-    return $slug;
-    return response()->json(['slug' => $slug]);
-}
 }
