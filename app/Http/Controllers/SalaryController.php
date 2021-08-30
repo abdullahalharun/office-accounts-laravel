@@ -91,7 +91,7 @@ class SalaryController extends Controller
         //     $expense->save(); 
         // }
 
-        return redirect()->back()->withSuccess('Salary has been inserted successfully.');
+        return redirect()->route('salary.index')->withSuccess('Salary has been inserted successfully.');
     }
 
     /**

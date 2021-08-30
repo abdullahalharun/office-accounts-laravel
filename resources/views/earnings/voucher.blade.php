@@ -30,22 +30,28 @@
     <div class="container">
         <div class="text-center mb-4">
             <h2 class="text-center">Taibah Academy</h2>
-            <h5 class="text-center">Expense Voucher</h5>
+            <h5 class="text-center">Earning Voucher</h5>
         </div>
        
-        <p>Date: {{ $expense->date }} </p>
+        <p>Date: {{ $earning->date }} </p>
         <table class="table table-bordered table-striped">
             <tr>
                 <th>#ID</th>
                 <th>Category</th>
+                <th>Account</th>
                 <th>Amount</th>
-                <th>Remark</th>
             </tr>
             <tr>
-                <td>{{ $expense->id }}</td>
-                <td>{{ $expense->category_name->name }}</td>
-                <td>{{ $expense->amount }}</td>
-                <td>{{ $expense->remarks }}</td>
+                <td>{{ $earning->id }}</td>
+                <td>{{ $earning->category_name->name }}</td>
+                <td>{{ $earning->account_name->name }}</td>
+                <td>{{ $earning->amount }}</td>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Total</th>
+                <th>{{ $earning->amount }}</th>
             </tr>
         </table>
         <br><br><br>

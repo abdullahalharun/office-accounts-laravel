@@ -8,6 +8,7 @@ use App\Models\Statement;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Category;
+use PDF;
 
 class EarningController extends Controller
 {
@@ -74,7 +75,7 @@ class EarningController extends Controller
         $earning->charge            = $request->get('charge');
         $earning->save(); 
 
-        return redirect()->back()->withSuccess('New Earning Deposited Successfully.');
+        return redirect()->route('earning.index')->withSuccess('New Earning Deposited Successfully.');
     }
 
     /**
@@ -120,5 +121,15 @@ class EarningController extends Controller
     public function destroy(Earning $earning)
     {
         //
+    }
+
+    public function create_voucher($id)
+    {
+        $earning = Earning::find($id);
+        // dd($expense);
+
+        $pdf = PDF::loadview('earnings.voucher', compact('earning'));
+
+        return $pdf->stream('earning_voucher.pdf');
     }
 }

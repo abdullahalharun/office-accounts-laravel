@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\EarningController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\TestController;
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('employee', 'EmployeeController');
     Route::resource('earning', 'EarningController');
     Route::resource('earning-category', 'EarningCategoryController');
+    Route::get('earning/{id}/create-voucher', [EarningController::class, 'create_voucher'])->name('earning.voucher');
     Route::resource('deposit', 'DepositController');
     Route::get('deposit/{id}/create-voucher', [DepositController::class, 'create_voucher'])->name('deposit.voucher');
     Route::resource('statement', 'StatementController');
