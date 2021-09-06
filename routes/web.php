@@ -6,6 +6,7 @@ use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TransactionController;
+use App\Models\Salary;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use TCG\Voyager\Facades\Voyager;

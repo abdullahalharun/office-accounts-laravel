@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+        @if (auth()->user()->hasRole('admin'))
         <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
             All Salary
         </x-jet-nav-link>
@@ -9,9 +10,10 @@
         <x-jet-nav-link href="{{ route('employee.create') }}" :active="request()->routeIs('employee.create')">
             {{ __('Add New Employee') }}
         </x-jet-nav-link>
+        @endif
     </x-slot>
 
-
+    @if (auth()->user()->hasRole('admin'))
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
@@ -117,6 +119,14 @@
             </div>
         </div>
     </div>
-
+    @else
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
+              <h1 class="p-4 mx-auto">You don't have permission to view this.</h1>         
+            </div>
+        </div>
+    </div>
+    @endif
 
 </x-app-layout>
