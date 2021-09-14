@@ -29,7 +29,8 @@ class ExpenseController extends Controller
             $expenses = Expense::all();
         }
         $accounts = Account::all();
-        $categories = Category::all();
+        $expense_cat = Category::where('slug', 'expense')->first();
+        $categories = Category::where('parent_id', $expense_cat->id)->get();
 
         return view('expense.index', compact('expenses', 'categories', 'accounts'));
 
