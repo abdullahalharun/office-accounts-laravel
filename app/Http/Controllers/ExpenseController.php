@@ -22,7 +22,7 @@ class ExpenseController extends Controller
             $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
                                 ->orWhere('cat_id', request()->category)
                                 ->orWhere('account', request()->account)
-                                ->orderBy('id', 'DESC')->paginate(20);
+                                ->orderBy('id', 'DESC')->get();
             // dd($expenses);
         } else {
             $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
@@ -211,10 +211,10 @@ class ExpenseController extends Controller
             $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
                                 ->orWhere('category_id', request()->category)
                                 ->orWhere('account_id', request()->account)
-                                ->orderBy('id', 'DESC')->paginate(20);
+                                ->orderBy('id', 'DESC')->get();
             // dd($expenses);
         } else {
-            $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
+            $expenses = Expense::orderBy('id', 'DESC')->get();
         }
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();

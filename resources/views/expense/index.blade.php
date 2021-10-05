@@ -192,8 +192,9 @@
                     </tbody>
                 </table>          
             </div>
-            
-            {{ $expenses->links() }}
+            @if($expenses instanceof \Illuminate\Pagination\AbstractPaginator)
+                {{ $expenses->links() }}
+            @endif
         </div>
     </div>
     
