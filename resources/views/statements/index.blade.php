@@ -76,6 +76,7 @@
                         </tbody>
                 </table>          
             </div>
+            {{ $statements->links() }}
         </div>
     </div>
 

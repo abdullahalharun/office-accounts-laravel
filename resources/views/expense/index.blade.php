@@ -18,6 +18,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
               
+                <!-- Filter Show Hide Button -->
+                <!-- <a  class="px-4 py-4 bg-gray-200"> Filter Expense </a> -->
+
                 <!-- Filter form -->            
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -59,7 +62,7 @@
                             </div>
                            
                             <div class="col-span-6 sm:col-span-3">
-                                <label for="country" class="block text-sm font-medium text-gray-700">Category</label>
+                                <label for="country" class="block text-sm font-medium text-gray-700">Account</label>
                                 <select id="country" name="account" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                     <option value="">Select Account</option>
                                     @foreach($accounts as $account)
@@ -156,9 +159,11 @@
                                         </svg>
                                     </div>
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                        </svg>
+                                        <a href="/expense/{{ $expense->id }}/edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            </svg>
+                                        </a>
                                     </div>
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -168,7 +173,9 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach                       
+                        @endforeach 
+                        
+                        
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
@@ -182,15 +189,16 @@
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>
                         </thead>
-                        </tbody>
+                    </tbody>
                 </table>          
             </div>
+            {{ $expenses->links() }}
         </div>
     </div>
     
-    <div class="py-12">
+    <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg justify-content-center">            
                        
             </div>
         </div>

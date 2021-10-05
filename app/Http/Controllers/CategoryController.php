@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Statement;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 
-class StatementController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +13,7 @@ class StatementController extends Controller
      */
     public function index()
     {
-        $statements = Transaction::orderBy('id', 'DESC')->paginate(20);
-
-        return view('statements.index', compact('statements'));
+        //
     }
 
     /**
@@ -44,10 +40,10 @@ class StatementController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Statement  $statement
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Statement $statement)
+    public function show($id)
     {
         //
     }
@@ -55,10 +51,10 @@ class StatementController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Statement  $statement
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Statement $statement)
+    public function edit($id)
     {
         //
     }
@@ -67,10 +63,10 @@ class StatementController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Statement  $statement
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Statement $statement)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,10 +74,10 @@ class StatementController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Statement  $statement
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Statement $statement)
+    public function destroy($id)
     {
         //
     }

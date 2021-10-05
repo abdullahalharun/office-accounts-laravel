@@ -27,27 +27,38 @@
 <!-- Chart line -->
 <script>
 
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December',
-    ];
+    // const labels = [        
+    //     'July',
+    //     'August',
+    //     'September',
+    //     'October',
+    //     'November',
+    //     'December',
+    //     'January',
+    //     'February',
+    //     'March',
+    //     'April',
+    //     'May',
+    //     'June',
+    // ];
+    const labels = new Array();
+    @foreach($expenses as $label)
+        labels.push("{{ $label['month_year'] }}");
+    @endforeach;
+    
+
     const data = {
         labels: labels,
         datasets: [{
             label: 'Expense chart of 2021',
             backgroundColor: 'hsl(252, 82.9%, 67.8%)',
             borderColor: 'hsl(252, 82.9%, 67.8%)',
-            data: [20, 30, 25, 20, 20, 30, 25, 20, 30, 25, 20, 30, 30, 45],
+            // data: [20, 30, 25, 20, 20, 30, 25, 20, 30, 25, 20, 30, 30, 45],
+            data: [
+                @foreach($expenses as $expense)
+                    {{ $expense['total_amount'] }},
+                @endforeach
+            ],
         }]
     };
 

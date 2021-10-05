@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use App\Models\Account;
-use App\Models\Expensecategory;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use PDF;
@@ -23,10 +22,10 @@ class ExpenseController extends Controller
             $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
                                 ->orWhere('cat_id', request()->category)
                                 ->orWhere('account', request()->account)
-                                ->get();
+                                ->orderBy('id', 'DESC')->paginate(20);
             // dd($expenses);
         } else {
-            $expenses = Expense::all();
+            $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
         }
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
@@ -129,12 +128,13 @@ class ExpenseController extends Controller
      */
     public function edit($id)
     {
-        $expensecategories = Expensecategory::all();
-        $accounts = Account::all();
-        $expenses = Expense::all();
-        $expense = Expense::find($id);
         
-        return view('expense.edit', compact('expensecategories', 'expenses', 'accounts', 'expense'));
+        $expense = Expense::find($id);
+        $parent_category = Category::where('slug', 'expense')->first();
+        $categories = Category::where('parent_id', $parent_category->id)->get();
+        $accounts = Account::all();
+
+        return view('expense.edit', compact('categories', 'expense', 'accounts'));
     }
 
     /**
@@ -147,22 +147,48 @@ class ExpenseController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'cat_id' => 'required',
-            'date'  =>  'required',
-            'amount' => 'required',
-            'account' => 'required',
+            'category_id'   => 'required',
+            'date'          =>  'required',
+            'amount'        => 'required',
+            'account_id'    => 'required',
         ]);
 
+        //Handle file upload
+        if ($request->hasFile('invoice')) {
+            //get filename with the extension
+            $fileNameWithExtension = $request->file('invoice')->getClientOriginalName();
+            //Get file name
+            $fileName = pathinfo($fileNameWithExtension , PATHINFO_FILENAME);
+            //get extension
+            $extension = $request->file('invoice')->getClientOriginalExtension();
+            //filename to store
+            $fileNametoStore = $fileName.'_'.time().'.'.$extension;
+            //upload image
+            $path = $request->file('invoice')->storeAs('public/invoices', $fileNametoStore);
+        } else {
+            $fileNametoStore = null;
+        }
+        
         $expense = Expense::find($id);
-        $expense->cat_id = $request->get('cat_id');
-        $expense->details = $request->get('details');
-        $expense->date = $request->get('date');
-        $expense->amount = $request->get('amount');
-        $expense->account = $request->get('account');
-        $expense->remarks = $request->get('remarks');
+        $expense->date              = $request->get('date'); 
+        $expense->category_id       = $request->get('category_id');
+        $expense->account_id        = $request->get('account_id');
+        $expense->details           = $request->get('details');
+        $expense->amount            = $request->get('amount');
+        $expense->charge            = $request->get('charge');
+        $expense->invoice           = $fileNametoStore;
         $expense->save();
 
-        return redirect()->back()->with('success', 'Expense Updated Successfully');
+        $transaction = Transaction::find($expense->transaction_id);
+        $transaction->date          = $request->get('date');
+        $transaction->category_id   = $request->get('category_id');
+        $transaction->account_id    = $request->get('account_id');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = $request->get('amount') + $request->get('charge');
+        $transaction->credit        = 0;
+        $transaction->save();                
+
+        return redirect()->route('expense.index')->with('success', 'Expense Updated Successfully');
     }
 
     /**

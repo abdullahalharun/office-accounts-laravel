@@ -1,133 +1,96 @@
-@extends('layouts.admin')
+<x-app-layout>
+    <x-slot name="header">
+        <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
+            All Expense
+        </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+            {{ __('Add New') }}
+        </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
+            {{ __('Add New Category') }}
+        </x-jet-nav-link>
+        <x-jet-nav-link href="#" :active="request()->routeIs('expense.edit')">
+            {{ __('Edit Expense') }}
+        </x-jet-nav-link>
+    </x-slot>
 
-@section('content') 
-    <div class="row mb-4">
-        <div class="col-lg-6 col-12">
-            <div class="card-header bg-white py-15">Edit Expense</div>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+              
+                <!-- Filter form -->            
+                <div class="px-4 py-4 sm:px-6 bg-gray-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Edit Expense
+                    </h3>
+                    <!-- <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                    Personal details and application.
+                    </p> -->
+                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                    <form action="{{ route('expense.update', $expense->id) }}" method="POST">
+                        {{ csrf_field() }} {{ method_field('PUT') }}
+                        <div class="shadow overflow-hidden sm:rounded-md">
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
+                                    <input type="date" name="date" value="{{ $expense->date ? $expense->date : old('date') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
 
-            <form class="card text-center form-horizontal card-body" method="post" action="{{ route('expense.update', $expense->id) }}">
-                {{ csrf_field() }}
-                {{ method_field('PUT') }}
-                
-                   <!-- Status -->
-                   <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-input-small">Category</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" name="cat_id">
-                                <option value="">Select category</option>
-                                @foreach($expensecategories as $category)
-                                <option value="{{$category->id}}" {{ $expense->cat_id == $category->id ? 'selected' : '' }}>{{$category->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div> 
-                    
-                    <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-date-input">Date</label>
-                        <div class="col-sm-10">
-                            <input type="date" name="date" value="{{ $expense->date }}" id="example-date-input" class="form-control">
-                        </div>
-                    </div>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                                    <select id="category" name="category_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="">Select Category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $expense->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
 
-                    <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-input-small">Expense Details</label>
-                        <div class="col-sm-10">
-                            <input type="textarea" name="details" value="{{ $expense->details }}" id="title" class="form-control">
-                        </div>
-                    </div>
-                    
-                    <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-input-small">Amount</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="amount" value="{{ $expense->amount }}" id="title" class="form-control">
-                        </div>
-                    </div>
 
-                    <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-input-small">Expense From</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" name="account">
-                                <option value="">Select Account</option>
-                                @foreach($accounts as $account)
-                                <option value="{{$account->id}}" {{ $expense->account == $account->id ? 'selected' : '' }}>{{ $account->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-input-small">Remarks</label>
-                        <div class="col-sm-10">
-                            <input type="textarea" name="remarks" value="{{ $expense->remarks }}" id="title" class="form-control">
-                        </div>
-                    </div> 
-                                        
-                    <div class="mb-15 mb-0 justify-content-start row">
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary">Update Expense</button>
-                        </div>
-                    </div>                
-            </form>
-        </div>
-
-        <div class="col-lg-6 col-12">
-
-        <div class="card mb-15">
-                <div class="card-header bg-transparent py-15">Latest Expenses</div>
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#Category</th>
-                                <th>Details</th>
-                                <th>Amount</th>
-                                <th>Account</th>
-                                <th>Remarks</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($expenses as $expense)
-                            <tr>
-                                <td>{{$expense->category_name->name}}</td>
-                                <td>{{$expense->details}}</td>
-                                <td>{{$expense->amount}}</td>
-                                <td>{{$expense->account_name->name}}</td>
-                                <td>{{$expense->remarks}}</td>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="account" class="block text-sm font-medium text-gray-700">From Account</label>
+                                    <select id="account" name="account_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <option value="">Select Account</option>
+                                        @foreach($accounts as $account)
+                                            <option value="{{ $account->id }}" {{ $expense->account_id == $account->id ? 'selected' : '' }}>{{ $account->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 
-                                <td class="text-right">
-                                    <a class="text-secondary" href="/expense/{{$expense->id}}/edit"><i class="fas fa-edit"></i></a>
-                                    <!-- <a class="text-danger" href="#"><i class="fas fa-trash"></i></a> -->
-                                        <form style="display:inline-block;" action="{{ action('ExpenseController@destroy', $expense->id) }}" method="post">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" id="MId" value="{{$expense->id}}">
-                                            <button style="" class="btn text-danger" type="submit"  data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                    
-                                    <!-- <div class="dropdown">
-                                        <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
-                                            type="button" id="d350ad" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="d350ad">
-                                                <a class="dropdown-item" href="#">View</a>
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Detele</a>
-                                            </div>
-                                        </button>
-                                    </div> -->
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Amount</label>
+                                    <input type="text" name="amount" value="{{ $expense->amount }}" required placeholder="Expense amount..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="country" class="block text-sm font-medium text-gray-700">Charge</label>
+                                    <input type="text" name="charge" value="{{ $expense->charge }}" required placeholder="Transaction charge..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                </div>
+                                
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="from" class="block text-sm font-medium text-gray-700">Details</label>
+                                    <textarea name="details" value="{{ $expense->details }}" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea> 
+                                </div>
+                            
+                                <div class="col-span-6 sm:col-span-3">
+                                    <label for="invoice" class="block text-sm font-medium text-gray-700">Invoice</label>
+                                    <input type="file" name="invoice" value="{{ $expense->invoice }}" id="invoice" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md leading-8">
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                Update
+                            </button>
+                        </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-
         </div>
     </div>
 
-@endsection
+</x-app-layout>
