@@ -18,7 +18,7 @@ class DashboardController extends Controller
             DB::raw("(sum(amount)) as total_amount"),
             DB::raw("(DATE_FORMAT(date, '%M-%Y')) as month_year")
             )
-            ->orderBy('date')
+            // ->orderBy('date')
             ->groupBy(DB::raw("DATE_FORMAT(date, '%M-%Y')"))
             ->get();
         
