@@ -4,7 +4,10 @@
             All Deposit
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('deposit.create') }}" :active="request()->routeIs('deposit.create')">
-            {{ __('Add New') }}
+            {{ __('New Deposit') }}
+        </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
+            {{ __('Transfer Money') }}
         </x-jet-nav-link>
     </x-slot>
 

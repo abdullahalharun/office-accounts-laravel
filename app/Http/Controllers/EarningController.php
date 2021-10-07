@@ -95,9 +95,14 @@ class EarningController extends Controller
      * @param  \App\Models\Earning  $earning
      * @return \Illuminate\Http\Response
      */
-    public function edit(Earning $earning)
+    public function edit($id)
     {
-        //
+        $earning = Earning::find($id);
+        $parent_category = Category::where('slug', 'earnings')->first();
+        $categories = Category::where('parent_id', $parent_category->id)->get();
+        $accounts = Account::all();
+
+        return view('earnings.edit', compact('categories', 'earning', 'accounts', 'parent_category'));
     }
 
     /**
@@ -107,9 +112,35 @@ class EarningController extends Controller
      * @param  \App\Models\Earning  $earning
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Earning $earning)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'category_id'   => 'required',
+            'date'          =>  'required',
+            'amount'        => 'required',
+            'account_id'    => 'required',
+        ]);
+
+                
+        $earning = Earning::find($id);
+        $earning->date              = $request->get('date');
+        $earning->category_id       = $request->get('category_id');
+        $earning->account_id        = $request->get('account_id');
+        $earning->details           = $request->get('details');
+        $earning->amount            = $request->get('amount');
+        $earning->charge            = $request->get('charge');
+        $earning->save(); 
+
+        $transaction = Transaction::find($earning->transaction_id);        
+        $transaction->date          = $request->get('date');
+        $transaction->category_id   = $request->get('category_id');
+        $transaction->account_id    = $request->get('account_id');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = 0;
+        $transaction->credit        = $request->get('amount') - $request->get('charge');
+        $transaction->save();              
+
+        return redirect()->route('earning.index')->with('success', 'Earning Updated Successfully');
     }
 
     /**

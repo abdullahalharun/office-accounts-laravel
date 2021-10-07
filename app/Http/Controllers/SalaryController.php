@@ -111,9 +111,13 @@ class SalaryController extends Controller
      * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function edit(Salary $salary)
+    public function edit($id)
     {
-        //
+        $salary = Salary::find($id);
+        $employees = Employee::all();
+        $accounts = Account::all();
+
+        return view('salary.edit', compact('salary', 'employees', 'accounts'));
     }
 
     /**
@@ -123,9 +127,36 @@ class SalaryController extends Controller
      * @param  \App\Models\Salary  $salary
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Salary $salary)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'amount' => 'required',
+            'employee_id'   => 'required',
+        ]);
+
+        $parent_category = Category::where('slug', 'expense')->first();
+        $category = Category::where('slug', 'salary')->first();
+        
+        $salary = Salary::find($id);
+        $salary->month          = Carbon::createFromFormat('Y-m-d', $request->get('date'));
+        $salary->employee_id    = $request->get('employee_id');
+        $salary->account_id     = $request->get('account_id');
+        $salary->details        = $request->get('details');
+        $salary->amount         = $request->get('amount');
+        $salary->charge         = $request->get('charge');
+        $salary->save();
+                
+        $transaction = Transaction::find($salary->transaction_id);
+        $transaction->date          = $request->get('date');
+        $transaction->parent_id     = $parent_category->id;
+        $transaction->category_id   = $category->id;
+        $transaction->account_id    = $request->get('account_id');
+        $transaction->details       = $request->get('details');
+        $transaction->debit         = $request->get('amount') + $request->get('charge');
+        $transaction->credit        = 0;
+        $transaction->save();
+
+        return redirect()->route('salary.index')->with('success', 'Salary Updated Successfully');
     }
 
     /**
