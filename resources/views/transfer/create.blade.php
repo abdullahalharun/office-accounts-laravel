@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-    <x-jet-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement.index')">
+        <x-jet-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement.index')">
             All Statement
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('account.index') }}" :active="request()->routeIs('account.index')">
