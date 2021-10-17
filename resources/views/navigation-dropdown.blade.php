@@ -18,9 +18,11 @@
                     <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense*')">
                         Expense
                     </x-jet-nav-link>
+                    @if (auth()->user()->hasRole('admin'))
                     <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary*')">
                         Salary
                     </x-jet-nav-link>
+                    @endif
                     <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning*')">
                         Earnings
                     </x-jet-nav-link>
