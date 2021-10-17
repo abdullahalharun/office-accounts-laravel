@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class StatementController extends Controller
 {
+    protected $model;
+
+    public function __construct(Transaction $model)
+    {
+        $this->model = $model;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -30,79 +37,32 @@ class StatementController extends Controller
         return view('statements.index', compact('statements', 'categories', 'accounts', 'query'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function filter_transaction(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Statement  $statement
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Statement $statement)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Statement  $statement
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Statement $statement)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Statement  $statement
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Statement $statement)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Statement  $statement
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Statement $statement)
-    {
-        //
-    }
-
-    public function filter_transaction()
-    {
+        $builder = $this->model;
+        
         if(request()->fromdate || request()->category || request()->account){
-            $statements = Transaction::whereBetween('date', [request()->fromdate, request()->todate])
-                                ->orWhere('category_id', request()->category)
-                                ->orWhere('account_id', request()->account)
-                                ->orderBy('id', 'DESC')->get();
+
+            if(!empty($request->fromdate)){
+                $builder = $builder->whereBetween('date', [request()->fromdate, request()->todate]);
+            }
+            
+            if(!empty($request->category)){
+                $builder = $builder->where('category_id', request()->category);
+            }
+            
+            if(!empty($request->account)){
+                $builder = $builder->where('account_id', request()->account);
+            }
+
+            $statements = $builder->get();
+            
+
+
+            // $statements = Transaction::whereBetween('date', [request()->fromdate, request()->todate])
+            //                     ->orWhere('category_id', request()->category)
+            //                     ->orWhere('account_id', request()->account)
+            //                     ->orderBy('id', 'DESC')->get();
             // dd($statements);
         } else {
             $statements = Transaction::orderBy('id', 'DESC')->get();

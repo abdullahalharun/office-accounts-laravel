@@ -11,6 +11,13 @@ use TCG\Voyager\Models\Category;
 
 class ExpenseController extends Controller
 {
+    protected $model;
+
+    public function __construct(Expense $model)
+    {
+        $this->model = $model;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,20 +25,19 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        if(request()->fromdate || request()->category || request()->account){
-            $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
-                                ->orWhere('cat_id', request()->category)
-                                ->orWhere('account', request()->account)
-                                ->orderBy('id', 'DESC')->get();
-            // dd($expenses);
-        } else {
-            $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
-        }
+        $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
+        
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
         $categories = Category::where('parent_id', $expense_cat->id)->get();
+        $query = [
+            'fromdate' => '',
+            'todate'    => '',
+            'category'  => '',
+            'account'   =>  '',
+        ];
 
-        return view('expense.index', compact('expenses', 'categories', 'accounts'));
+        return view('expense.index', compact('expenses', 'categories', 'accounts', 'query'));
 
         // return view('expense.index', compact('expenses', 'expensecategories', 'accounts'));
     }
@@ -205,13 +211,30 @@ class ExpenseController extends Controller
         return redirect()->back()->with('success', 'Expense Deleted Successfully');
     }
 
-    public function filter_expense()
+    public function filter_expense(Request $request)
     {
+        $builder = $this->model;
+        
         if(request()->fromdate || request()->category || request()->account){
-            $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
-                                ->orWhere('category_id', request()->category)
-                                ->orWhere('account_id', request()->account)
-                                ->orderBy('id', 'DESC')->get();
+
+            if(!empty($request->fromdate)){
+                $builder = $builder->whereBetween('date', [request()->fromdate, request()->todate]);
+            }
+            
+            if(!empty($request->category)){
+                $builder = $builder->where('category_id', request()->category);
+            }
+            
+            if(!empty($request->account)){
+                $builder = $builder->where('account_id', request()->account);
+            }
+
+            $expenses = $builder->get();
+
+            // $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
+            //                     ->orWhere('category_id', request()->category)
+            //                     ->orWhere('account_id', request()->account)
+            //                     ->orderBy('id', 'DESC')->get();
             // dd($expenses);
         } else {
             $expenses = Expense::orderBy('id', 'DESC')->get();
@@ -219,8 +242,9 @@ class ExpenseController extends Controller
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
         $categories = Category::where('parent_id', $expense_cat->id)->get();
+        $query = request()->all();
 
-        return view('expense.index', compact('expenses', 'categories', 'accounts'));
+        return view('expense.index', compact('expenses', 'categories', 'accounts', 'query'));
     }
 
     public function create_invoice($id)
