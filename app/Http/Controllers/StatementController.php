@@ -20,7 +20,12 @@ class StatementController extends Controller
         $statements = Transaction::orderBy('id', 'DESC')->paginate(20);
         $categories = Category::all();
         $accounts   = Account::all();
-        $query = null;
+        $query = [
+            'fromdate' => '',
+            'todate'    => '',
+            'category'  => '',
+            'account'   =>  '',
+        ];
 
         return view('statements.index', compact('statements', 'categories', 'accounts', 'query'));
     }
