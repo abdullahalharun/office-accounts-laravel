@@ -5,6 +5,7 @@ use App\Http\Controllers\DepositController;
 use App\Http\Controllers\EarningController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\StatementController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\TransactionController;
 use App\Models\Salary;
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('earning/{id}/create-voucher', [EarningController::class, 'create_voucher'])->name('earning.voucher');
     Route::resource('deposit', 'DepositController');
     Route::get('deposit/{id}/create-voucher', [DepositController::class, 'create_voucher'])->name('deposit.voucher');
+    Route::get('/statement/filter', [StatementController::class, 'filter_transaction'])->name('statement.filter');
     Route::resource('statement', 'StatementController');
     Route::resource('transfer', 'TransactionController');
     Route::get('expense/{id}/create-invoice', [ExpenseController::class, 'create_invoice'])->name('expense.invoice');
