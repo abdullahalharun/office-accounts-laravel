@@ -71,7 +71,7 @@
                                 
                                 <div class="col-span-6 sm:col-span-3">
                                     <label for="from" class="block text-sm font-medium text-gray-700">Details</label>
-                                    <textarea name="details" value="{{ $earning->details }}" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea> 
+                                    <textarea name="details" value="{{ $earning->details }}" id="" cols="30" rows="4" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">{{ $earning->details }}</textarea> 
                                 </div>
 
                                 

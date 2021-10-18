@@ -116,6 +116,9 @@
                         </tbody>
                 </table>          
             </div>
+            @if($earnings instanceof \Illuminate\Pagination\AbstractPaginator)
+                {{ $earnings->links() }}
+            @endif
         </div>
     </div>
 

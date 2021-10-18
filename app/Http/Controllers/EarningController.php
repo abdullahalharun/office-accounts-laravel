@@ -19,7 +19,7 @@ class EarningController extends Controller
      */
     public function index()
     {
-        $earnings = Earning::all();
+        $earnings = Earning::orderBy('date', 'DESC')->get();
 
         return view('earnings.index', compact('earnings'));
     }
