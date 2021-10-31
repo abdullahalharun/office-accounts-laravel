@@ -12,6 +12,13 @@ use PDF;
 
 class EarningController extends Controller
 {
+    protected $model;
+
+    public function __construct(Earning $model)
+    {
+        $this->model = $model;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -19,9 +26,18 @@ class EarningController extends Controller
      */
     public function index()
     {
-        $earnings = Earning::orderBy('date', 'DESC')->get();
+        $earnings = Earning::orderBy('date', 'DESC')->paginate(20);
+        $accounts = Account::all();
+        $earning_cat = Category::where('slug', 'earnings')->first();
+        $categories = Category::where('parent_id', $earning_cat->id)->get();
+        $query = [
+            'fromdate' => '',
+            'todate'    => '',
+            'category'  => '',
+            'account'   =>  '',
+        ];
 
-        return view('earnings.index', compact('earnings'));
+        return view('earnings.index', compact('earnings', 'categories', 'accounts', 'query'));
     }
 
     /**
@@ -162,5 +178,41 @@ class EarningController extends Controller
         $pdf = PDF::loadview('earnings.voucher', compact('earning'));
 
         return $pdf->stream('earning_voucher.pdf');
+    }
+
+    public function filter_earning(Request $request)
+    {
+        $builder = $this->model;
+        
+        if(request()->fromdate || request()->category || request()->account){
+
+            if(!empty($request->fromdate)){
+                $builder = $builder->whereBetween('date', [request()->fromdate, request()->todate]);
+            }
+            
+            if(!empty($request->category)){
+                $builder = $builder->where('category_id', request()->category);
+            }
+            
+            if(!empty($request->account)){
+                $builder = $builder->where('account_id', request()->account);
+            }
+
+            $earnings = $builder->get();
+
+            // $expenses = Expense::whereBetween('date', [request()->fromdate, request()->todate])
+            //                     ->orWhere('category_id', request()->category)
+            //                     ->orWhere('account_id', request()->account)
+            //                     ->orderBy('id', 'DESC')->get();
+            // dd($expenses);
+        } else {
+            $earnings = Earning::orderBy('id', 'DESC')->get();
+        }
+        $accounts = Account::all();
+        $earning_cat = Category::where('slug', 'earnings')->first();
+        $categories = Category::where('parent_id', $earning_cat->id)->get();
+        $query = request()->all();
+
+        return view('earnings.index', compact('earnings', 'categories', 'accounts', 'query'));
     }
 }

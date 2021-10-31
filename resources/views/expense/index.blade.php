@@ -114,7 +114,7 @@
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
-                                    <span>{{ $expense->date }}</span>
+                                    <span>{{ date('d M Y', strtotime($expense->date)) }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left whitespace-nowrap">

@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('salary', 'SalaryController');
     Route::get('salary/{id}/create-voucher', [SalaryController::class, 'create_voucher'])->name('salary.voucher');
     Route::resource('employee', 'EmployeeController');
+    Route::get('/earning/filter', [EarningController::class, 'filter_earning'])->name('earning.filter');
     Route::resource('earning', 'EarningController');
     Route::resource('earning-category', 'EarningCategoryController');
     Route::get('earning/{id}/create-voucher', [EarningController::class, 'create_voucher'])->name('earning.voucher');

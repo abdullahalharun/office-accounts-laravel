@@ -108,7 +108,7 @@
                             
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">                                    
-                                    <span>{{ $statement->date }}</span>
+                                    <span>{{ date('d M Y', strtotime($statement->date)) }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
