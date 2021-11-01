@@ -256,4 +256,25 @@ class ExpenseController extends Controller
 
         return $pdf->stream('invoice.pdf');
     }
+
+    public function report()
+    {
+        
+        $accounts = Account::all();
+        $expense_cat = Category::where('slug', 'expense')->first();
+        $categories = Category::where('parent_id', $expense_cat->id)->get();
+        $expenses = Expense::groupBy('category_id')
+                            ->selectRaw('date, category_id, account_id, details, SUM(amount) as group_amount, SUM(charge) as group_charge')
+                            ->get();
+        // dd($expenses);
+
+        $query = [
+            'fromdate'  => '',
+            'todate'    => '',
+            'category'  => '',
+            'account'   =>  '',
+        ];
+
+        return view('expense.report', compact('expenses', 'categories', 'accounts', 'query'));
+    }
 }

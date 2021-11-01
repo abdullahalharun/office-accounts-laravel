@@ -173,7 +173,6 @@ class EarningController extends Controller
     public function create_voucher($id)
     {
         $earning = Earning::find($id);
-        // dd($expense);
 
         $pdf = PDF::loadview('earnings.voucher', compact('earning'));
 
