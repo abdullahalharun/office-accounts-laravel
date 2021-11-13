@@ -208,7 +208,7 @@ class ExpenseController extends Controller
         $expense = Expense::find($id);
         $expense->delete();
 
-        return redirect()->back()->with('success', 'Expense Deleted Successfully');
+        return redirect()->back()->with('success', 'Expense Deleted Successfully!');
     }
 
     public function filter_expense(Request $request)

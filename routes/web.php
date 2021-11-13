@@ -12,22 +12,23 @@ use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use TCG\Voyager\Facades\Voyager;
 
-Route::get('/login/google', function () {
-    return Socialite::driver('google')->redirect();
-});
-Route::get('/login/google/callback', 'SocialiteController@handleGoogleCallback');
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/livewire-test', function () {
+    return view('test.livewire-test');
 });
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', function () {
+        return view('welcome');
+    });
     Route::resource('account', 'AccountController');
 
     Route::get('/expense/filter', [ExpenseController::class, 'filter_expense'])->name('expense.filter');
     Route::resource('expense', 'ExpenseController');
+    Route::get('/expense/{id}/delete', [ExpenseController::class, 'destroy'])->name('expense.destroy');
     Route::resource('expense-category', 'ExpensecategoryController');
     Route::get('expense-category/slug', 'ExpensecategoryController@slug')->name('expense-category.slug');
     Route::get('/report/expense', [ExpenseController::class, 'report'])->name('expense.report');
@@ -59,3 +60,8 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+// Route::get('/login/google', function () {
+//     return Socialite::driver('google')->redirect();
+// });
+// Route::get('/login/google/callback', 'SocialiteController@handleGoogleCallback');
