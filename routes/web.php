@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\EarningController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\StatementController;
 use App\Http\Controllers\TestController;
@@ -51,6 +52,8 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::resource('transfer', 'TransactionController');
     Route::get('expense/{id}/create-invoice', [ExpenseController::class, 'create_invoice'])->name('expense.invoice');
+
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
 
     // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);
     Route::get('/test', [TestController::class, 'index'])->name('test');

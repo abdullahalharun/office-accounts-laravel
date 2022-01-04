@@ -16,6 +16,7 @@
         </x-jet-nav-link>
     </x-slot>
 
+
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -178,14 +179,21 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg> 
                                         </a>
+                                        <!-- <a href="#" id="buttonmodal" data-confirm="Are you sure to delete this item?">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg> 
+                                        </a> -->
 
+                                        
+                                        
                                     </div>
-
+                                    
                                 </div>
                             </td>
                         </tr>
                         @endforeach 
-
+                        
                         
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -204,7 +212,7 @@
                 </table>          
             </div>
             @if($expenses instanceof \Illuminate\Pagination\AbstractPaginator)
-                {{ $expenses->links() }}
+            {{ $expenses->links() }}
             @endif
         </div>
     </div>
@@ -212,26 +220,76 @@
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg justify-content-center">            
-                       
+                
             </div>
         </div>
     </div>
-
-
+    
+    
     <script>    
         var deleteLinks = document.querySelectorAll('.delete');
-    
+        
         for (var i = 0; i < deleteLinks.length; i++) {
             deleteLinks[i].addEventListener('click', function(event) {
                 event.preventDefault();
-    
+                
                 var choice = confirm(this.getAttribute('data-confirm'));
-    
+                
                 if (choice) {
                     window.location.href = this.getAttribute('href');
                 }
             });
         }
+        </script>
+
+    <!--Open modal button-->
+    <div>    
+        <!-- <button id="buttonmodal" class="focus:outline-none p-2 bg-blue-600 text-white bg-opacity-75 rounded-lg ring-4 ring-indigo-300" type="button">Open modal</button> -->
+    </div>
+
+    <div id="modal" class="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-gray-500 bg-opacity-50 transform scale-0 transition-transform duration-300">
+        <!-- Modal content -->         
+        <!-- <div class="absolute bg-black opacity-80 inset-0 z-0"></div> -->
+        <div class="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white ">
+            <!--content-->
+            <div class="">
+                <form style="display:inline-block;" action="" method="post">
+                    {{csrf_field()}}
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" id="MId" value="">
+                    <button class="btn text-danger" type="submit"  data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                </form>
+                    <!--body-->
+                    <div class="text-center p-5 flex-auto justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex items-center text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                            </svg>
+                                                    <h2 class="text-xl font-bold py-4 ">Are you sure?</h3>
+                                    <p class="text-sm text-gray-500 px-8">Do you really want to delete your account?
+                            This process cannot be undone</p>    
+                    </div>
+                    <!--footer-->
+                    <div class="p-3  mt-2 text-center space-x-4 md:block">
+                        <button id="closebutton" type="button" class="focus:outline-none mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
+                            Cancel
+                        </button>
+                        <button class="mb-2 md:mb-0 bg-red-500 border border-red-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-red-600">Delete</button>
+                    </div>
+                     
+            </div>
+        </div>
+    </div>
+
+    <script> 
+        const button = document.getElementById('buttonmodal')
+        const closebutton = document.getElementById('closebutton')
+        const modal = document.getElementById('modal')
+
+        button.addEventListener('click',()=>modal.classList.add('scale-100'))
+        closebutton.addEventListener('click',()=>modal.classList.remove('scale-100'))
     </script>
 
 </x-app-layout>

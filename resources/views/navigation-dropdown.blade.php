@@ -32,7 +32,7 @@
                     <x-jet-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement*')">
                         Statement
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="/" :active="request()->routeIs('report*')">
+                    <x-jet-nav-link href="/report" :active="request()->routeIs('report*')">
                         Report
                     </x-jet-nav-link>
                 </div>
