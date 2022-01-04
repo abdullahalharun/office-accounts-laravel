@@ -12,9 +12,10 @@
         <thead>
             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                 <th class="py-3 px-6 text-left">Year</th>
+                <th class="py-3 px-6 text-left">2018</th>
                 <th class="py-3 px-6 text-left">2019</th>
                 <th class="py-3 px-6 text-left">2020</th>
-                <th class="py-3 px-6 text-center">2021</th>
+                <th class="py-3 px-6 text-left">2021</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
@@ -25,20 +26,18 @@
                         <span>Income</span>
                     </div>
                 </th>
-                <td class="py-3 px-6 text-left whitespace-nowrap">
-                    <div class="flex items-center">
-                        <span class="font-medium"></span>
-                    </div>
+                <td class="py-3 px-6 text-left whitespace-nowrap">                    
+                    <span class="font-medium">{{ $earnings_18->sum('amount') }}</span>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <div class="flex items-center justify-center">
-                        <span></span>
-                    </div>
+                    <span>{{ $earnings_19->sum('amount') }}</span>                    
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <div class="flex items-center justify-center">
-                        <span></span>
-                    </div>
+                    <span>{{ $earnings_20->sum('amount') }}</span>
+                    
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <span>{{ $earnings_21->sum('amount') }}</span>
                 </td>
             </tr>
             <tr class="border-b border-gray-200  hover:bg-gray-100">
@@ -47,29 +46,28 @@
                         <span>Expense</span>
                     </div>
                 </th>
-                <td class="py-3 px-6 text-left whitespace-nowrap">
-                    <div class="flex items-center">
-                        <span class="font-medium"></span>
-                    </div>
+                <td class="py-3 px-6 text-left whitespace-nowrap">                    
+                    <span class="font-medium">{{ $expense_18->sum('amount') }}</span>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <div class="flex items-center justify-center">
-                        <span></span>
-                    </div>
+                    <span>{{ $expense_19->sum('amount') }}</span>                    
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <div class="flex items-center justify-center">
-                        <span></span>
-                    </div>
+                    <span>{{ $expense_20->sum('amount') }}</span>
+                    
+                </td>
+                <td class="py-3 px-6 text-left">
+                    <span>{{ $expense_21->sum('amount') }}</span>
                 </td>
             </tr>
 
             <thead>
                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                     <th class="py-3 px-6 text-left">Net Earnings</th>
-                    <th class="py-3 px-6 text-center"></th>
-                    <th class="py-3 px-6 text-center"></th>
-                    <th class="py-3 px-6 text-center"></th>
+                    <th class="py-3 px-6 text-left">{{ $earnings_18->sum('amount') - $expense_18->sum('amount') }}</th>
+                    <th class="py-3 px-6 text-left">{{ $earnings_19->sum('amount') - $expense_19->sum('amount') }}</th>
+                    <th class="py-3 px-6 text-left">{{ $earnings_20->sum('amount') - $expense_20->sum('amount') }}</th>
+                    <th class="py-3 px-6 text-left">{{ $earnings_21->sum('amount') - $expense_21->sum('amount') }}</th>
                 </tr>
             </thead>
         </tbody>
