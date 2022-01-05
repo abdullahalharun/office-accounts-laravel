@@ -27,17 +27,17 @@
                     </div>
                 </th>
                 <td class="py-3 px-6 text-left whitespace-nowrap">                    
-                    <span class="font-medium">{{ $earnings_18->sum('amount') }}</span>
+                    <span class="font-medium">{{ $earnings_18->sum('amount') - $earnings_18->sum('charge') }}</span>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span>{{ $earnings_19->sum('amount') }}</span>                    
+                    <span>{{ $earnings_19->sum('amount') - $earnings_19->sum('charge') }}</span>                    
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span>{{ $earnings_20->sum('amount') }}</span>
+                    <span>{{ $earnings_20->sum('amount') - $earnings_20->sum('charge') }}</span>
                     
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span>{{ $earnings_21->sum('amount') }}</span>
+                    <span>{{ $earnings_21->sum('amount') - $earnings_21->sum('charge') }}</span>
                 </td>
             </tr>
             <tr class="border-b border-gray-200  hover:bg-gray-100">
@@ -47,17 +47,17 @@
                     </div>
                 </th>
                 <td class="py-3 px-6 text-left whitespace-nowrap">                    
-                    <span class="font-medium">{{ $expense_18->sum('amount') }}</span>
+                    <span class="font-medium">{{ $expense_18->sum('amount') + $expense_18->sum('charge') }}</span>
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span>{{ $expense_19->sum('amount') }}</span>                    
+                    <span>{{ $expense_19->sum('amount') + $expense_19->sum('charge') }}</span>                    
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span>{{ $expense_20->sum('amount') }}</span>
+                    <span>{{ $expense_20->sum('amount') + $expense_20->sum('charge') }}</span>
                     
                 </td>
                 <td class="py-3 px-6 text-left">
-                    <span>{{ $expense_21->sum('amount') }}</span>
+                    <span>{{ $expense_21->sum('amount') + $expense_21->sum('charge') }}</span>
                 </td>
             </tr>
 
