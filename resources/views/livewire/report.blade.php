@@ -4,7 +4,7 @@
 
     <div class="px-4 py-4 sm:px-6 bg-white-200">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Reports
+            Yearly Reports
         </h3>
     </div>
 
