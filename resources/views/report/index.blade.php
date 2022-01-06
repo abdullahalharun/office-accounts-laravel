@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         @if (auth()->user()->hasRole('admin'))
-        <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+        <!-- <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
             All Salary
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('salary.create') }}" :active="request()->routeIs('salary.create')">
@@ -9,7 +9,7 @@
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('employee.create') }}" :active="request()->routeIs('employee.create')">
             {{ __('Add New Employee') }}
-        </x-jet-nav-link>
+        </x-jet-nav-link> -->
         @endif
     </x-slot>
 
