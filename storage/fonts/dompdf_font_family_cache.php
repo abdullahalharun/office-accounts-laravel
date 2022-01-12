@@ -78,9 +78,9 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'nunito' => array(
-    'normal' => $fontDir . '/nunito_normal_46b9b3b48cc3ddbae60da82f1c1c5d29',
-    '600' => $fontDir . '/nunito_600_0f08625611c8a9cf8d1f0e5a4e3b8e39',
-    'bold' => $fontDir . '/nunito_bold_23f6d1b3589b1fb8a1a0052cb8778ab4',
+    'normal' => $fontDir . '/nunito_normal_40be13e0838a28d85ef39e94d206a3ec',
+    '600' => $fontDir . '/nunito_600_c3043a2e85e7b258084eb09e0bf67379',
+    'bold' => $fontDir . '/nunito_bold_20491dd02d708ed860212ace0e462b13',
   ),
   'kalpurush' => array(
     'normal' => $fontDir . '/kalpurush_normal_4f408d34df1aad54a5d4094b7bc9b0dc',

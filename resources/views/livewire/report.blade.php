@@ -16,6 +16,7 @@
                 <th class="py-3 px-6 text-left">2019</th>
                 <th class="py-3 px-6 text-left">2020</th>
                 <th class="py-3 px-6 text-left">2021</th>
+                <th class="py-3 px-6 text-left">2022</th>
             </tr>
         </thead>
         <tbody class="text-gray-600 text-sm font-light">
@@ -39,6 +40,9 @@
                 <td class="py-3 px-6 text-left">
                     <span>{{ $earnings_21->sum('amount') - $earnings_21->sum('charge') }}</span>
                 </td>
+                <td class="py-3 px-6 text-left">
+                    <span>{{ $earnings_22->sum('amount') - $earnings_22->sum('charge') }}</span>
+                </td>
             </tr>
             <tr class="border-b border-gray-200  hover:bg-gray-100">
                 <th class="py-3 px-6 text-left">
@@ -59,6 +63,9 @@
                 <td class="py-3 px-6 text-left">
                     <span>{{ $expense_21->sum('amount') + $expense_21->sum('charge') }}</span>
                 </td>
+                <td class="py-3 px-6 text-left">
+                    <span>{{ $expense_22->sum('amount') + $expense_22->sum('charge') }}</span>
+                </td>
             </tr>
 
             <thead>
@@ -68,6 +75,7 @@
                     <th class="py-3 px-6 text-left">{{ $earnings_19->sum('amount') - $expense_19->sum('amount') }}</th>
                     <th class="py-3 px-6 text-left">{{ $earnings_20->sum('amount') - $expense_20->sum('amount') }}</th>
                     <th class="py-3 px-6 text-left">{{ $earnings_21->sum('amount') - $expense_21->sum('amount') }}</th>
+                    <th class="py-3 px-6 text-left">{{ $earnings_22->sum('amount') - $expense_22->sum('amount') }}</th>
                 </tr>
             </thead>
         </tbody>
