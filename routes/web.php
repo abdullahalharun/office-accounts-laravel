@@ -21,10 +21,9 @@ Route::get('/livewire-test', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', [DashboardController::class, 'index']);
+
     Route::resource('account', 'AccountController');
 
     Route::get('/expense/filter', [ExpenseController::class, 'filter_expense'])->name('expense.filter');
