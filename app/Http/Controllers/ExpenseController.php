@@ -26,7 +26,7 @@ class ExpenseController extends Controller
     public function index()
     {
         $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
-        
+
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
         $categories = Category::where('parent_id', $expense_cat->id)->get();
@@ -77,11 +77,11 @@ class ExpenseController extends Controller
             //get filename with the extension
             $fileNameWithExtension = $request->file('invoice')->getClientOriginalName();
             //Get file name
-            $fileName = pathinfo($fileNameWithExtension , PATHINFO_FILENAME);
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             //get extension
             $extension = $request->file('invoice')->getClientOriginalExtension();
             //filename to store
-            $fileNametoStore = $fileName.'_'.time().'.'.$extension;
+            $fileNametoStore = $fileName . '_' . time() . '.' . $extension;
             //upload image
             $path = $request->file('invoice')->storeAs('public/invoices', $fileNametoStore);
         } else {
@@ -89,7 +89,7 @@ class ExpenseController extends Controller
         }
 
         $parent_category = Category::where('slug', 'expense')->first();
-        
+
         $transaction = new Transaction;
         $transaction->date          = $request->get('date');
         $transaction->parent_id     = $parent_category->id;
@@ -110,7 +110,7 @@ class ExpenseController extends Controller
         $expense->amount            = $request->get('amount');
         $expense->charge            = $request->get('charge');
         $expense->invoice           = $fileNametoStore;
-        $expense->save();        
+        $expense->save();
 
         return redirect()->route('expense.index')->with('success', 'New Expense Inserted Successfully');
     }
@@ -134,7 +134,7 @@ class ExpenseController extends Controller
      */
     public function edit($id)
     {
-        
+
         $expense = Expense::find($id);
         $parent_category = Category::where('slug', 'expense')->first();
         $categories = Category::where('parent_id', $parent_category->id)->get();
@@ -164,19 +164,19 @@ class ExpenseController extends Controller
             //get filename with the extension
             $fileNameWithExtension = $request->file('invoice')->getClientOriginalName();
             //Get file name
-            $fileName = pathinfo($fileNameWithExtension , PATHINFO_FILENAME);
+            $fileName = pathinfo($fileNameWithExtension, PATHINFO_FILENAME);
             //get extension
             $extension = $request->file('invoice')->getClientOriginalExtension();
             //filename to store
-            $fileNametoStore = $fileName.'_'.time().'.'.$extension;
+            $fileNametoStore = $fileName . '_' . time() . '.' . $extension;
             //upload image
             $path = $request->file('invoice')->storeAs('public/invoices', $fileNametoStore);
         } else {
             $fileNametoStore = null;
         }
-        
+
         $expense = Expense::find($id);
-        $expense->date              = $request->get('date'); 
+        $expense->date              = $request->get('date');
         $expense->category_id       = $request->get('category_id');
         $expense->account_id        = $request->get('account_id');
         $expense->details           = $request->get('details');
@@ -192,7 +192,7 @@ class ExpenseController extends Controller
         $transaction->details       = $request->get('details');
         $transaction->debit         = $request->get('amount') + $request->get('charge');
         $transaction->credit        = 0;
-        $transaction->save();                
+        $transaction->save();
 
         return redirect()->route('expense.index')->with('success', 'Expense Updated Successfully');
     }
@@ -214,18 +214,18 @@ class ExpenseController extends Controller
     public function filter_expense(Request $request)
     {
         $builder = $this->model;
-        
-        if(request()->fromdate || request()->category || request()->account){
 
-            if(!empty($request->fromdate)){
+        if (request()->fromdate || request()->category || request()->account) {
+
+            if (!empty($request->fromdate)) {
                 $builder = $builder->whereBetween('date', [request()->fromdate, request()->todate]);
             }
-            
-            if(!empty($request->category)){
+
+            if (!empty($request->category)) {
                 $builder = $builder->where('category_id', request()->category);
             }
-            
-            if(!empty($request->account)){
+
+            if (!empty($request->account)) {
                 $builder = $builder->where('account_id', request()->account);
             }
 
@@ -259,13 +259,13 @@ class ExpenseController extends Controller
 
     public function report()
     {
-        
+
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
         $categories = Category::where('parent_id', $expense_cat->id)->get();
         $expenses = Expense::groupBy('category_id')
-                            ->selectRaw('date, category_id, account_id, details, SUM(amount) as group_amount, SUM(charge) as group_charge')
-                            ->get();
+            ->selectRaw('date, category_id, account_id, details, SUM(amount) as group_amount, SUM(charge) as group_charge')
+            ->get();
         // dd($expenses);
 
         $query = [
@@ -276,5 +276,12 @@ class ExpenseController extends Controller
         ];
 
         return view('expense.report', compact('expenses', 'categories', 'accounts', 'query'));
+    }
+
+    public function expenseApi()
+    {
+        $expenses = Expense::all();
+
+        return $expenses;
     }
 }

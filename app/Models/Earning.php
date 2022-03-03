@@ -9,7 +9,20 @@ class Earning extends Model
 {
     use HasFactory;
 
-    public function account_name(){
+    protected $fillable = [
+        'date',
+        'parent_id',
+        'category_id',
+        'transaction_id',
+        'account_id',
+        'details',
+        'amount',
+        'charge',
+        'fiscal_year'
+    ];
+
+    public function account_name()
+    {
         return $this->belongsTo('App\Models\Account', 'account_id');
     }
 
