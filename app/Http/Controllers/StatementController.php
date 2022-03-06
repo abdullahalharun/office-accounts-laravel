@@ -16,7 +16,7 @@ class StatementController extends Controller
     {
         $this->model = $model;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +24,7 @@ class StatementController extends Controller
      */
     public function index()
     {
-        $statements = Transaction::orderBy('id', 'DESC')->paginate(20);
+        $statements = Transaction::orderBy('date', 'DESC')->paginate(20);
         $categories = Category::all();
         $accounts   = Account::all();
         $query = [
@@ -40,23 +40,23 @@ class StatementController extends Controller
     public function filter_transaction(Request $request)
     {
         $builder = $this->model;
-        
-        if(request()->fromdate || request()->category || request()->account){
 
-            if(!empty($request->fromdate)){
+        if (request()->fromdate || request()->category || request()->account) {
+
+            if (!empty($request->fromdate)) {
                 $builder = $builder->whereBetween('date', [request()->fromdate, request()->todate]);
             }
-            
-            if(!empty($request->category)){
+
+            if (!empty($request->category)) {
                 $builder = $builder->where('category_id', request()->category);
             }
-            
-            if(!empty($request->account)){
+
+            if (!empty($request->account)) {
                 $builder = $builder->where('account_id', request()->account);
             }
 
             $statements = $builder->get();
-            
+
 
 
             // $statements = Transaction::whereBetween('date', [request()->fromdate, request()->todate])

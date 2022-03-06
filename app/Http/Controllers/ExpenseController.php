@@ -25,7 +25,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::orderBy('id', 'DESC')->paginate(20);
+        $expenses = Expense::orderBy('date', 'DESC')->paginate(20);
 
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
