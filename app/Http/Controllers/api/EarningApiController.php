@@ -36,11 +36,11 @@ class EarningApiController extends Controller
 
         ]);
 
-        $parent_category = Category::where('slug', 'earnings')->first();
+        // $parent_category = Category::where('slug', 'earnings')->first();
 
         $transaction                = new Transaction();
         $transaction->date          = Carbon::today()->toDateString();
-        $transaction->parent_id     = $parent_category->id;
+        $transaction->parent_id     = $request->parent_category;
         $transaction->category_id   = $request->category_id;
         $transaction->account_id    = $request->account_id;
         $transaction->details       = $request->details;
@@ -50,7 +50,7 @@ class EarningApiController extends Controller
 
         $earning = new Earning;
         $earning->date              = Carbon::today()->toDateString();
-        $earning->parent_id         = $parent_category->id;
+        $earning->parent_id         = $request->parent_category;
         $earning->category_id       = $request->category_id;
         $earning->transaction_id    = $transaction->id;
         $earning->account_id        = $request->account_id;
