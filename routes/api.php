@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/expense', [ExpenseController::class, 'expenseApi']);
+// Route::get('/expense', [ExpenseController::class, 'expenseApi']);
 
 // Route::get('/earning', [EarningApiController::class, 'index']);
 // Route::post('/earning', [EarningApiController::class, 'store']);

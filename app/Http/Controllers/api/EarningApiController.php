@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Earning;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class EarningApiController extends Controller
@@ -32,7 +35,31 @@ class EarningApiController extends Controller
             'amount' => 'required',
 
         ]);
-        return Earning::create($request->all());
+
+        $parent_category = Category::where('slug', 'earnings')->first();
+
+        $transaction                = new Transaction();
+        $transaction->date          = Carbon::today()->toDateString();
+        $transaction->parent_id     = $parent_category->id;
+        $transaction->category_id   = $request->category_id;
+        $transaction->account_id    = $request->account_id;
+        $transaction->details       = $request->details;
+        $transaction->debit         = 0;
+        $transaction->credit        = $request->amount - $request->charge;
+        $transaction->save();
+
+        $earning = new Earning;
+        $earning->date              = Carbon::today()->toDateString();
+        $earning->parent_id         = $parent_category->id;
+        $earning->category_id       = $request->category_id;
+        $earning->transaction_id    = $transaction->id;
+        $earning->account_id        = $request->account_id;
+        $earning->details           = $request->details;
+        $earning->amount            = $request->amount;
+        $earning->charge            = $request->charge;
+        $earning->save();
+
+        return "New earning created successfully!";
     }
 
     /**
