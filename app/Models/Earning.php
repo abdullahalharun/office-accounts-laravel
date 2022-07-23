@@ -30,4 +30,9 @@ class Earning extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category_id');
     }
+
+    public function sub_category()
+    {
+        return $this->belongsTo('App\Models\SubCategory', 'sub_category');
+    }
 }

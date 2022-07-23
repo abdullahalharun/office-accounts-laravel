@@ -18,6 +18,7 @@ class CreateEarningsTable extends Migration
             $table->date('date');
             $table->integer('parent_id');
             $table->integer('category_id');
+            $table->integer('sub_category');
             $table->integer('transaction_id');
             $table->integer('account_id');
             $table->string('details')->nullable();

@@ -24,7 +24,7 @@
                                 <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
                             <div class="text-gray-700">
-                                <p class="font-semibold text-3xl">{{ $expenses->sum('amount') + $expenses->sum('charge') + $salaries->sum('amount') + $salaries->sum('charge') }}</p>
+                                <p class="font-semibold text-3xl">{{ number_format($expenses->sum('amount') + $expenses->sum('charge') + $salaries->sum('amount') + $salaries->sum('charge'), 2) }}</p>
                                 <p>Total Expense</p>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                                 <path fill-rule="evenodd" d="M3.293 9.707a1 1 0 010-1.414l6-6a1 1 0 011.414 0l6 6a1 1 0 01-1.414 1.414L11 5.414V17a1 1 0 11-2 0V5.414L4.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                             </svg>
                             <div class="text-gray-700">
-                                <p class="font-semibold text-3xl">{{ $earnings->sum('amount') - $earnings->sum('charge') }}</p>
+                                <p class="font-semibold text-3xl">{{ number_format($earnings->sum('amount') - $earnings->sum('charge'), 2) }}</p>
                                 <p>Total Earnings</p>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                                 <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                             </svg>
                             <div class="text-gray-700">
-                                <p class="font-semibold text-3xl">{{ $earnings->sum('amount') - $earnings->sum('charge') - $expenses->sum('amount') - $expenses->sum('charge') - $salaries->sum('amount') - $salaries->sum('charge') }}</p>
+                                <p class="font-semibold text-3xl">{{ number_format($earnings->sum('amount') - $earnings->sum('charge') - $expenses->sum('amount') - $expenses->sum('charge') - $salaries->sum('amount') - $salaries->sum('charge'), 2) }}</p>
                                 <p>Net Earnings</p>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 md:grid md:grid-cols-2 md:gap-6">
-            
+
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2 sm:px-6 bg-red-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">

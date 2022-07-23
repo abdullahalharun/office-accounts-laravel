@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('earning', 'EarningController');
     Route::resource('earning-category', 'EarningCategoryController');
     Route::get('earning/{id}/create-voucher', [EarningController::class, 'create_voucher'])->name('earning.voucher');
+    Route::post('/getsubcategories', [EarningController::class, 'getsubcategories']);
 
     Route::resource('deposit', 'DepositController');
     Route::get('deposit/{id}/create-voucher', [DepositController::class, 'create_voucher'])->name('deposit.voucher');
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('expense/{id}/create-invoice', [ExpenseController::class, 'create_invoice'])->name('expense.invoice');
 
     Route::get('report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('report/monthly', [ReportController::class, 'monthly'])->name('report.monthly');
 
     // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);
     Route::get('/test', [TestController::class, 'index'])->name('test');

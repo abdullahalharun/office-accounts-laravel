@@ -37,12 +37,17 @@
 
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                        <select id="category" name="category_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                        <select id="category" name="category_id" onchange="getSubCategories()" autocomplete="country" required class="choices mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">Select category</option>
                                             @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                             @endforeach
                                         </select>
+                                    </div>
+
+                                    <!-- Sub cats ajax -->
+                                    <div class="col-span-6 sm:col-span-3" id="sub_cats">
+
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
@@ -84,4 +89,35 @@
         </div>
     </div>
 
+    @section('custom-js')
+    <script>
+        function getSubCategories() {
+            $.ajax({
+                type: 'POST',
+                url: '/getsubcategories',
+                data: {
+                    "parent_id": document.getElementById('category').value,
+                    "_token": "{{ csrf_token() }}",
+                },
+                success: function(data) {
+                    console.log(data)
+                    var html_str_data = '';
+                    if (data.length > 0) {
+                        html_str_data += `<label for="sub_category" class="block text-sm font-medium text-gray-700">Sub Category</label>
+                                        <select id="sub_category" name="sub_category" autocomplete="country" required class="choices mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">Select category</option>`;
+                        for (var i = 0; i < data.length; i++) {
+                            html_str_data += `<option value="${data[i].id}">${data[i].name}</option>`;
+                        }
+                        html_str_data += `</select>`;
+                    } else {
+                        html_str_data += '';
+                    }
+                    $("#sub_cats").html(html_str_data);
+                }
+            });
+
+        }
+    </script>
+    @endsection
 </x-app-layout>

@@ -14,8 +14,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-              
-                <!-- Filter form -->            
+
+                <!-- Filter form -->
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         Add Earning Category
@@ -28,41 +28,41 @@
                     <form action="{{ route('earning-category.store') }}" method="POST">
                         {{ csrf_field() }}
                         <div class="shadow overflow-hidden sm:rounded-md">
-                        <div class="px-4 py-5 bg-white sm:p-6">
-                            <div class="grid grid-cols-3 gap-4">
-                                
-                                <!-- <div class="col-span-6 sm:col-span-3">
-                                    <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                    <select id="category" name="category_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option value="">Select Category</option>
-                                        @foreach($categories as $category)
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <div class="grid grid-cols-3 gap-4">
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="category" class="block text-sm font-medium text-gray-700">Parent Category</label>
+                                        <select id="category" name="sub_parent_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">None</option>
+                                            @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>   -->
-                                
-                                <div class="col-span-6 sm:col-span-3">
-                                    <!-- <label for="parent_category" class="block text-sm font-medium text-gray-700">Parent Category</label> -->
-                                    <input type="hidden" name="parent_id" value="{{ $earningcategory->id }}" id="parent_category" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <!-- <label for="parent_category" class="block text-sm font-medium text-gray-700">Parent Category</label> -->
+                                        <input type="hidden" name="parent_id" value="{{ $earningcategory->id }}" id="parent_category" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="country" class="block text-sm font-medium text-gray-700">New Category Name</label>
+                                        <input type="text" name="cat_name" id="cat_name" required placeholder="Category name..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="order" class="block text-sm font-medium text-gray-700">Order</label>
+                                        <input type="number" name="order" id="order" required placeholder="Category order..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    </div>
+
                                 </div>
-                                                                
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">New Category Name</label>
-                                    <input type="text" name="cat_name" id="cat_name" required placeholder="Category name..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>                                
-                                
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="order" class="block text-sm font-medium text-gray-700">Order</label>
-                                    <input type="number" name="order" id="order" required placeholder="Category order..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
-                                                                                            
                             </div>
-                        </div>
-                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Save
-                            </button>
-                        </div>
+                            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Save
+                                </button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -72,8 +72,8 @@
 
     <div class="">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
-              <!-- Table component -->            
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <!-- Table component -->
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -85,29 +85,29 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                      @foreach($categories as $category)
+                        @foreach($categories as $category)
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
+                                <div class="flex items-center">
                                     <span>{{ $category->id }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">
-                                  <span>{{ $category->name }}</span>
+                                    <span>{{ $category->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $category->slug }}</span>
+                                    <span>{{ $category->slug }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $category->order }}</span>
+                                    <span>{{ $category->order }}</span>
                                 </div>
                             </td>
-                            
+
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
@@ -129,7 +129,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach                       
+                        @endforeach
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
@@ -139,8 +139,8 @@
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>
                         </thead>
-                        </tbody>
-                </table>          
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -153,59 +153,59 @@
 
 
 
-@section('content') 
-    <div class="row mb-4">
-        <div class="col-lg-6 col-12">
-            <div class="card-header bg-white py-15">Add New Expense Category</div>
+@section('content')
+<div class="row mb-4">
+    <div class="col-lg-6 col-12">
+        <div class="card-header bg-white py-15">Add New Expense Category</div>
 
-            <form class="card text-center form-horizontal card-body" method="post" action="{{ route('expense-category.store') }}">
-                {{ csrf_field() }}
-                               
-                    <div class="mb-15 row">
-                        <label class="col-sm-2 col-form-label" for="example-input-small">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="cat_name" id="no" class="form-control">
-                        </div>
-                    </div>
-                                                            
-                    <div class="mb-15 mb-0 justify-content-start row">
-                        <div class="col-sm-6">
-                            <button type="submit" class="btn btn-primary">Add Category</button>
-                        </div>
-                    </div>                
-            </form>
-        </div>
+        <form class="card text-center form-horizontal card-body" method="post" action="{{ route('expense-category.store') }}">
+            {{ csrf_field() }}
 
-        <div class="col-lg-6 col-12">
+            <div class="mb-15 row">
+                <label class="col-sm-2 col-form-label" for="example-input-small">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" name="cat_name" id="no" class="form-control">
+                </div>
+            </div>
+
+            <div class="mb-15 mb-0 justify-content-start row">
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-6 col-12">
 
         <div class="card mb-15">
-                <div class="card-header bg-transparent py-15">Latest Category</div>
+            <div class="card-header bg-transparent py-15">Latest Category</div>
 
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#C ID</th>
-                                <th>Category Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($categories as $category)
-                            <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->name}}</td>
-                                
-                                <td class="text-right">
-                                    <a class="text-secondary" href="/expense-category/{{$category->id}}/edit"><i class="fas fa-edit"></i></a>
-                                    <!-- <a class="text-danger" href="#"><i class="fas fa-trash"></i></a> -->
-                                        <form style="display:inline-block;" action="{{ action('ExpensecategoryController@destroy', $category->id) }}" method="post">
-                                            {{csrf_field()}}
-                                            <input type="hidden" name="_method" value="DELETE">
-                                            <input type="hidden" id="MId" value="{{$category->id}}">
-                                            <button style="" class="btn text-danger" type="submit"  data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                                        </form>
-                                    
-                                    <!-- <div class="dropdown">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#C ID</th>
+                            <th>Category Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($categories as $category)
+                        <tr>
+                            <td>{{$category->id}}</td>
+                            <td>{{$category->name}}</td>
+
+                            <td class="text-right">
+                                <a class="text-secondary" href="/expense-category/{{$category->id}}/edit"><i class="fas fa-edit"></i></a>
+                                <!-- <a class="text-danger" href="#"><i class="fas fa-trash"></i></a> -->
+                                <form style="display:inline-block;" action="{{ action('ExpensecategoryController@destroy', $category->id) }}" method="post">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" id="MId" value="{{$category->id}}">
+                                    <button style="" class="btn text-danger" type="submit" data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                                </form>
+
+                                <!-- <div class="dropdown">
                                         <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
                                             type="button" id="d350ad" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
@@ -218,15 +218,15 @@
                                             </div>
                                         </button>
                                     </div> -->
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
-
         </div>
+
     </div>
+</div>
 
 @endsection

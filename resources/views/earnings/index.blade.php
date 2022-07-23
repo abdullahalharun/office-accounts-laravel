@@ -14,11 +14,11 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-              
+
                 <!-- Filter Show Hide Button -->
                 <!-- <a  class="px-4 py-4 bg-gray-200"> Filter Expense </a> -->
 
-                <!-- Filter form -->            
+                <!-- Filter form -->
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         Filter Earnings
@@ -27,128 +27,134 @@
                     Personal details and application.
                     </p> -->
                 </div>
-              <div class="mt-5 md:mt-0 md:col-span-2">
-                <form action="{{ route('earning.filter') }}" method="GET">
-                    <!-- {{ csrf_field() }} -->
-                    <div class="shadow overflow-hidden sm:rounded-md">
-                        <div class="px-4 py-5 bg-white sm:p-6">
-                            <div class="grid grid-cols-12 gap-6">
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="first_name" class="block text-sm font-medium text-gray-700">From</label>
-                                    <input type="date" name="fromdate" value="{{ $query['fromdate'] }}" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
+                <div class="mt-5 md:mt-0 md:col-span-2">
+                    <form action="{{ route('earning.filter') }}" method="GET">
+                        <!-- {{ csrf_field() }} -->
+                        <div class="shadow overflow-hidden sm:rounded-md">
+                            <div class="px-4 py-5 bg-white sm:p-6">
+                                <div class="grid grid-cols-12 gap-6">
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="first_name" class="block text-sm font-medium text-gray-700">From</label>
+                                        <input type="date" name="fromdate" value="{{ $query['fromdate'] }}" id="first_name" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    </div>
 
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="last_name" class="block text-sm font-medium text-gray-700">To</label>
-                                    <input type="date" name="todate" value="{{ $query['todate'] }}" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                </div>
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="last_name" class="block text-sm font-medium text-gray-700">To</label>
+                                        <input type="date" name="todate" value="{{ $query['todate'] }}" id="last_name" autocomplete="family-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                    </div>
 
-                                <!-- <div class="col-span-6 sm:col-span-4">
+                                    <!-- <div class="col-span-6 sm:col-span-4">
                                     <label for="email_address" class="block text-sm font-medium text-gray-700">Email address</label>
                                     <input type="text" name="email_address" id="email_address" autocomplete="email" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                 </div> -->
 
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Category</label>
-                                    <select id="country" name="category" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option value="">Select Category</option>
-                                        @foreach($categories as $category)
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="country" class="block text-sm font-medium text-gray-700">Category</label>
+                                        <select id="country" name="category" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">Select Category</option>
+                                            @foreach($categories as $category)
                                             <option value="{{ $category->id }}" {{ $query['category'] == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            
-                                <div class="col-span-6 sm:col-span-3">
-                                    <label for="country" class="block text-sm font-medium text-gray-700">Account</label>
-                                    <select id="country" name="account" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                        <option value="">Select Account</option>
-                                        @foreach($accounts as $account)
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="col-span-6 sm:col-span-3">
+                                        <label for="country" class="block text-sm font-medium text-gray-700">Account</label>
+                                        <select id="country" name="account" autocomplete="country" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                            <option value="">Select Account</option>
+                                            @foreach($accounts as $account)
                                             <option value="{{ $account->id }}" {{ $query['account'] == $account->id ? 'selected' : '' }}>{{ $account->name }}</option>
-                                        @endforeach
-                                    </select>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                 </div>
-                                
+                            </div>
+                            <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                <button class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    <a href="/earning">
+                                        Clear Filter
+                                    </a>
+                                </button>
+                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                    Filter
+                                </button>
                             </div>
                         </div>
-                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                            <button class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                <a href="/earning">
-                                    Clear Filter
-                                </a>
-                            </button>
-                            <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Filter
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
-              <!-- Table component -->            
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <!-- Table component -->
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">#ID</th>
                             <th class="py-3 px-6 text-left">Date</th>
                             <th class="py-3 px-6 text-center">Category</th>
                             <th class="py-3 px-6 text-center">Account</th>
                             <th class="py-3 px-6 text-center">Details</th>
                             <th class="py-3 px-6 text-center">Amount (৳{{ $earnings->sum('amount') }})</th>
-                            <th class="py-3 px-6 text-center">Charge (৳{{ $earnings->sum('charge') }})</th>
-                            <th class="py-3 px-6 text-center">Net Earnings (৳{{ $earnings->sum('amount') - $earnings->sum('charge') }})</th>
-                            <th class="py-3 px-6 text-center">Voucher</th>
+                            <!-- <th class="py-3 px-6 text-center">Charge (৳{{ $earnings->sum('charge') }})</th>
+                            <th class="py-3 px-6 text-center">Net Earnings (৳{{ $earnings->sum('amount') - $earnings->sum('charge') }})</th> -->
+                            <!-- <th class="py-3 px-6 text-center">Voucher</th> -->
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                      @foreach($earnings as $earning)
+                        @foreach($earnings as $earning)
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
-                            
+
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
+                                <div class="flex items-center">
+                                    <span>{{ $earning->id }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
                                     <span>{{ date('d M Y', strtotime($earning->date)) }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $earning->category_name->name }}</span>
+                                    <span>{{ $earning->category_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $earning->account_name->name }}</span>
+                                    <span>{{ $earning->account_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $earning->details }}</span>
+                                    <span>{{ $earning->details }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $earning->amount }}</span>
+                                    <span>{{ $earning->amount }}</span>
+                                </div>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <span>{{ $earning->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $earning->charge }}</span>
+                                    <span>{{ $earning->amount - $earning->charge }}</span>
                                 </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
+                            </td> -->
+                            <!-- <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $earning->amount - $earning->charge }}</span>
+                                    <a href="/earning/{{$earning->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
                                 </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
-                                <div class="flex items-center justify-center">
-                                  <a href="/earning/{{$earning->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
-                                </div>
-                            </td>
+                            </td> -->
                             <!-- <td class="py-3 px-6 text-center">
                                 <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">Active</span>
                             </td> -->
@@ -175,25 +181,26 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach                       
+                        @endforeach
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left"></th>
                                 <th class="py-3 px-6 text-left"></th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center"></th>
                                 <th class="py-3 px-6 text-center">Total Amount</th>
                                 <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('amount') }}</th>
-                                <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('charge') }}</th>
-                                <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('amount') - $earnings->sum('charge') }}</th>
-                                <th class="py-3 px-6 text-center"></th>
+                                <!-- <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('charge') }}</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $earnings->sum('amount') - $earnings->sum('charge') }}</th> -->
+                                <!-- <th class="py-3 px-6 text-center"></th> -->
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>
                         </thead>
-                        </tbody>
-                </table>          
+                    </tbody>
+                </table>
             </div>
             @if($earnings instanceof \Illuminate\Pagination\AbstractPaginator)
-                {{ $earnings->links() }}
+            {{ $earnings->links() }}
             @endif
         </div>
     </div>

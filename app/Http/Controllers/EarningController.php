@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Account;
 use App\Models\Earning;
 use App\Models\Statement;
+use App\Models\SubCategory;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use TCG\Voyager\Models\Category;
@@ -18,7 +19,7 @@ class EarningController extends Controller
     {
         $this->model = $model;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -84,12 +85,13 @@ class EarningController extends Controller
         $earning->date              = $request->get('date');
         $earning->parent_id         = $parent_category->id;
         $earning->category_id       = $request->get('category_id');
+        $earning->sub_category       = $request->get('sub_category');
         $earning->transaction_id    = $transaction->id;
         $earning->account_id        = $request->get('account_id');
         $earning->details           = $request->get('details');
         $earning->amount            = $request->get('amount');
         $earning->charge            = $request->get('charge');
-        $earning->save(); 
+        $earning->save();
 
         return redirect()->route('earning.index')->withSuccess('New Earning Deposited Successfully.');
     }
@@ -137,7 +139,7 @@ class EarningController extends Controller
             'account_id'    => 'required',
         ]);
 
-                
+
         $earning = Earning::find($id);
         $earning->date              = $request->get('date');
         $earning->category_id       = $request->get('category_id');
@@ -145,16 +147,16 @@ class EarningController extends Controller
         $earning->details           = $request->get('details');
         $earning->amount            = $request->get('amount');
         $earning->charge            = $request->get('charge');
-        $earning->save(); 
+        $earning->save();
 
-        $transaction = Transaction::find($earning->transaction_id);        
+        $transaction = Transaction::find($earning->transaction_id);
         $transaction->date          = $request->get('date');
         $transaction->category_id   = $request->get('category_id');
         $transaction->account_id    = $request->get('account_id');
         $transaction->details       = $request->get('details');
         $transaction->debit         = 0;
         $transaction->credit        = $request->get('amount') - $request->get('charge');
-        $transaction->save();              
+        $transaction->save();
 
         return redirect()->route('earning.index')->with('success', 'Earning Updated Successfully');
     }
@@ -182,18 +184,18 @@ class EarningController extends Controller
     public function filter_earning(Request $request)
     {
         $builder = $this->model;
-        
-        if(request()->fromdate || request()->category || request()->account){
 
-            if(!empty($request->fromdate)){
+        if (request()->fromdate || request()->category || request()->account) {
+
+            if (!empty($request->fromdate)) {
                 $builder = $builder->whereBetween('date', [request()->fromdate, request()->todate]);
             }
-            
-            if(!empty($request->category)){
+
+            if (!empty($request->category)) {
                 $builder = $builder->where('category_id', request()->category);
             }
-            
-            if(!empty($request->account)){
+
+            if (!empty($request->account)) {
                 $builder = $builder->where('account_id', request()->account);
             }
 
@@ -213,5 +215,11 @@ class EarningController extends Controller
         $query = request()->all();
 
         return view('earnings.index', compact('earnings', 'categories', 'accounts', 'query'));
+    }
+
+    public function getsubcategories(Request $request)
+    {
+        $cates = SubCategory::where('parent_id', $request->parent_id)->get();
+        return $cates;
     }
 }

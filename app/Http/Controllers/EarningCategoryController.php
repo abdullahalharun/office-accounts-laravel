@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -40,18 +41,28 @@ class EarningCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'cat_name' => 'required'
         ]);
 
-        $category = new Category;
-        $category->parent_id    = $request->get('parent_id');
-        $category->order        = $request->get('order');
-        $category->name         = $request->get('cat_name');
-        $category->slug         = Str::slug($request->cat_name, '-');
-        $category->save();
+        if ($request->sub_parent_id) {
+            $sub_cat = new SubCategory();
+            $sub_cat->parent_id    = $request->get('sub_parent_id');
+            $sub_cat->order        = $request->get('order');
+            $sub_cat->name         = $request->get('cat_name');
+            $sub_cat->slug         = Str::slug($request->cat_name, '-');
+            $sub_cat->save();
+        } else {
+            $category = new Category;
+            $category->parent_id    = $request->get('parent_id');
+            $category->order        = $request->get('order');
+            $category->name         = $request->get('cat_name');
+            $category->slug         = Str::slug($request->cat_name, '-');
+            $category->save();
+        }
 
-        return redirect()->back()->with('success', 'Category Inserted Successfully');
+        return redirect()->back()->with('success', 'Category Created Successfully.');
     }
 
     /**
