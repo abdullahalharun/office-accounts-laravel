@@ -1,9 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
         @if (auth()->user()->hasRole('admin'))
-        <!-- <x-jet-nav-link href="/report/monthly" :active="request()->routeIs('/report*')">
+        <x-jet-nav-link href="/report" :active="request()->is('report')">
+            Full Report
+        </x-jet-nav-link>
+        <x-jet-nav-link href="/report/monthly" :active="request()->routeIs('/report*')">
             Monthly Report
-        </x-jet-nav-link> -->
+        </x-jet-nav-link>
         @endif
     </x-slot>
 
@@ -72,8 +75,6 @@
             </div>
         </div>
     </div>
-
-    @livewire('monthly-report')
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 md:grid md:grid-cols-2 md:gap-6">

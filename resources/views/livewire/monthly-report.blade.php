@@ -158,4 +158,109 @@
             </div>
         </div>
     </div>
+
+    <div class="py-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 md:grid md:grid-cols-2 md:gap-6">
+
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="px-4 py-2 sm:px-6 bg-red-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Expense Report By Category
+                    </h3>
+                </div>
+
+                <table class="min-w-max w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Category</th>
+                            <th class="py-3 px-6 text-left">Amount</th>
+                            <th class="py-3 px-6 text-left">Charge</th>
+                            <th class="py-3 px-6 text-left">Net Expense</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        @foreach($expenseByCategory as $expense)
+                        <tr class="border-b border-gray-200  hover:bg-gray-100">
+                            <th class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <span>{{ $expense->category_name->name }}</span>
+                                </div>
+                            </th>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <span class="font-medium">{{ $expense->total_amount }}</span>
+                            </td>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <span class="font-medium">{{ $expense->total_charge }}</span>
+                            </td>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <span class="font-medium">{{ $expense->total_amount + $expense->total_charge }}</span>
+                            </td>
+                        </tr>
+                        @endforeach
+
+
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Total</th>
+                                <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_amount') }}</th>
+                                <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_charge') }}</th>
+                                <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_amount') + $expenseByCategory->sum('total_charge') }}</th>
+                            </tr>
+                        </thead>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="px-4 py-2 sm:px-6 bg-green-200">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Earning Report By Category
+                    </h3>
+                </div>
+
+                <table class="min-w-max w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Category</th>
+                            <th class="py-3 px-6 text-left">Amount</th>
+                            <th class="py-3 px-6 text-left">Charge</th>
+                            <th class="py-3 px-6 text-left">Net Earning</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        @foreach($earningByCategory as $earning)
+                        <tr class="border-b border-gray-200  hover:bg-gray-100">
+                            <th class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <span>{{ $earning->category_name->name }}</span>
+                                </div>
+                            </th>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <span class="font-medium">{{ $earning->total_amount }}</span>
+                            </td>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <span class="font-medium">{{ $earning->total_charge }}</span>
+                            </td>
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <span class="font-medium">{{ $earning->total_amount - $earning->total_charge }}</span>
+                            </td>
+                        </tr>
+                        @endforeach
+
+
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left">Total</th>
+                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_amount') }}</th>
+                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_charge') }}</th>
+                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_amount') - $earningByCategory->sum('total_charge') }}</th>
+                            </tr>
+                        </thead>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
 </div>
