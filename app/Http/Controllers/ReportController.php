@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Earning;
 use App\Models\Expense;
 use App\Models\Salary;
