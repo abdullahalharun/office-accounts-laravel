@@ -1,21 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full mx-4 flex flex-col lg:flex-row">
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-500  flex justify-center" href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+        <div class="w-full flex flex-col lg:flex-row">
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
                 {{ __('Add Expense') }}
             </a>
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-500  flex justify-center" href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
                 {{ __('Add Earnings') }}
             </a>
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-500  flex justify-center" href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
                 {{ __('Transfer Money') }}
             </a>
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-500  flex justify-center" href="{{ route('report.index') }}" :active="request()->routeIs('report.index')">
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('report.index') }}" :active="request()->routeIs('report.index')">
                 {{ __('See Reports') }}
             </a>
         </div>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight pt-4">
-            <div class="border-t py-2"></div>
+            <!-- <div class="border-t py-2"></div> -->
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
