@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\Earning;
+use App\Models\Expense;
 use App\Models\Statement;
 use App\Models\SubCategory;
 use App\Models\Transaction;

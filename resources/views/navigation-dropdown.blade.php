@@ -26,9 +26,9 @@
                     <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning*')">
                         Earnings
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit*')">
+                    <!-- <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit*')">
                         Deposit
-                    </x-jet-nav-link>
+                    </x-jet-nav-link> -->
                     <x-jet-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement*')">
                         Statement
                     </x-jet-nav-link>
@@ -143,11 +143,23 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
+    <!-- Mobile Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+                {{ __('Add Expense') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
+                {{ __('Add Earnings') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
+                {{ __('Transfer Money') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('report.index') }}" :active="request()->routeIs('report.index')">
+                {{ __('See Reports') }}
             </x-jet-responsive-nav-link>
         </div>
 
@@ -171,10 +183,8 @@
                 </x-jet-responsive-nav-link>
 
                 <!-- Custom Dropdown Menu -->
-                <x-jet-dropdown-link href="{{ route('expense.index') }}">
-                    {{ __('Expense') }}
-                </x-jet-dropdown-link>
-                @if (auth()->user()->hasRole('admin'))
+
+                <!-- @if (auth()->user()->hasRole('admin'))
                 <x-jet-dropdown-link href="{{ route('salary.index') }}">
                     Salary
                 </x-jet-dropdown-link>
@@ -196,7 +206,7 @@
                 <x-jet-responsive-nav-link href="{{ route('api-tokens.index') }}" :active="request()->routeIs('api-tokens.index')">
                     {{ __('API Tokens') }}
                 </x-jet-responsive-nav-link>
-                @endif
+                @endif -->
 
 
                 <!-- Authentication -->
