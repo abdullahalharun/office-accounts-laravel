@@ -5,7 +5,7 @@
                 {{ __('Add Expense') }}
             </a>
             <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
-                {{ __('Add Earnings') }}
+                {{ __('Add Income') }}
             </a>
             <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
                 {{ __('Transfer Money') }}
@@ -15,7 +15,7 @@
             </a>
         </div>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight pt-4">
-            <!-- <div class="border-t py-2"></div> -->
+            <div class="border-t py-2"></div>
             {{ __('Dashboard') }}
         </h2>
     </x-slot>

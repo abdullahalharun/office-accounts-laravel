@@ -149,14 +149,17 @@
             <x-jet-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
-                {{ __('Add Expense') }}
+            <x-jet-responsive-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
+                {{ __('Expense') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
-                {{ __('Add Earnings') }}
+            <x-jet-responsive-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+                {{ __('Salary') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
-                {{ __('Transfer Money') }}
+            <x-jet-responsive-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">
+                {{ __('Earnings') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement.index')">
+                {{ __('Statement') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('report.index') }}" :active="request()->routeIs('report.index')">
                 {{ __('See Reports') }}
