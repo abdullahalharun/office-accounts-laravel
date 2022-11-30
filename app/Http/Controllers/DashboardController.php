@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Earning;
 use App\Models\Expense;
 use App\Models\Salary;
+use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,6 +17,10 @@ class DashboardController extends Controller
         $total_expenses = Expense::all();
         $earnings = Earning::all();
         $salaries = Salary::all();
+
+        $officeDeposit = Transaction::where('account_id', 1)
+            ->whereBetween('date', [Carbon::now()->startOfMonth()->toDateString(), Carbon::now()->endOfMonth()->toDateString()])->get();
+        $officeExpense = Expense::whereBetween('date', [Carbon::now()->startOfMonth()->toDateString(), Carbon::now()->endOfMonth()->toDateString()])->get();
 
         // $month = [ 7, 8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, ];
         // $expenses = Expense::whereIn('date', $month)->get();
@@ -31,6 +37,6 @@ class DashboardController extends Controller
 
         // dd($expenses);
 
-        return view('dashboard', compact('expenses', 'total_expenses', 'earnings', 'salaries'));
+        return view('dashboard', compact('expenses', 'total_expenses', 'earnings', 'salaries', 'officeDeposit', 'officeExpense'));
     }
 }

@@ -1,14 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
-            All Expense
-        </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
-            {{ __('Add New') }}
-        </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
-            {{ __('Add New Category') }}
-        </x-jet-nav-link>
+        <div class="w-full flex flex-col lg:flex-row">
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
+                {{ __('All Expense') }}
+            </a>
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+                {{ __('New Expense') }}
+            </a>
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
+                {{ __('Add New Category') }}
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -30,12 +32,12 @@
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-3 gap-4">
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-3 lg:col-span-1">
                                         <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
                                         <input type="date" name="date" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}" id="date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                     </div>
 
-                                    <div class="col-span-6 sm:col-span-3">
+                                    <div class="col-span-3 lg:col-span-1">
                                         <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
                                         <select id="category" name="category_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                             <option value="">Select Category</option>
