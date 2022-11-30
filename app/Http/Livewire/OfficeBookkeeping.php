@@ -13,7 +13,7 @@ use Livewire\Component;
 class OfficeBookkeeping extends Component
 {
     public $earnings, $earningByCategory, $officeDeposit;
-    public $expenses, $expenseByCategory;
+    public $expenses, $expenseByCategory, $officeExpense;
     public $salaries;
     public $categories;
     public $query;
