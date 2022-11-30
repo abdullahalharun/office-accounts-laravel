@@ -53,7 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('transfer', 'TransactionController');
     Route::get('expense/{id}/create-invoice', [ExpenseController::class, 'create_invoice'])->name('expense.invoice');
 
-    Route::get('report', [ReportController::class, 'index'])->name('report.index');
+    Route::get('report', [ReportController::class, 'office_bookkeeping'])->name('report.office_bookkeeping');
+    Route::get('report/full-report', [ReportController::class, 'index'])->name('report.index');
     Route::get('report/monthly', [ReportController::class, 'monthly'])->name('report.monthly');
 
     // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);

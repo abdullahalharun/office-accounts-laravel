@@ -1,17 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-jet-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
-            All Expense
-        </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
-            {{ __('Add New') }}
-        </x-jet-nav-link>
-        <x-jet-nav-link href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
-            {{ __('Add New Category') }}
-        </x-jet-nav-link>
-        <x-jet-nav-link href="#" :active="request()->routeIs('expense.edit')">
-            {{ __('Edit Expense') }}
-        </x-jet-nav-link>
+        <div class="w-full flex flex-col lg:flex-row">
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 :active:bg-blue-200 hover:bg-blue-700 text-center" href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
+                {{ __('All Expense') }}
+            </a>
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+                {{ __('Add Expense') }}
+            </a>
+            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
+                {{ __('Add New Category') }}
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">

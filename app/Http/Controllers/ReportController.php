@@ -13,9 +13,13 @@ class ReportController extends Controller
     public function index()
     {
         $expenses = Expense::all();
-        $expenseByCategory = Expense::groupBy('category_id')
-            ->selectRaw('category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+        $expenseByCategory = Expense::groupBy('parent_id')
+            ->selectRaw('parent_id, category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
             ->get();
+        // dd($expenseByCategory);
+        // $expenseByCategory = Expense::groupBy('category_id')
+        //     ->selectRaw('category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+        //     ->get();
 
         $expense_18 = Expense::whereBetween('date', [date('2018-01-01'), date('2018-12-31')])->get();
         $expense_19 = Expense::whereBetween('date', [date('2019-01-01'), date('2019-12-31')])->get();
@@ -53,5 +57,10 @@ class ReportController extends Controller
     public function monthly()
     {
         return view('report.monthly');
+    }
+
+    public function office_bookkeeping()
+    {
+        return view('report.office-bookkeeping');
     }
 }
