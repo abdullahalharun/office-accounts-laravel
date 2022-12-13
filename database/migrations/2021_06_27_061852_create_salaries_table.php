@@ -15,14 +15,15 @@ class CreateSalariesTable extends Migration
     {
         Schema::create('salaries', function (Blueprint $table) {
             $table->id();
-            $table->date('month');
+            $table->date('month')->nullable();
+            $table->date('disburse_date')->nullable();
             $table->integer('transaction_id');
             $table->integer('employee_id');
             $table->integer('account_id');
             $table->string('details')->nullable();
             $table->double('amount');
             $table->double('charge');
-            $table->string('fiscal_year')->default(2122);
+            $table->string('fiscal_year')->default(2223);
             $table->timestamps();
         });
     }

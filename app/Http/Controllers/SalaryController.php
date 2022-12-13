@@ -22,7 +22,7 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::all();
+        $salaries = Salary::orderBy('month', 'DESC')->get();
         $canViewSalary = Auth::user()->can('browse', $salaries);
 
         return view('salary.index', compact('salaries', 'canViewSalary'));
@@ -35,12 +35,14 @@ class SalaryController extends Controller
      */
     public function create()
     {
+        // dd(Carbon::now()->previous('month')->toDateString());
         $accounts = Account::all();
         // $get_employees =  Http::get('https://taibahacademy.com/api/employees');
         // $employees = json_decode($get_employees);
         $employees = Employee::all();
+        $salaries = Salary::whereBetween('month', [Carbon::now()->firstOfMonth()->toDateString(), Carbon::now()->lastOfMonth()->toDateString()])->get();
 
-        return view('salary.create', compact('accounts', 'employees'));
+        return view('salary.create', compact('accounts', 'employees', 'salaries'));
     }
 
     /**
@@ -51,15 +53,16 @@ class SalaryController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $this->validate($request, [
             'amount' => 'required',
         ]);
 
         $parent_category = Category::where('slug', 'expense')->first();
         $category = Category::where('slug', 'salary')->first();
-        
+
         $transaction = new Transaction;
-        $transaction->date          = $request->get('date');
+        $transaction->date          = $request->get('disburse_date');
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $category->id;
         $transaction->account_id    = $request->get('account_id');
@@ -69,7 +72,8 @@ class SalaryController extends Controller
         $transaction->save();
 
         $salary = new Salary;
-        $salary->month          = Carbon::createFromFormat('Y-m-d', $request->get('date'));
+        $salary->month          = Carbon::createFromFormat('Y-m', $request->get('month'));
+        $salary->disburse_date  = Carbon::createFromFormat('Y-m-d', $request->get('disburse_date'));
         $salary->transaction_id = $transaction->id;
         $salary->employee_id    = $request->get('employee_id');
         $salary->account_id     = $request->get('account_id');
@@ -136,18 +140,19 @@ class SalaryController extends Controller
 
         $parent_category = Category::where('slug', 'expense')->first();
         $category = Category::where('slug', 'salary')->first();
-        
+
         $salary = Salary::find($id);
-        $salary->month          = Carbon::createFromFormat('Y-m-d', $request->get('date'));
+        $salary->month          = Carbon::createFromFormat('Y-m', $request->get('month'));
+        $salary->disburse_date  = Carbon::createFromFormat('Y-m-d', $request->get('disburse_date'));
         $salary->employee_id    = $request->get('employee_id');
         $salary->account_id     = $request->get('account_id');
         $salary->details        = $request->get('details');
         $salary->amount         = $request->get('amount');
         $salary->charge         = $request->get('charge');
         $salary->save();
-                
+
         $transaction = Transaction::find($salary->transaction_id);
-        $transaction->date          = $request->get('date');
+        $transaction->date          = $request->get('disburse_date');
         $transaction->parent_id     = $parent_category->id;
         $transaction->category_id   = $category->id;
         $transaction->account_id    = $request->get('account_id');

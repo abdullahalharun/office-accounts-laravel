@@ -19,7 +19,7 @@
                         Expense
                     </x-jet-nav-link>
                     @if (auth()->user()->hasRole('admin'))
-                    <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary*')">
+                    <x-jet-nav-link href="{{ route('salary.create') }}" :active="request()->routeIs('salary*')">
                         Salary
                     </x-jet-nav-link>
                     @endif
@@ -152,7 +152,7 @@
             <x-jet-responsive-nav-link href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
                 {{ __('Expense') }}
             </x-jet-responsive-nav-link>
-            <x-jet-responsive-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+            <x-jet-responsive-nav-link href="{{ route('salary.create') }}" :active="request()->routeIs('salary*')">
                 {{ __('Salary') }}
             </x-jet-responsive-nav-link>
             <x-jet-responsive-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning.index')">

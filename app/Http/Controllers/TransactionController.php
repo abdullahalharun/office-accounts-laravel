@@ -29,8 +29,10 @@ class TransactionController extends Controller
         $accounts = Account::all();
         $parent_category = Category::where('slug', 'transfer')->first();
         $categories = Category::where('parent_id', $parent_category->id)->get();
-        
-        return view('transfer.create', compact('accounts', 'parent_category', 'categories'));
+
+        $transactions = Transaction::where('parent_id', $parent_category->id)->orderBy('date', 'desc')->limit(8)->get();
+
+        return view('transfer.create', compact('accounts', 'parent_category', 'categories', 'transactions'));
     }
 
     /**
@@ -44,7 +46,7 @@ class TransactionController extends Controller
         $this->validate($request, [
             'from_account_id'   => 'required',
             'to_account_id'     => 'required',
-            'amount'            => 'required', 
+            'amount'            => 'required',
         ]);
 
         $parent_category = Category::where('slug', 'transfer')->first();
@@ -58,7 +60,7 @@ class TransactionController extends Controller
         $debit->debit         = $request->get('amount');
         $debit->credit        = 0;
         $debit->save();
-        
+
         $credit = new Transaction;
         $credit->date          = $request->get('date');
         $credit->parent_id     = $parent_category->id;
@@ -89,9 +91,19 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $accounts = Account::all();
+        $parent_category = Category::where('slug', 'transfer')->first();
+        $categories = Category::where('parent_id', $parent_category->id)->get();
+
+        return view('transfer.edit', [
+            'accounts'      => $accounts,
+            'categories'    => $categories,
+            'trxTo'         => Transaction::find($id),
+            'trxFrom'       => Transaction::find($id - 1),
+            'transactions'  => Transaction::where('parent_id', $parent_category->id)->orderBy('id', 'desc')->limit(8)->get()
+        ]);
     }
 
     /**
@@ -101,9 +113,37 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'from_account_id'   => 'required',
+            'to_account_id'     => 'required',
+            'amount'            => 'required',
+        ]);
+
+        $parent_category = Category::where('slug', 'transfer')->first();
+
+        $debit = Transaction::find($id - 1);
+        $debit->date          = $request->get('date');
+        $debit->parent_id     = $parent_category->id;
+        $debit->category_id   = $request->get('category_id');
+        $debit->account_id    = $request->get('from_account_id');
+        $debit->details       = $request->get('details');
+        $debit->debit         = $request->get('amount');
+        $debit->credit        = 0;
+        $debit->save();
+
+        $credit = Transaction::find($id);
+        $credit->date          = $request->get('date');
+        $credit->parent_id     = $parent_category->id;
+        $credit->category_id   = $request->get('category_id');
+        $credit->account_id    = $request->get('to_account_id');
+        $credit->details       = $request->get('details');
+        $credit->debit         = 0;
+        $credit->credit        = $request->get('amount');
+        $credit->save();
+
+        return redirect()->back()->withSuccess('Transfer Updated Successfully.');
     }
 
     /**
@@ -112,8 +152,11 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        Transaction::find($id)->delete();
+        Transaction::find($id - 1)->delete();
+
+        return redirect()->route('transfer.create')->withSuccess('Fund transfer deleted successfully!');
     }
 }

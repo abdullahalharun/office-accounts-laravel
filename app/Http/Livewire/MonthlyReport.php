@@ -10,7 +10,6 @@ use Livewire\Component;
 
 class MonthlyReport extends Component
 {
-
     public $earnings;
     public $expenses;
     public $earningByCategory;
@@ -18,13 +17,19 @@ class MonthlyReport extends Component
     public $salaries;
     public $categories;
     public $query;
-    public $year = 2022;
-    public $month = 1;
+    public $year;
+    public $month;
     public $datefrom;
     public $dateto;
     public $displayMonth;
 
     // protected $listeners = ['updateReport' => '$refresh'];
+
+    public function mount()
+    {
+        $this->month = date('m', strtotime(now()));
+        $this->year =  date('Y', strtotime(now()));
+    }
 
     public function render()
     {

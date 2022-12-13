@@ -35,9 +35,6 @@
             </div>
         </header>
 
-        @include('inc.messages')
-
-
         <!-- Page Content -->
         <main>
             {{ $slot }}
@@ -55,6 +52,54 @@
     <script>
         const element = document.querySelector('.choices');
         const choices = new Choices(element);
+    </script>
+
+    <!-- Sweetalert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // From events
+        window.addEventListener('swal:modal', event => {
+            Swal.fire({
+                // position: 'bottom-start',
+                title: event.detail.title,
+                text: event.detail.text,
+                icon: event.detail.type,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+        });
+
+        // From session message
+        $(document).ready(function() {
+            "@if(session('success'))"
+            Swal.fire({
+                // position: 'bottom-start',
+                icon: 'success',
+                title: '{{ session("success") }}',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            "@elseif(session('warning'))"
+            Swal.fire({
+                // position: 'bottom-start',
+                icon: 'warning',
+                title: '{{ session("warning") }}',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            "@elseif(session('error'))"
+            Swal.fire({
+                // position: 'bottom-start',
+                icon: 'error',
+                title: '{{ session("error") }}',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+            });
+            "@endif"
+        });
     </script>
 </body>
 

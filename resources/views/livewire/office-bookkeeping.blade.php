@@ -16,7 +16,6 @@
                     </p>
                 </div>
 
-
                 <div class="shadow overflow-hidden sm:rounded-md">
                     <div class="px-4 py-5 bg-white sm:p-6">
                         <div class="grid grid-cols-12 gap-6">
@@ -149,24 +148,13 @@
                             </td>
                         </tr>
                         @endforeach
-                        <tr class="border-b border-gray-200  hover:bg-gray-100">
-                            <th class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <span>SSL/Bkash Charge</span>
-                                </div>
-                            </th>
-                            <td class="py-3 px-6 text-right whitespace-nowrap">
-                                <span class="font-medium">{{ number_format($earnings->sum('charge'), 2) }}</span>
-                            </td>
-                        </tr>
-
 
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left">Total</th>
                                 <!-- <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_amount') }}</th>
                                 <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_charge') }}</th> -->
-                                <th class="py-3 px-6 text-right">{{ $expenseByCategory->sum('amount') + $expenseByCategory->sum('charge') + $earnings->sum('charge') }}</th>
+                                <th class="py-3 px-6 text-right">{{ $expenseByCategory->sum('amount') + $expenseByCategory->sum('charge') }}</th>
                             </tr>
                         </thead>
                     </tbody>
@@ -174,55 +162,7 @@
 
             </div>
 
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-2 sm:px-6 bg-green-200">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Earning Report By Category - {{ date('F', strtotime($this->datefrom)) .', '. $year }}
-                    </h3>
-                </div>
-
-                <table class="min-w-max w-full table-auto">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Category</th>
-                            <!-- <th class="py-3 px-6 text-left">Amount</th>
-                            <th class="py-3 px-6 text-left">Charge</th> -->
-                            <th class="py-3 px-6 text-right">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        @foreach($earningByCategory as $earning)
-                        <tr class="border-b border-gray-200  hover:bg-gray-100">
-                            <th class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <span>{{ $earning->category_name->name }}</span>
-                                </div>
-                            </th>
-                            <!-- <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_amount }}</span>
-                            </td>
-                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_charge }}</span>
-                            </td> -->
-                            <td class="py-3 px-6 text-right whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_amount - $earning->total_charge }}</span>
-                            </td>
-                        </tr>
-                        @endforeach
-
-
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left">Total</th>
-                                <!-- <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_amount') }}</th>
-                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_charge') }}</th> -->
-                                <th class="py-3 px-6 text-right">{{ $earningByCategory->sum('total_amount') - $earningByCategory->sum('total_charge') }}</th>
-                            </tr>
-                        </thead>
-                    </tbody>
-                </table>
-            </div>
-
+            @if (auth()->user()->hasRole('admin'))
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2 sm:px-6 bg-red-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -265,6 +205,74 @@
                         </thead>
                     </tbody>
                 </table>
+            </div>
+            @endif
+
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="px-4 py-4 sm:px-6 bg-gray-200 border-b">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900">
+                        Recent Transfers
+                    </h3>
+                </div>
+                <table class="min-w-max w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Date</th>
+                            <!-- <th class="py-3 px-6 text-center">Category</th> -->
+                            <th class="py-3 px-6 text-center">Account</th>
+                            <th class="py-3 px-6 text-center">Amount (৳{{ $recentTransfers->sum('credit') }})</th>
+                            <th class="py-3 px-6 text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        @foreach($recentTransfers as $transaction)
+                        <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
+
+                            <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <span>{{ date('d M Y', strtotime($transaction->date)) }}</span>
+                                </div>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-center">
+                                    <div class="flex items-center justify-center">
+                                        <span>{{ $transaction->category_name->name }}</span>
+                                    </div>
+                                </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <span>{{ $transaction->account_name->name }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <span>{{ $transaction->credit }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex item-center justify-center {{ $loop->even ? 'hidden' : '' }}">
+                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                        <a href="/transfer/{{ $transaction->id }}/edit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        @endforeach
+                        <thead>
+                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-6 text-left"></th>
+                                <th class="py-3 px-6 text-center">Total Amount</th>
+                                <th class="py-3 px-6 text-center">৳ {{ $recentTransfers->sum('credit') }}</th>
+                                <th class="py-3 px-6 text-center"></th>
+                            </tr>
+                        </thead>
+                    </tbody>
+                </table>
+
             </div>
 
         </div>

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         @if (auth()->user()->hasRole('admin'))
-        <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
-            All Salary
-        </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('salary.create') }}" :active="request()->routeIs('salary.create')">
             {{ __('New Salary') }}
+        </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('salary.index') }}" :active="request()->routeIs('salary.index')">
+            All Salary
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('employee.create') }}" :active="request()->routeIs('employee.create')">
             {{ __('Add New Employee') }}
@@ -16,8 +16,8 @@
     @if (auth()->user()->hasRole('admin'))
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
-              <!-- Table component -->            
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <!-- Table component -->
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -33,47 +33,47 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                      @foreach($salaries as $salary)
+                        @foreach($salaries as $salary)
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
-                            
+
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
+                                <div class="flex items-center">
                                     <span>{{ \Carbon\Carbon::parse($salary->month)->format('M Y') }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->employee_name->name }}</span>
+                                    <span>{{ $salary->employee_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->account_name->name }}</span>
+                                    <span>{{ $salary->account_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->details }}</span>
+                                    <span>{{ $salary->details }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->amount }}</span>
+                                    <span>{{ $salary->amount }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->charge }}</span>
+                                    <span>{{ $salary->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $salary->amount + $salary->charge }}</span>
+                                    <span>{{ $salary->amount + $salary->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <a href="/salary/{{$salary->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
+                                    <a href="/salary/{{$salary->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
                                 </div>
                             </td>
                             <!-- <td class="py-3 px-6 text-center">
@@ -102,7 +102,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach                       
+                        @endforeach
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
@@ -116,16 +116,16 @@
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>
                         </thead>
-                        </tbody>
-                </table>          
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     @else
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
-              <h1 class="p-4 mx-auto">You don't have permission to view this.</h1>         
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <h1 class="p-4 mx-auto">You don't have permission to view this.</h1>
             </div>
         </div>
     </div>
