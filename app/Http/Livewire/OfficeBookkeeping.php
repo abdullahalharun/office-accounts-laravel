@@ -19,7 +19,7 @@ class OfficeBookkeeping extends Component
     public $recentTransfers;
     public $categories;
     public $query;
-    public $month, $year, $datefrom, $dateto, $displayMonth;
+    public $date, $month, $year, $datefrom, $dateto, $displayMonth;
 
     public function mount()
     {
