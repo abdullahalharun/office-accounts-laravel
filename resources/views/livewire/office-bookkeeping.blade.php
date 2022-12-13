@@ -209,9 +209,9 @@
             @endif
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-4 sm:px-6 bg-gray-200 border-b">
+                <div class="px-4 py-4 sm:px-6 bg-green-200 border-b">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Recent Transfers
+                        Recent Deposits
                     </h3>
                 </div>
                 <table class="min-w-max w-full table-auto">
