@@ -59,6 +59,20 @@ class ReportController extends Controller
         return view('report.monthly');
     }
 
+    public function monthly_print_format(Request $request)
+    {
+        $expenses = Expense::groupBy('category_id')
+            ->selectRaw('id, date, category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+            ->whereBetween('date', [$request->datefrom, $request->dateto])
+            ->get();
+
+        // dd($expenses);
+
+        return view('report.monthly-report-print', [
+            'expenses' => $expenses
+        ]);
+    }
+
     public function office_bookkeeping()
     {
         return view('report.office-bookkeeping');

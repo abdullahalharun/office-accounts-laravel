@@ -123,11 +123,15 @@
         </div>
     </div>
 
+    <div class="container max-w-7xl mx-auto px-8">
+        <a href="/report/monthly/print?datefrom={{$datefrom}}&dateto={{$dateto}}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white cursor-pointer rounded-lg px-4 py-2">Print monthly expense report</a>
+    </div>
+
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 md:grid md:grid-cols-2 md:gap-6">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-2 sm:px-6 bg-red-200">
+                <div class="px-4 py-2 sm:px-6 bg-red-200 flex flex-col md:flex-row justify-between">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
                         Expense Report By Category - {{ date('F', strtotime($this->datefrom)) .', '. $year }}
                     </h3>
@@ -147,7 +151,7 @@
                         <tr class="border-b border-gray-200  hover:bg-gray-100">
                             <th class="py-3 px-6 text-left">
                                 <div class="flex items-center">
-                                    <span>{{ $expense->parent_category->name }}</span>
+                                    <span>{{ $expense->category_name->name }}</span>
                                 </div>
                             </th>
                             <!-- <td class="py-3 px-6 text-left whitespace-nowrap">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\Account;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PDF;
 use TCG\Voyager\Models\Category;
@@ -52,7 +53,7 @@ class ExpenseController extends Controller
         $parent_category = Category::where('slug', 'expense')->first();
         $categories = Category::where('parent_id', $parent_category->id)->get();
         $accounts = Account::all();
-        $expenses = Expense::all();
+        $expenses = Expense::whereBetween('date', [Carbon::now()->firstOfMonth()->toDateString(), Carbon::now()->lastOfMonth()->toDateString()])->get();
 
         return view('expense.create', compact('categories', 'expenses', 'accounts'));
     }
@@ -112,7 +113,7 @@ class ExpenseController extends Controller
         $expense->invoice           = $fileNametoStore;
         $expense->save();
 
-        return redirect()->back()->with('success', 'New Expense Inserted Successfully');
+        return redirect()->back()->with('success', 'Expense created successfully');
     }
 
     /**

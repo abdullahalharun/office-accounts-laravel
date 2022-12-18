@@ -14,13 +14,13 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <div class="">
                     <div class="px-4 py-4 sm:px-6 bg-gray-200">
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
                             New Salary
                         </h3>
                     </div>
-                    <div class="mt-5 md:mt-0 md:col-span-2">
+                    <div class="bg-white shadow-xl overflow-hidden sm:rounded-lg mt-5 md:mt-0 md:col-span-2">
                         <form action="{{ route('salary.store') }}" method="POST">
                             {{ csrf_field() }}
                             <div class="shadow overflow-hidden sm:rounded-md">
@@ -82,18 +82,18 @@
                         </form>
                     </div>
                 </div>
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="px-4 py-4 sm:px-6 bg-gray-200 border-b">
+
+                <div class="">
+                    <div class="rounded px-4 py-4 sm:px-6 bg-gray-200 border-b">
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
                             Salaries of {{ date('F', strtotime(now())) }}
                         </h3>
                     </div>
-                    <table class="min-w-max w-full table-auto">
+                    <table class="bg-white shadow-xl overflow-scroll sm:rounded-lg min-w-max w-full table-auto">
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-center">Employee</th>
                                 <th class="py-3 px-6 text-center">Account</th>
-                                <th class="py-3 px-6 text-center">Details</th>
                                 <!-- <th class="py-3 px-6 text-center">Amount (৳{{ $salaries->sum('amount') }})</th>
                                 <th class="py-3 px-6 text-center">Charge (৳{{ $salaries->sum('charge') }})</th> -->
                                 <th class="py-3 px-6 text-center">Net Amount (৳{{ $salaries->sum('amount') + $salaries->sum('charge') }})</th>
@@ -113,11 +113,6 @@
                                 <td class="py-3 px-6 text-center">
                                     <div class="flex items-center justify-center">
                                         <span>{{ $salary->account_name->name }}</span>
-                                    </div>
-                                </td>
-                                <td class="py-3 px-6 text-left">
-                                    <div class="flex items-center justify-center">
-                                        <span>{{ $salary->details }}</span>
                                     </div>
                                 </td>
                                 <!-- <td class="py-3 px-6 text-center">
@@ -169,7 +164,6 @@
                             @endforeach
                             <thead>
                                 <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                    <th class="py-3 px-6 text-center"></th>
                                     <th class="py-3 px-6 text-center"></th>
                                     <th class="py-3 px-6 text-center">Total Amount</th>
                                     <!-- <th class="py-3 px-6 text-center">৳ {{ $salaries->sum('amount') }}</th>

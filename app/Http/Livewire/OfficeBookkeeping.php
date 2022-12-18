@@ -36,8 +36,8 @@ class OfficeBookkeeping extends Component
         $this->expenses = Expense::whereBetween('date', [$this->datefrom, $this->dateto])->get();
         $this->salaries = Salary::whereBetween('month', [$this->datefrom, $this->dateto])->get();
         $this->categories = Category::all();
-        $this->expenseByCategory = Expense::groupBy('parent_id')
-            ->selectRaw('parent_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+        $this->expenseByCategory = Expense::groupBy('category_id')
+            ->selectRaw('category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
             ->whereBetween('date', [$this->datefrom, $this->dateto])
             ->get();
 
