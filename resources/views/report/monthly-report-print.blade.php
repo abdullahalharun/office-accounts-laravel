@@ -29,9 +29,9 @@
                         <th class="py-3 px-6 text-left">#ID</th>
                         <th class="py-3 px-6 text-left">Date</th>
                         <th class="py-3 px-6 text-left">Category</th>
-                        <!-- <th class="py-3 px-6 text-center">Details</th> -->
-                        <th class="py-3 px-6 text-center">Account</th>
-                        <th class="py-3 px-6 text-center">Amount (৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }})</th>
+                        <th class="py-3 px-6 text-center">Details</th>
+                        <!-- <th class="py-3 px-6 text-center">Account</th> -->
+                        <th class="py-3 px-6 text-center">Amount</th>
 
                     </tr>
                 </thead>
@@ -53,19 +53,19 @@
                                 <span class="font-medium">{{ $expense->category_name->name }}</span>
                             </div>
                         </td>
-                        <!-- <td class="py-3 px-6 text-left">
+                        <td class="py-3 px-6 text-left">
                             <div class="flex items-center justify-center">
                                 <span>{{ $expense->details }}</span>
+                            </div>
+                        </td>
+                        <!-- <td class="py-3 px-6 text-center">
+                            <div class="flex items-center justify-center">
+                                <span>{{ $expense->account_name->name }}</span>
                             </div>
                         </td> -->
                         <td class="py-3 px-6 text-center">
                             <div class="flex items-center justify-center">
-                                <span>{{ $expense->account_name->name }}</span>
-                            </div>
-                        </td>
-                        <td class="py-3 px-6 text-center">
-                            <div class="flex items-center justify-center">
-                                <span>{{ $expense->amount + $expense->charge }}</span>
+                                <span>৳ {{ $expense->amount + $expense->charge }}</span>
                             </div>
                         </td>
                     </tr>
