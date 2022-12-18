@@ -62,7 +62,7 @@ class ReportController extends Controller
     public function monthly_print_format(Request $request)
     {
         $expenses = Expense::groupBy('category_id')
-            ->selectRaw('id, date, category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+            ->selectRaw('id, date, category_id, account_id, details, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
             ->whereBetween('date', [$request->datefrom, $request->dateto])
             ->get();
 
