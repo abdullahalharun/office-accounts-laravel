@@ -29,7 +29,7 @@
                         <th class="py-3 px-6 text-left">#ID</th>
                         <th class="py-3 px-6 text-left">Date</th>
                         <th class="py-3 px-6 text-left">Category</th>
-                        <th class="py-3 px-6 text-center">Details</th>
+                        <th class="py-3 px-6 text-left">Details</th>
                         <!-- <th class="py-3 px-6 text-center">Account</th> -->
                         <th class="py-3 px-6 text-center">Amount</th>
 
@@ -54,7 +54,7 @@
                             </div>
                         </td>
                         <td class="py-3 px-6 text-left">
-                            <div class="flex items-center justify-center">
+                            <div class="flex items-center">
                                 <span>{{ $expense->details }}</span>
                             </div>
                         </td>
@@ -78,7 +78,7 @@
                             <th class="py-3 px-6 text-left"></th>
                             <!-- <th class="py-3 px-6 text-left"></th> -->
                             <th class="py-3 px-6 text-left"></th>
-                            <th class="py-3 px-6 text-center">Total Amount</th>
+                            <th class="py-3 px-6 text-right">Total Amount</th>
                             <th class="py-3 px-6 text-center">৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }}</th>
                         </tr>
                     </thead>
