@@ -69,7 +69,8 @@ class ReportController extends Controller
         // dd($expenses);
 
         return view('report.monthly-report-print', [
-            'expenses' => $expenses
+            'expenses' => $expenses,
+            'datefrom' => $request->datefrom
         ]);
     }
 

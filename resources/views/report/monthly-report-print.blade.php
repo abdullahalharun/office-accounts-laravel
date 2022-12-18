@@ -18,7 +18,7 @@
     <div class="my-4">
         <div class="text-center py-8 space-y-1">
             <h1 class="text-xl">Expense Report</h1>
-            <p>{{ date('F, Y', strtotime(now())) }}</p>
+            <p>{{ date('F, Y', strtotime($datefrom)) }}</p>
         </div>
 
         <div class="container mx-auto sm:px-6 lg:px-8">
