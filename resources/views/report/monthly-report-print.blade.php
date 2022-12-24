@@ -16,14 +16,16 @@
     </div>
 
     <div class="my-4">
-        <div class="text-center py-8 space-y-1">
-            <h1 class="text-xl">Expense Report</h1>
-            <p>{{ date('F, Y', strtotime($datefrom)) }}</p>
+        <div class="flex justify-center py-8 space-y-1">
+            <div class="text-center">
+                <h1 class="text-xl">Expense Report</h1>
+                <p class="border-b py-1">{{ date('F, Y', strtotime($datefrom)) }}</p>
+            </div>
         </div>
 
         <div class="container mx-auto sm:px-6 lg:px-8">
             <!-- Table component -->
-            <table class="min-w-max w-full table-auto">
+            <table class="w-a4 h-a4 table-auto">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal border-b border-gray-300">
                         <th class="py-3 px-6 text-left">#ID</th>
@@ -31,7 +33,7 @@
                         <th class="py-3 px-6 text-left">Category</th>
                         <th class="py-3 px-6 text-left">Details</th>
                         <!-- <th class="py-3 px-6 text-center">Account</th> -->
-                        <th class="py-3 px-6 text-center">Amount</th>
+                        <th class="py-3 px-6 text-right">Amount</th>
 
                     </tr>
                 </thead>
@@ -63,14 +65,13 @@
                                 <span>{{ $expense->account_name->name }}</span>
                             </div>
                         </td> -->
-                        <td class="py-3 px-6 text-center">
-                            <div class="flex items-center justify-center">
-                                <span>৳ {{ $expense->amount + $expense->charge }}</span>
+                        <td class="py-3 px-6 text-right">
+                            <div class="flex items-center justify-end">
+                                <span class="font-medium">৳ {{ $expense->amount + $expense->charge }}</span>
                             </div>
                         </td>
                     </tr>
                     @endforeach
-
 
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -79,7 +80,7 @@
                             <!-- <th class="py-3 px-6 text-left"></th> -->
                             <th class="py-3 px-6 text-left"></th>
                             <th class="py-3 px-6 text-right">Total Amount</th>
-                            <th class="py-3 px-6 text-center">৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }}</th>
+                            <th class="py-3 px-6 text-right font-medium">৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }}</th>
                         </tr>
                     </thead>
                 </tbody>

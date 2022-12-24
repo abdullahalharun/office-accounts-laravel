@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="col-span-3 md:col-span-1">
                                         <label for="disburse_date" class="block text-sm font-medium text-gray-700">Disburse Date</label>
-                                        <input type="date" name="disburse_date" value="{{ $salary->disburse_date ? $salary->disburse_date : old('disburse_date') }}" id="disburse_date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                        <input type="date" name="disburse_date" value="{{ $salary->disburse_date ? $salary->disburse_date : date('Y-m-d') }}" id="disburse_date" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
