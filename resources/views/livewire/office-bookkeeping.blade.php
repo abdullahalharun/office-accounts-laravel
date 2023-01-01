@@ -155,7 +155,7 @@
                                 <th class="py-3 px-6 text-left">Total</th>
                                 <!-- <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_amount') }}</th>
                                 <th class="py-3 px-6 text-left">{{ $expenseByCategory->sum('total_charge') }}</th> -->
-                                <th class="py-3 px-6 text-right">{{ $expenseByCategory->sum('amount') + $expenseByCategory->sum('charge') }}</th>
+                                <th class="py-3 px-6 text-right">{{ $expenseByCategory->sum('total_amount') + $expenseByCategory->sum('total_charge') }}</th>
                             </tr>
                         </thead>
                     </tbody>

@@ -66,8 +66,6 @@ class ReportController extends Controller
             ->whereBetween('date', [$request->datefrom, $request->dateto])
             ->get();
 
-        // dd($expenses);
-
         return view('report.monthly-report-print', [
             'expenses' => $expenses,
             'datefrom' => $request->datefrom

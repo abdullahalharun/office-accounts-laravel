@@ -23,7 +23,6 @@ class OfficeBookkeeping extends Component
 
     public function mount()
     {
-        $this->date = now()->toDateString();
         $this->month = date('m', strtotime(now()));
         $this->year =  date('Y', strtotime(now()));
     }

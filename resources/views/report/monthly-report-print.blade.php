@@ -67,7 +67,7 @@
                         </td> -->
                         <td class="py-3 px-6 text-right">
                             <div class="flex items-center justify-end">
-                                <span class="font-medium">৳ {{ $expense->amount + $expense->charge }}</span>
+                                <span class="font-medium">৳ {{ $expense->total_amount + $expense->total_charge }}</span>
                             </div>
                         </td>
                     </tr>
@@ -80,7 +80,7 @@
                             <!-- <th class="py-3 px-6 text-left"></th> -->
                             <th class="py-3 px-6 text-left"></th>
                             <th class="py-3 px-6 text-right">Total Amount</th>
-                            <th class="py-3 px-6 text-right font-medium">৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }}</th>
+                            <th class="py-3 px-6 text-right font-medium">৳ {{ $expenses->sum('total_amount') + $expenses->sum('total_charge') }}</th>
                         </tr>
                     </thead>
                 </tbody>
