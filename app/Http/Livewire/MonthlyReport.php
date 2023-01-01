@@ -33,7 +33,7 @@ class MonthlyReport extends Component
 
     public function render()
     {
-        $this->datefrom = date($this->year . '-' . $this->month . '-1');
+        $this->datefrom = date($this->year . '-' . $this->month . '-01');
         $this->dateto = date($this->year . '-' . $this->month . '-31');
         $this->earnings = Earning::whereBetween('date', [$this->datefrom, $this->dateto])->get();
         $this->expenses = Expense::whereBetween('date', [$this->datefrom, $this->dateto])->get();
