@@ -12,7 +12,7 @@
                         Office Bookkeeping
                     </h3>
                     <p class="mt-1 text-sm text-gray-500 text-center">
-                        {{ date('F, Y', strtotime($this->date))  }}
+                        {{ date('F, Y', strtotime($this->datefrom))  }}
                     </p>
                 </div>
 
