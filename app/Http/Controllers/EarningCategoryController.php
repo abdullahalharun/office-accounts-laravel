@@ -84,7 +84,14 @@ class EarningCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        //edit category
+        $category = Category::find($id);
+        $categories = Category::where('parent_id', $category->parent_id)->get();
+        $parent = Category::find($category->parent_id);
+
+        // dd($category);
+
+        return view('earnings.edit_category', compact('category', 'categories', 'parent'));
     }
 
     /**
@@ -96,7 +103,17 @@ class EarningCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required'
+        ]);
+
+        $category = Category::find($id);
+        $category->name         = $request->get('name');
+        $category->order        = $request->get('order');
+        $category->admission_target = $request->get('admission_target');
+        $category->save();
+
+        return redirect()->back()->with('success', 'Category Updated Successfully.');
     }
 
     /**

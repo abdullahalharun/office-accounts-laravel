@@ -9,6 +9,9 @@
         <x-jet-nav-link href="{{ route('earning-category.create') }}" :active="request()->routeIs('earning-category.create')">
             {{ __('Add Earning Category') }}
         </x-jet-nav-link>
+        <x-jet-nav-link :active="request()->routeIs('earning-category.edit')">
+            {{ __('Edit Category') }}
+        </x-jet-nav-link>
     </x-slot>
 
     <div class="py-12">
@@ -18,49 +21,40 @@
                 <!-- Filter form -->
                 <div class="px-4 py-4 sm:px-6 bg-gray-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Add Earning Category
+                        Edit Category
                     </h3>
                     <!-- <p class="mt-1 max-w-2xl text-sm text-gray-500">
                     Personal details and application.
                     </p> -->
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form action="{{ route('earning-category.store') }}" method="POST">
-                        {{ csrf_field() }}
+                    <form action="{{ route('earning-category.update', $category->id) }}" method="POST">
+                        {{ csrf_field() }} {{ method_field('PUT') }}
+
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-3 gap-4">
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <label for="category" class="block text-sm font-medium text-gray-700">Parent Category</label>
-                                        <select id="category" name="sub_parent_id" autocomplete="country" required class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                            <option value="">None</option>
-                                            @foreach($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
+                                        <label for="name" class="block text-sm font-medium text-gray-700">Category Name</label>
+                                        <input type="text" name="name" value="{{ $category->name }}" id="name" required placeholder="Category name..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
-                                        <!-- <label for="parent_category" class="block text-sm font-medium text-gray-700">Parent Category</label> -->
-                                        <input type="hidden" name="parent_id" value="{{ $earningcategory->id }}" id="parent_category" required class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
-                                    </div>
-
-                                    <div class="col-span-6 sm:col-span-3">
-                                        <label for="country" class="block text-sm font-medium text-gray-700">New Category Name</label>
-                                        <input type="text" name="cat_name" id="cat_name" required placeholder="Category name..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                        <label for="admission_target" class="block text-sm font-medium text-gray-700">Admission Target</label>
+                                        <input type="number" name="admission_target" value="{{ $category->admission_target }}" id="admission_target" required placeholder="Admission target..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="order" class="block text-sm font-medium text-gray-700">Order</label>
-                                        <input type="number" name="order" id="order" required placeholder="Category order..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                        <input type="number" name="order" value="{{ $category->order }}" id="order" required placeholder="Category order..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                     </div>
 
                                 </div>
                             </div>
                             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                 <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                    Save
+                                    Update
                                 </button>
                             </div>
                         </div>
@@ -111,11 +105,15 @@
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <a href="/earning-category/{{$category->id}}/edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                            </svg>
-                                        </a>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                        </svg>
+                                    </div>
+                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
                                     </div>
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -201,19 +199,6 @@
                                     <button class="btn text-danger" type="submit" data-toggle="tooltip" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                 </form>
 
-                                <!-- <div class="dropdown">
-                                        <button class="btn btn-default btn-sm btn-icon btn-transparent font-xl"
-                                            type="button" id="d350ad" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">
-                                            <i class="mdi mdi-dots-horizontal"></i>
-                                            <div class="dropdown-menu dropdown-menu-right"
-                                                aria-labelledby="d350ad">
-                                                <a class="dropdown-item" href="#">View</a>
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Detele</a>
-                                            </div>
-                                        </button>
-                                    </div> -->
                             </td>
                         </tr>
                         @endforeach

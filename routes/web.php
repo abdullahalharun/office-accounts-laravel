@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report', [ReportController::class, 'office_bookkeeping'])->name('report.office_bookkeeping');
     Route::get('report/full-report', [ReportController::class, 'index'])->name('report.index');
     Route::get('report/monthly', [ReportController::class, 'monthly'])->name('report.monthly');
+    Route::get('report/sales', [ReportController::class, 'sales_report'])->name('report.sales');
     Route::get('report/monthly/print', [ReportController::class, 'monthly_print_format']);
 
     // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);

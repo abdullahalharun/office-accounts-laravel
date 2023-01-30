@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->integer('order')->default(1);
             $table->string('name');
             $table->string('slug')->unique();
+            $table->integer('admission_target')->nullable()->default(0);
             $table->timestamps();
         });
     }

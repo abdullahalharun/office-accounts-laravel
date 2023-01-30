@@ -76,4 +76,9 @@ class ReportController extends Controller
     {
         return view('report.office-bookkeeping');
     }
+
+    public function sales_report()
+    {
+        return view('report.sales-report');
+    }
 }

@@ -9,6 +9,9 @@
         <x-jet-nav-link href="/report/full-report" :active="request()->is('report/full-report')">
             Full Report
         </x-jet-nav-link>
+        <x-jet-nav-link href="/report/sales" :active="request()->is('report/sales')">
+            Sales Report
+        </x-jet-nav-link>
     </x-slot>
 
     <livewire:office-bookkeeping />

@@ -14,6 +14,6 @@
         </x-jet-nav-link>
     </x-slot>
 
-    @livewire('monthly-report')
+    @livewire('sales-report')
 
 </x-app-layout>
