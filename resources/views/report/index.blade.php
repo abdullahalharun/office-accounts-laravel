@@ -10,10 +10,10 @@
         <x-jet-nav-link href="/report/full-report" :active="request()->is('report/full-report')">
             Full Report
         </x-jet-nav-link>
+        @endif
         <x-jet-nav-link href="/report/sales" :active="request()->is('report/sales')">
             Sales Report
         </x-jet-nav-link>
-        @endif
     </x-slot>
 
     <div class="py-8 px-3 lg:px-0">
@@ -144,8 +144,8 @@
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">Category</th>
-                            <!-- <th class="py-3 px-6 text-left">Amount</th>
-                            <th class="py-3 px-6 text-left">Charge</th> -->
+                            <th class="py-3 px-6 text-left">Admitted</th>
+                            <!-- <th class="py-3 px-6 text-left">Charge</th> -->
                             <th class="py-3 px-6 text-right">Amount</th>
                         </tr>
                     </thead>
@@ -157,12 +157,10 @@
                                     <span>{{ $earning->category_name->name }}</span>
                                 </div>
                             </th>
-                            <!-- <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_amount }}</span>
-                            </td>
                             <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_charge }}</span>
-                            </td> -->
+                                <span class="font-medium">{{ $earning->total_count }}</span>
+                            </td>
+                            </td>
                             <td class="py-3 px-6 text-right whitespace-nowrap">
                                 <span class="font-medium">{{ number_format($earning->total_amount, 2) }}</span>
                             </td>
@@ -173,8 +171,8 @@
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left">Total</th>
-                                <!-- <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_amount') }}</th>
-                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_charge') }}</th> -->
+                                <th class="py-3 px-6 text-left"></th>
+                                <!-- <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_charge') }}</th> -->
                                 <th class="py-3 px-6 text-right">{{ number_format($earningByCategory->sum('total_amount'), 2) }}</th>
                             </tr>
                         </thead>

@@ -34,7 +34,7 @@ class ReportController extends Controller
 
         $earnings = Earning::all();
         $earningByCategory = Earning::groupBy('category_id')
-            ->selectRaw('category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+            ->selectRaw('category_id, account_id, amount, count(amount) as total_count, sum(amount) as total_amount, charge, sum(charge) as total_charge')
             ->get();
 
         return view('report.index', compact(

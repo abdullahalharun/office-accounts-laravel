@@ -115,7 +115,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="px-4 py-2 sm:px-6 bg-green-200">
                     <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        Sales Report By Category - {{ date('F', strtotime($this->datefrom)) .', '. $year }}
+                        Sales Report - {{ date('F', strtotime($this->datefrom)) .', '. $year }}
                     </h3>
                 </div>
 
@@ -125,7 +125,6 @@
                             <th class="py-3 px-6 text-left">Category</th>
                             <th class="py-3 px-6 text-left">Admission Target</th>
                             <th class="py-3 px-6 text-left">Admitted</th>
-                            <th class="py-3 px-6 text-right">Amount</th>
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
@@ -142,86 +141,8 @@
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <span class="font-medium">{{ $earning->total_count }}</span>
                             </td>
-                            <!-- <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_charge }}</span>
-                            </td> -->
-                            <td class="py-3 px-6 text-right whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_amount }}</span>
-                            </td>
                         </tr>
                         @endforeach
-
-
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left"></th>
-                                <th class="py-3 px-6 text-left"></th>
-                                <th class="py-3 px-6 text-left">Total</th>
-                                <!-- <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_amount') }}</th>
-                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_charge') }}</th> -->
-                                <th class="py-3 px-6 text-right">{{ $earningByCategory->sum('total_amount') }}</th>
-                            </tr>
-                        </thead>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 md:grid md:grid-cols-1 md:gap-6">
-
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="px-4 py-2 sm:px-6 bg-green-200">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900">
-                        All Earnings
-                    </h3>
-                </div>
-
-                <table class="min-w-max w-full table-auto">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Category</th>
-                            <th class="py-3 px-6 text-left">Admission Target</th>
-                            <th class="py-3 px-6 text-left">Admitted</th>
-                            <th class="py-3 px-6 text-right">Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        @foreach($earnings as $earning)
-                        <tr class="border-b border-gray-200  hover:bg-gray-100">
-                            <th class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <span>{{ $earning->category_name->name }}</span>
-                                </div>
-                            </th>
-                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->category_name->admission_target ?? '' }}</span>
-                            </td>
-                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_count }}</span>
-                            </td>
-                            <!-- <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_charge }}</span>
-                            </td> -->
-                            <td class="py-3 px-6 text-right whitespace-nowrap">
-                                <span class="font-medium">{{ $earning->total_amount }}</span>
-                            </td>
-                        </tr>
-                        @endforeach
-
-
-                        <thead>
-                            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                                <th class="py-3 px-6 text-left"></th>
-                                <th class="py-3 px-6 text-left"></th>
-                                <th class="py-3 px-6 text-left">Total</th>
-                                <!-- <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_amount') }}</th>
-                                <th class="py-3 px-6 text-left">{{ $earningByCategory->sum('total_charge') }}</th> -->
-                                <th class="py-3 px-6 text-right">{{ $earningByCategory->sum('total_amount') }}</th>
-                            </tr>
-                        </thead>
                     </tbody>
                 </table>
             </div>
