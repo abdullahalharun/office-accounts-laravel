@@ -18,6 +18,10 @@ Route::get('/livewire-test', function () {
     return view('test.livewire-test');
 });
 
+Route::get('/taibah/sales-report/282744', function () {
+    return view('report.marketting-report');
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
