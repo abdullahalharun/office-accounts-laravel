@@ -86,7 +86,7 @@ class EarningController extends Controller
         $earning->date              = $request->get('date');
         $earning->parent_id         = $parent_category->id;
         $earning->category_id       = $request->get('category_id');
-        $earning->sub_category       = $request->get('sub_category');
+        $earning->sub_category       = 0;
         $earning->transaction_id    = $transaction->id;
         $earning->account_id        = $request->get('account_id');
         $earning->details           = $request->get('details');

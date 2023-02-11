@@ -18,7 +18,7 @@ Route::get('/livewire-test', function () {
     return view('test.livewire-test');
 });
 
-Route::get('/taibah/sales-report/282744', function () {
+Route::get('/taibah/sales-report/285744', function () {
     return view('report.marketting-report');
 });
 

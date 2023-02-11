@@ -37,7 +37,7 @@ class MonthlyReport extends Component
         $this->dateto = date($this->year . '-' . $this->month . '-31');
         $this->earnings = Earning::whereBetween('date', [$this->datefrom, $this->dateto])->get();
         $this->expenses = Expense::whereBetween('date', [$this->datefrom, $this->dateto])->get();
-        $this->salaries = Salary::whereBetween('month', [$this->datefrom, $this->dateto])->get();
+        $this->salaries = Salary::whereBetween('disburse_date', [$this->datefrom, $this->dateto])->get();
         $this->categories = Category::all();
         $this->expenseByCategory = Expense::groupBy('category_id')
             ->selectRaw('category_id, account_id, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')

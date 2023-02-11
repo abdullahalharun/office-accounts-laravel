@@ -40,7 +40,7 @@ class SalaryController extends Controller
         // $get_employees =  Http::get('https://taibahacademy.com/api/employees');
         // $employees = json_decode($get_employees);
         $employees = Employee::all();
-        $salaries = Salary::whereBetween('month', [Carbon::now()->firstOfMonth()->toDateString(), Carbon::now()->lastOfMonth()->toDateString()])->get();
+        $salaries = Salary::whereBetween('disburse_date', [Carbon::now()->firstOfMonth()->toDateString(), Carbon::now()->lastOfMonth()->toDateString()])->get();
 
         return view('salary.create', compact('accounts', 'employees', 'salaries'));
     }

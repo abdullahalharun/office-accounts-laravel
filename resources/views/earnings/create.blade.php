@@ -67,7 +67,7 @@
 
                                     <div class="col-span-6 sm:col-span-3">
                                         <label for="charge" class="block text-sm font-medium text-gray-700">Charge</label>
-                                        <input type="text" name="charge" required placeholder="Transaction charge..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                                        <input type="text" name="charge" value="0" required placeholder="Transaction charge..." class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                                     </div>
 
                                     <div class="col-span-6 sm:col-span-3">
