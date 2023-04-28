@@ -16,7 +16,10 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        //
+        $parent_category = Category::where('slug', 'transfer')->first();
+        $transactions = Transaction::where('parent_id', $parent_category->id)->orderBy('date', 'desc')->paginate(20);
+
+        return view('transfer.index', compact('transactions', 'parent_category'));
     }
 
     /**

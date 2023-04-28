@@ -113,7 +113,7 @@ class ExpenseController extends Controller
         $expense->invoice           = $fileNametoStore;
         $expense->save();
 
-        return redirect()->back()->with('success', 'Expense created successfully');
+        return redirect()->back()->with('success', '#' . $expense->id . ' - Expense added successfully');
     }
 
     /**
@@ -195,7 +195,7 @@ class ExpenseController extends Controller
         $transaction->credit        = 0;
         $transaction->save();
 
-        return redirect()->back()->with('success', 'Expense Updated Successfully');
+        return redirect()->back()->with('success', '#' . $expense->id . ' - Expense updated successfully');
     }
 
     /**
