@@ -14,9 +14,13 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $datefrom = Carbon::now()->startOfMonth()->toDateString();
+        $dateto = Carbon::now()->endOfMonth()->toDateString();
+
         $total_expenses = Expense::all();
         $earnings = Earning::all();
         $salaries = Salary::all();
+        $running_month_salary =  Salary::whereBetween('disburse_date', [$datefrom, $dateto])->get();
 
         $officeDeposit = Transaction::where('account_id', 1)
             ->whereBetween('date', [Carbon::now()->startOfMonth()->toDateString(), Carbon::now()->endOfMonth()->toDateString()])->get();
@@ -37,6 +41,14 @@ class DashboardController extends Controller
 
         // dd($expenses);
 
-        return view('dashboard', compact('expenses', 'total_expenses', 'earnings', 'salaries', 'officeDeposit', 'officeExpense'));
+        return view('dashboard', compact(
+            'expenses',
+            'total_expenses',
+            'earnings',
+            'salaries',
+            'officeDeposit',
+            'officeExpense',
+            'running_month_salary'
+        ));
     }
 }

@@ -47,7 +47,7 @@
                                 <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                             </svg>
                             <div class="text-gray-700">
-                                <p class="font-semibold text-3xl">{{ number_format($officeExpense->sum('amount'), 2) }}</p>
+                                <p class="font-semibold text-3xl">{{ number_format($officeExpense->sum('amount') + $officeExpense->sum('charge') + $running_month_salary->sum('amount') + $running_month_salary->sum('charge'), 2) }}</p>
                                 <p>Total Expense</p>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                 <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                             </svg>
                             <div class="text-gray-700">
-                                <p class="font-semibold text-3xl">{{ number_format($officeDeposit->sum('credit') - $officeExpense->sum('amount'), 2) }}</p>
+                                <p class="font-semibold text-3xl">{{ number_format($officeDeposit->sum('credit') - ($officeExpense->sum('amount') + $officeExpense->sum('charge') + $running_month_salary->sum('amount') + $running_month_salary->sum('charge')), 2) }}</p>
                                 <p>Office Balance</p>
                             </div>
                         </div>
