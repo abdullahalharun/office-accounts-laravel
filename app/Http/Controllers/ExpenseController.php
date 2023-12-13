@@ -30,6 +30,12 @@ class ExpenseController extends Controller
 
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
+        if($expense_cat == null){
+            $expense_cat = new Category;
+            $expense_cat->name = 'Expense';
+            $expense_cat->slug = 'expense';
+            $expense_cat->save();
+        }
         $categories = Category::where('parent_id', $expense_cat->id)->get();
         $query = [
             'fromdate' => '',

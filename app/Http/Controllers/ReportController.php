@@ -75,6 +75,22 @@ class ReportController extends Controller
             'datefrom' => $request->datefrom
         ]);
     }
+    
+    public function print_expense_report(Request $request)
+    {
+        // title: from date to date
+        $title = date('d M Y', strtotime($request->datefrom)) . ' - ' . date('d M Y', strtotime($request->dateto));
+        $expenses = Expense::groupBy('id')
+            ->selectRaw('id, date, category_id, account_id, details, amount, sum(amount) as total_amount, charge, sum(charge) as total_charge')
+            ->whereBetween('date', [$request->datefrom, $request->dateto])
+            ->get();
+
+        return view('report.print', [
+            'expenses' => $expenses,
+            'datefrom' => $request->datefrom,
+            'title' => $title
+        ]);
+    }
 
     public function office_bookkeeping()
     {
