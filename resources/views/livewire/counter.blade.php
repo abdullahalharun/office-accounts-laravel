@@ -1,6 +1,5 @@
 <div>
     <input wire:model="name" type="text">
 
-    Hello  {{ $name }}
+    Hello {{ $name }}
 </div>
-
