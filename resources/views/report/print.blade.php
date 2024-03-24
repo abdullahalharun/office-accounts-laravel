@@ -25,15 +25,15 @@
 
         <div class="container mx-auto sm:px-6 lg:px-8">
             <!-- Table component -->
-            <table class="w-a4 h-a4 table-auto">
+            <table class="w-a4 h-a4 ">
                 <thead>
                     <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal border-b border-gray-300">
-                        <th class="py-3 px-6 text-left">#ID</th>
-                        <th class="py-3 px-6 text-left">Date</th>
-                        <th class="py-3 px-6 text-left">Category</th>
-                        <th class="py-3 px-6 text-left">Details</th>
+                        <th class="py-3 px-6 w-1/12 text-left">#ID</th>
+                        <th class="py-3 px-6 w-2/12 text-left">Date</th>
+                        <th class="py-3 px-6 w-2/12 text-left">Category</th>
+                        <th class="py-3 px-6 w-4/12 text-left">Details</th>
                         <!-- <th class="py-3 px-6 text-center">Account</th> -->
-                        <th class="py-3 px-6 text-right">Amount</th>
+                        <th class="py-3 px-6 w-3/12 text-right">Amount</th>
 
                     </tr>
                 </thead>
