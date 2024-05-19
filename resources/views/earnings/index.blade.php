@@ -87,6 +87,12 @@
         </div>
     </div>
 
+    @if($query['fromdate'] && $query['todate'])
+    <div class="container max-w-7xl mx-auto px-8 py-4 flex justify-end">
+        <a href="/report/earnings/print?datefrom={{ $query['fromdate'] }}&dateto={{ $query['todate'] }}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white cursor-pointer rounded-lg px-4 py-2">Print</a>
+    </div>
+    @endif
+
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">

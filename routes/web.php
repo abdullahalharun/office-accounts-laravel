@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     // print report
     Route::get('report/monthly/print', [ReportController::class, 'monthly_print_format']);
     Route::get('report/print', [ReportController::class, 'print_expense_report']);
+    Route::get('report/earnings/print', [ReportController::class, 'print_earnings_report']);
 
     // Route::get('expense-category', [ExpensecategoryController::class, 'expense-category']);
     Route::get('/test', [TestController::class, 'index'])->name('test');
