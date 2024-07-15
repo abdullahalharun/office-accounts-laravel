@@ -7,7 +7,10 @@
             {{ __('Accounts') }}
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
-            {{ __('Transfer Money') }}
+            {{ __('New Transfer') }}
+        </x-jet-nav-link>
+        <x-jet-nav-link href="{{ route('transfer.index') }}" :active="request()->routeIs('transfer.index')">
+            {{ __('All Transfers') }}
         </x-jet-nav-link>
     </x-slot>
 

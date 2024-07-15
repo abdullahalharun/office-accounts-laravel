@@ -75,7 +75,8 @@
         $(document).ready(function() {
             "@if(session('success'))"
             Swal.fire({
-                // position: 'bottom-start',
+                position: 'top-end',
+                toast: true,
                 icon: 'success',
                 title: '{{ session("success") }}',
                 showConfirmButton: false,
@@ -84,7 +85,8 @@
             });
             "@elseif(session('warning'))"
             Swal.fire({
-                // position: 'bottom-start',
+                position: 'top-end',
+                toast: true,
                 icon: 'warning',
                 title: '{{ session("warning") }}',
                 showConfirmButton: false,

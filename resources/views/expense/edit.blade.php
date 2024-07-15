@@ -8,7 +8,7 @@
                 {{ __('Add Expense') }}
             </a>
             <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
-                {{ __('Add New Category') }}
+                {{ __('Manage Category') }}
             </a>
         </div>
     </x-slot>
@@ -27,7 +27,7 @@
                     </p> -->
                 </div>
                 <div class="mt-5 md:mt-0 md:col-span-2">
-                    <form action="{{ route('expense.update', $expense->id) }}" method="POST">
+                    <form action="{{ route('expense.update', $expense->id) }}" method="POST" enctype="multipart/form-data">
                         {{ csrf_field() }} {{ method_field('PUT') }}
                         <div class="shadow overflow-hidden sm:rounded-md">
                             <div class="px-4 py-5 bg-white sm:p-6">

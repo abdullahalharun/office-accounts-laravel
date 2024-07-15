@@ -53,18 +53,15 @@
 
         <div class="main-navbar navbar-expand-md navbar-light bg-white fixed-top shadow-sm">
 
-            <button class="btn d-md-none" type="button" data-toggle="collapse" data-target="#main-menu"
-                aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="btn d-md-none" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
 
 
-            <img src="https://i.imgur.com/QTZ8pU1.png" title="Taibah" class="navbar-logo d-md-none"
-                style="height: 36px;">
+            <img src="https://i.imgur.com/QTZ8pU1.png" title="Taibah" class="navbar-logo d-md-none" style="height: 36px;">
 
 
-            <button class="btn d-md-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="btn d-md-none" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
 
@@ -85,10 +82,10 @@
                         <form class="form-inline">
                             <div class="input-group">
                                 <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                
-                                    <button class="btn btn-outline-primary" type="button">
-                                        <i class="fas fa-search"></i>
-                                    </button>                              
+
+                                <button class="btn btn-outline-primary" type="button">
+                                    <i class="fas fa-search"></i>
+                                </button>
                             </div>
                         </form>
                     </li>
@@ -113,8 +110,7 @@
                     </li>
 
                     <li class="nav-item mr-10 dropdown">
-                        <a href="#" class="nav-icon avatar rounded-circle" id="PJXN7R" role="button"
-                            data-toggle="dropdown" aria-expanded="false">
+                        <a href="#" class="nav-icon avatar rounded-circle" id="PJXN7R" role="button" data-toggle="dropdown" aria-expanded="false">
                             <img src="https://i.imgur.com/ROPF2fQ.png">
                         </a>
 
@@ -125,15 +121,14 @@
                             <a class="dropdown-item" href="#"><i class="mdi mdi-settings-outline"></i>Settings</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="mdi mdi-exit-to-app"></i> Logout</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                    {{ csrf_field() }}
-                                </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                {{ csrf_field() }}
+                            </form>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-icon font-2xl rounded-circle" href="#" id="WJIK6R" role="button"
-                            data-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-icon font-2xl rounded-circle" href="#" id="WJIK6R" role="button" data-toggle="dropdown" aria-expanded="false">
                             <!-- <i class="fas fa-ellipsis-h"></i> -->
 
                             <i class="mdi mdi-dots-horizontal"></i>
@@ -154,8 +149,7 @@
 
             <div class="menubar-header text-center bg-primary">
                 <a class="menubar-brand" href="/expense">
-                    <img src="/images/logo_icon.png" title="Dashboard" class="menubar-logo"
-                        style="height: 50px;">
+                    <img src="/images/logo_icon.png" title="Dashboard" class="menubar-logo" style="height: 50px;">
                 </a>
             </div>
 
@@ -197,10 +191,9 @@
 
                         </a>
                     </li>
-                                     
+
                     <li class="menu-item">
-                        <a href="javascript://" class="menu-link" data-toggle="collapse" data-target="#menu-expense"
-                            aria-expanded="true" aria-controls="menu-expense">
+                        <a href="javascript://" class="menu-link" data-toggle="collapse" data-target="#menu-expense" aria-expanded="true" aria-controls="menu-expense">
                             <i class="menu-icon fas fa-border-all"></i>
                             <span class="menu-label">Expense</span>
                             <i class="menu-arrow mdi mdi-chevron-right"></i>
@@ -220,11 +213,11 @@
                                     <span class="menu-label"> Add New</span>
                                 </a>
                             </li>
-                            
+
                             <li class="menu-item">
                                 <a href="/expense-category/create" class="menu-link">
                                     <i class="menu-icon"></i>
-                                    <span class="menu-label"> Add New Category</span>
+                                    <span class="menu-label"> Manage Category</span>
                                 </a>
                             </li>
 
@@ -233,8 +226,7 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="javascript://" class="menu-link" data-toggle="collapse" data-target="#menu-account"
-                            aria-expanded="true" aria-controls="menu-account">
+                        <a href="javascript://" class="menu-link" data-toggle="collapse" data-target="#menu-account" aria-expanded="true" aria-controls="menu-account">
                             <i class="menu-icon fas fa-border-all"></i>
                             <span class="menu-label">Account</span>
                             <i class="menu-arrow mdi mdi-chevron-right"></i>
@@ -254,7 +246,7 @@
                                     <span class="menu-label"> Add New</span>
                                 </a>
                             </li>
-                            
+
                         </ul>
 
                     </li>
@@ -267,22 +259,22 @@
             </div>
 
         </div>
-        
+
 
         <div class="container-fluid mt-15">
 
-        @include('inc.messages')
+            @include('inc.messages')
 
-          <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-white">
-              <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="/{{ request()->path() }}">{{ request()->path() }}</a></li>
-              
-          </ol>
-          </nav>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-white">
+                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="/{{ request()->path() }}">{{ request()->path() }}</a></li>
+
+                </ol>
+            </nav>
 
             @yield('content')
-            
+
         </div>
 
     </div>
@@ -302,7 +294,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50750921-19"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'UA-50750921-19');
@@ -313,8 +308,7 @@
     <script src="/js/morioh.js"></script>
 
     <script>
-
-        $(function () {
+        $(function() {
 
             $('#modal-download').modal('show');
 
@@ -420,7 +414,7 @@
             Highcharts.chart('hl-line-main', {
 
                 title: {
-                    text: ''//'Stats of last 30 days'
+                    text: '' //'Stats of last 30 days'
                 },
 
                 // subtitle: {
@@ -447,8 +441,7 @@
                     }
                 },
 
-                series: [
-                    {
+                series: [{
                         name: 'Views',
                         data: [8050, 8500, 8600, 8800, 8600, 9000, 9100, 9100, 9500, 9400, 9800, 9900, 10000, 9800, 9600, 9000, 8800, 9600, 9800, 10000, 11000, 11200, 11400, 11400]
                     },
@@ -461,7 +454,8 @@
                     }, {
                         name: 'Income',
                         data: [1000, 2200, 2300, 3000, 2500, 2300, 3000, 3200, 2600, 2800, 2700, 2650, 2600, 2800, 2500, 2500, 3000, 3100, 3300, 3000, 3200, 3000, 3200, 3300]
-                    }],
+                    }
+                ],
 
                 responsive: {
                     rules: [{
@@ -480,7 +474,6 @@
 
             });
         })
-
     </script>
 
 
