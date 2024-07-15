@@ -7,7 +7,7 @@
             {{ __('Add New') }}
         </x-jet-nav-link>
         <x-jet-nav-link href="{{ route('earning-category.create') }}" :active="request()->routeIs('earning-category.create')">
-            {{ __('Add New Category') }}
+            {{ __('Manage Category') }}
         </x-jet-nav-link>
     </x-slot>
 

@@ -9,7 +9,7 @@
                 {{ __('New Expense') }}
             </a>
             <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense-category.create') }}" :active="request()->routeIs('expense-category.create')">
-                {{ __('Add New Category') }}
+                {{ __('Manage Category') }}
             </a>
         </div>
     </x-slot>
@@ -107,7 +107,7 @@
                             <th class="py-3 px-6 text-center">Amount (৳ {{ $expenses->sum('amount') }})</th>
                             <th class="py-3 px-6 text-center">Charge (৳ {{ $expenses->sum('charge') }})</th>
                             <th class="py-3 px-6 text-center">Net Expense (৳ {{ $expenses->sum('amount') + $expenses->sum('charge') }})</th>
-                            <th class="py-3 px-6 text-center">Invoice</th>
+                            <th class="py-3 px-6 text-center">Attachment</th>
                             <th class="py-3 px-6 text-center">Actions</th>
                         </tr>
                     </thead>
@@ -156,7 +156,9 @@
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                    <a href="/expense/{{$expense->id}}/create-invoice" target="_blank"><span>Create Invoice</span></a>
+                                    @if($expense->invoice)
+                                    <a href="{{ asset('storage/invoices/' . $expense->invoice) }}" target="_blank"><span>View</span></a>
+                                    @endif
                                 </div>
                             </td>
                             <!-- <td class="py-3 px-6 text-center">
@@ -164,12 +166,6 @@
                             </td> -->
                             <td class="py-3 px-6 text-center">
                                 <div class="flex item-center justify-center">
-                                    <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                        </svg>
-                                    </div>
                                     <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                                         <a href="/expense/{{ $expense->id }}/edit">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

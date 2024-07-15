@@ -27,14 +27,11 @@
                     <x-jet-nav-link href="{{ route('earning.index') }}" :active="request()->routeIs('earning*')">
                         Earnings
                     </x-jet-nav-link>
-                    <!-- <x-jet-nav-link href="{{ route('deposit.index') }}" :active="request()->routeIs('deposit*')">
-                        Deposit
-                    </x-jet-nav-link> -->
-                    <x-jet-nav-link href="{{ route('statement.index') }}" :active="request()->routeIs('statement*')">
-                        Statement
-                    </x-jet-nav-link>
                     <x-jet-nav-link href="/report" :active="request()->routeIs('report*')">
-                        Report
+                        Reports
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="/statement" :active="request()->routeIs('statement*')">
+                        Others
                     </x-jet-nav-link>
                 </div>
             </div>
