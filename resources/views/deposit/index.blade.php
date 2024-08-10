@@ -13,8 +13,8 @@
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">            
-              <!-- Table component -->            
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <!-- Table component -->
                 <table class="min-w-max w-full table-auto">
                     <thead>
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -30,47 +30,47 @@
                         </tr>
                     </thead>
                     <tbody class="text-gray-600 text-sm font-light">
-                      @foreach($deposits as $deposit)
+                        @foreach($deposits as $deposit)
                         <tr class="border-b border-gray-200 @if($loop->even) bg-gray-50 @endif hover:bg-gray-100">
-                            
+
                             <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">                                    
+                                <div class="flex items-center">
                                     <span>{{ date('d M Y', strtotime($deposit->date)) }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->category_name->name }}</span>
+                                    <span>{{ $deposit->category_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->account_name->name }}</span>
+                                    <span>{{ $deposit->account_name->name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->details }}</span>
+                                    <span>{{ $deposit->details }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->amount }}</span>
+                                    <span>{{ $deposit->amount }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->charge }}</span>
+                                    <span>{{ $deposit->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <span>{{ $deposit->amount - $deposit->charge }}</span>
+                                    <span>{{ $deposit->amount - $deposit->charge }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center justify-center">
-                                  <a href="/deposit/{{$deposit->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
+                                    <a href="/deposit/{{$deposit->id}}/create-voucher" target="_blank"><span>Create Voucher</span></a>
                                 </div>
                             </td>
                             <!-- <td class="py-3 px-6 text-center">
@@ -97,7 +97,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach                       
+                        @endforeach
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                                 <th class="py-3 px-6 text-left"></th>
@@ -111,8 +111,8 @@
                                 <th class="py-3 px-6 text-center"></th>
                             </tr>
                         </thead>
-                        </tbody>
-                </table>          
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

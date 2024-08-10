@@ -1,16 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="w-full flex flex-col lg:flex-row">
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
+        <div class="w-full flex flex-col lg:flex-row gap-2">
+            <a class="border px-3 py-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.create') }}" :active="request()->routeIs('expense.create')">
                 {{ __('Add Expense') }}
             </a>
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
+            <a class="border px-3 py-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('earning.create') }}" :active="request()->routeIs('earning.create')">
                 {{ __('Add Income') }}
             </a>
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
+            <a class="border px-3 py-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('transfer.create') }}" :active="request()->routeIs('transfer.create')">
                 {{ __('Transfer Money') }}
             </a>
-            <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('report.index') }}" :active="request()->routeIs('report.index')">
+            <a class="border px-3 py-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('report.index') }}" :active="request()->routeIs('report.index')">
                 {{ __('See Reports') }}
             </a>
         </div>
