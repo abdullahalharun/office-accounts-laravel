@@ -1,4 +1,5 @@
-<?php return array (
+<?php return function ($fontDir, $rootDir) {
+return array (
   'sans-serif' => array(
     'normal' => $rootDir . '/lib/fonts/Helvetica',
     'bold' => $rootDir . '/lib/fonts/Helvetica-Bold',
@@ -78,11 +79,12 @@
     'normal' => $rootDir . '/lib/fonts/DejaVuSerif',
   ),
   'nunito' => array(
-    'normal' => $fontDir . '/nunito_normal_40be13e0838a28d85ef39e94d206a3ec',
-    '600' => $fontDir . '/nunito_600_c3043a2e85e7b258084eb09e0bf67379',
-    'bold' => $fontDir . '/nunito_bold_20491dd02d708ed860212ace0e462b13',
+    'normal' => $fontDir . '/nunito_normal_ee99570c2d40db4ca7cb27ecfa07bd0e',
+    '600' => $fontDir . '/nunito_600_462968132f9bb0b300c9ac89cb99aa5d',
+    'bold' => $fontDir . '/nunito_bold_8878d120ae1cf02db589138e103b16c4',
   ),
   'kalpurush' => array(
     'normal' => $fontDir . '/kalpurush_normal_4f408d34df1aad54a5d4094b7bc9b0dc',
   ),
-) ?>
+);
+}; ?>

@@ -172,7 +172,12 @@ class SalaryController extends Controller
      */
     public function destroy(Salary $salary)
     {
-        //
+        $transaction = Transaction::find($salary->transaction_id);
+        $transaction->delete();
+
+        $salary->delete();
+
+        return redirect()->route('salary.index')->with('success', 'Salary Deleted Successfully');
     }
 
     public function create_voucher($id)
