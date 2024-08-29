@@ -125,8 +125,10 @@
         </div>
     </div>
 
-    <div class="container max-w-7xl mx-auto px-8">
+    <div class="container max-w-7xl mx-auto px-8 ">
         <a href="/report/monthly/print?datefrom={{$datefrom}}&dateto={{$dateto}}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white cursor-pointer rounded-lg px-4 py-2">Print monthly expense report</a>
+        <a href="/expense/export?fromDate={{$datefrom}}&toDate={{$dateto}}" class="bg-yellow-500 hover:bg-blue-500 text-white cursor-pointer rounded-lg px-4 py-2 mx-2">Export</a>
+
     </div>
 
     <div class="py-8">

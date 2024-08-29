@@ -11,6 +11,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Maatwebsite\Excel\Facades\Excel;
 use TCG\Voyager\Facades\Voyager;
 
 
@@ -22,6 +23,8 @@ Route::get('/taibah/sales-report/285744', function () {
     return view('report.marketting-report');
 });
 
+Route::get('/expense/export', [ExpenseController::class, 'export'])->name('expense.export');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -30,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('account', 'AccountController');
 
+    // Expense routes
     Route::get('/expense/filter', [ExpenseController::class, 'filter_expense'])->name('expense.filter');
     Route::resource('expense', 'ExpenseController');
     Route::get('/expense/{id}/delete', [ExpenseController::class, 'destroy'])->name('expense.destroy');

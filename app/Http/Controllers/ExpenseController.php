@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExpenseExport;
 use App\Models\Expense;
 use App\Models\Account;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use TCG\Voyager\Models\Category;
 
@@ -30,7 +32,7 @@ class ExpenseController extends Controller
 
         $accounts = Account::all();
         $expense_cat = Category::where('slug', 'expense')->first();
-        if($expense_cat == null){
+        if ($expense_cat == null) {
             $expense_cat = new Category;
             $expense_cat->name = 'Expense';
             $expense_cat->slug = 'expense';
@@ -290,5 +292,16 @@ class ExpenseController extends Controller
         $expenses = Expense::all();
 
         return $expenses;
+    }
+
+    // export test
+    public function export(Request $request)
+    {
+        $fromDate = $request->fromDate;
+        $toDate = $request->toDate;
+
+        // dd($fromDate, $toDate);
+
+        return Excel::download(new ExpenseExport($fromDate, $toDate), $fromDate . '_' . $toDate . '_expense.xlsx');
     }
 }
