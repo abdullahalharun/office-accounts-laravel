@@ -1,7 +1,7 @@
 <x-app-layout>
 
     <x-slot name="header">
-        <div class="w-full flex flex-col lg:flex-row">
+        <div class="w-full flex flex-col lg:flex-row gap-2">
             <a class="border p-2 my-2 rounded-full text-white bg-blue-800 hover:bg-blue-700 text-center" href="{{ route('expense.index') }}" :active="request()->routeIs('expense.index')">
                 {{ __('All Expense') }}
             </a>
@@ -15,6 +15,7 @@
     </x-slot>
 
 
+    <!-- Filter expense -->
     <div class="py-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -87,10 +88,13 @@
     </div>
 
     @if($query['fromdate'] && $query['todate'])
-    <div class="container max-w-7xl mx-auto px-8 py-4 flex justify-end">
+    <div class="container max-w-7xl mx-auto px-8 py-4 flex justify-end gap-3">
+        <a href="/expense/export?fromDate={{ $query['fromdate'] }}&toDate={{ $query['todate'] }}" class="bg-yellow-500 hover:bg-blue-500 text-white cursor-pointer rounded-lg px-4 py-2">Export</a>
         <a href="/report/print?datefrom={{ $query['fromdate'] }}&dateto={{ $query['todate'] }}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white cursor-pointer rounded-lg px-4 py-2">Print</a>
     </div>
+
     @endif
+
 
     <div class="">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
